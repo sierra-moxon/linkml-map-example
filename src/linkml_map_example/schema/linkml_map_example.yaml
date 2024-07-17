@@ -29,6 +29,7 @@ classes:
       - first_name
       - last_name
       - age_in_years
+      - aliases
 slots:
   first_name:
     description: A human-readable first name for a Person
@@ -40,6 +41,12 @@ slots:
     description: The age of a Person in years
     domain: Person
     range: integer
+  aliases:
+    description: A list of aliases for a Person
+    domain: Person
+    range: string
+    multivalued: true
+
 
 
 enums:
