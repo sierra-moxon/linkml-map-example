@@ -28,6 +28,7 @@ classes:
     slots:
       - first_name
       - last_name
+      - age_in_years
 slots:
   first_name:
     description: A human-readable first name for a Person
@@ -35,6 +36,10 @@ slots:
   last_name:
     description: A human-readable last name for a Person
     domain: Person
+  age_in_years:
+    description: The age of a Person in years
+    domain: Person
+    range: integer
 
 
 enums:

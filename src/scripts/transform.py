@@ -2,6 +2,7 @@ from linkml_map.session import Session
 import graphviz
 from linkml_runtime.utils.schemaview import SchemaView
 from pprint import pprint
+from linkml_runtime.dumpers import yaml_dumper
 
 # Load the schema
 schema_path = "src/linkml_map_example/schema/linkml_map_example.yaml"
@@ -24,15 +25,22 @@ class_derivations:
                 populated_from: first_name
             family_name:
                 populated_from: last_name
+            name:
+                expr: "{first_name} + ' ' + {last_name}"    
+            age_in_months:
+                expr: age_in_years * 12
+                range: integer
 """)
 
 obj = {
         "first_name": "Jane",
-        "last_name": "Doe"
+        "last_name": "Doe",
+        "age_in_years": 25
 }
 
 pprint(session.transform(obj))
 
+print(yaml_dumper.dumps(session.target_schema))
 
 dot = session.graphviz()
 if isinstance(dot, graphviz.Digraph):
