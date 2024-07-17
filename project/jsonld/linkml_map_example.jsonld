@@ -348,32 +348,6 @@
       "@type": "TypeDefinition"
     }
   ],
-  "enums": [
-    {
-      "name": "PersonStatus",
-      "definition_uri": "https://w3id.org/sierra-moxon/linkml-map-example/PersonStatus",
-      "from_schema": "https://w3id.org/sierra-moxon/linkml-map-example",
-      "permissible_values": [
-        {
-          "text": "ALIVE",
-          "description": "the person is living",
-          "meaning": "PATO:0001421"
-        },
-        {
-          "text": "DEAD",
-          "description": "the person is deceased",
-          "meaning": "PATO:0001422"
-        },
-        {
-          "text": "UNKNOWN",
-          "description": "the vital status is not known",
-          "todos": [
-            "map this to an ontology"
-          ]
-        }
-      ]
-    }
-  ],
   "slots": [
     {
       "name": "id",
@@ -385,138 +359,68 @@
       ],
       "slot_uri": "http://schema.org/identifier",
       "identifier": true,
-      "owner": "NamedThing",
+      "owner": "Person",
       "domain_of": [
-        "NamedThing"
+        "NamedThing",
+        "Person"
       ],
       "range": "uriorcurie",
       "required": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "name",
-      "definition_uri": "https://w3id.org/sierra-moxon/linkml-map-example/name",
-      "description": "A human-readable name for a thing",
+      "name": "first_name",
+      "definition_uri": "https://w3id.org/sierra-moxon/linkml-map-example/first_name",
+      "description": "A human-readable first name for a Person",
       "from_schema": "https://w3id.org/sierra-moxon/linkml-map-example",
-      "mappings": [
-        "http://schema.org/name"
-      ],
-      "slot_uri": "http://schema.org/name",
-      "owner": "NamedThing",
+      "domain": "Person",
+      "slot_uri": "https://w3id.org/sierra-moxon/linkml-map-example/first_name",
+      "owner": "Person",
       "domain_of": [
-        "NamedThing"
+        "Person"
       ],
       "range": "string",
       "@type": "SlotDefinition"
     },
     {
-      "name": "description",
-      "definition_uri": "https://w3id.org/sierra-moxon/linkml-map-example/description",
-      "description": "A human-readable description for a thing",
+      "name": "last_name",
+      "definition_uri": "https://w3id.org/sierra-moxon/linkml-map-example/last_name",
+      "description": "A human-readable last name for a Person",
       "from_schema": "https://w3id.org/sierra-moxon/linkml-map-example",
-      "mappings": [
-        "http://schema.org/description"
-      ],
-      "slot_uri": "http://schema.org/description",
-      "owner": "NamedThing",
+      "domain": "Person",
+      "slot_uri": "https://w3id.org/sierra-moxon/linkml-map-example/last_name",
+      "owner": "Person",
       "domain_of": [
-        "NamedThing"
+        "Person"
       ],
       "range": "string",
       "@type": "SlotDefinition"
     },
     {
-      "name": "primary_email",
-      "definition_uri": "https://w3id.org/sierra-moxon/linkml-map-example/primary_email",
-      "description": "The main email address of a person",
+      "name": "entries",
+      "definition_uri": "https://w3id.org/sierra-moxon/linkml-map-example/entries",
+      "description": "A collection of Person objects",
       "from_schema": "https://w3id.org/sierra-moxon/linkml-map-example",
-      "mappings": [
-        "http://schema.org/email"
-      ],
-      "slot_uri": "http://schema.org/email",
-      "owner": "Sample",
-      "domain_of": [
-        "Sample"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "birth_date",
-      "definition_uri": "https://w3id.org/sierra-moxon/linkml-map-example/birth_date",
-      "description": "Date on which a person is born",
-      "from_schema": "https://w3id.org/sierra-moxon/linkml-map-example",
-      "mappings": [
-        "http://schema.org/birthDate"
-      ],
-      "slot_uri": "http://schema.org/birthDate",
-      "owner": "Sample",
-      "domain_of": [
-        "Sample"
-      ],
-      "range": "date",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "age_in_years",
-      "definition_uri": "https://w3id.org/sierra-moxon/linkml-map-example/age_in_years",
-      "description": "Number of years since birth",
-      "from_schema": "https://w3id.org/sierra-moxon/linkml-map-example",
-      "slot_uri": "https://w3id.org/sierra-moxon/linkml-map-example/age_in_years",
-      "owner": "Sample",
-      "domain_of": [
-        "Sample"
-      ],
-      "range": "integer",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "vital_status",
-      "definition_uri": "https://w3id.org/sierra-moxon/linkml-map-example/vital_status",
-      "description": "living or dead status",
-      "from_schema": "https://w3id.org/sierra-moxon/linkml-map-example",
-      "slot_uri": "https://w3id.org/sierra-moxon/linkml-map-example/vital_status",
-      "owner": "Sample",
-      "domain_of": [
-        "Sample"
-      ],
-      "range": "PersonStatus",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "sampleCollection__entries",
-      "from_schema": "https://w3id.org/sierra-moxon/linkml-map-example",
+      "domain": "PersonCollection",
       "slot_uri": "https://w3id.org/sierra-moxon/linkml-map-example/entries",
-      "alias": "entries",
-      "owner": "SampleCollection",
-      "domain_of": [
-        "SampleCollection"
-      ],
-      "range": "Sample",
+      "owner": "entries",
+      "range": "Person",
       "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "Sample_primary_email",
-      "definition_uri": "https://w3id.org/sierra-moxon/linkml-map-example/primary_email",
-      "description": "The main email address of a person",
+      "name": "personCollection__entries",
       "from_schema": "https://w3id.org/sierra-moxon/linkml-map-example",
-      "mappings": [
-        "http://schema.org/email"
-      ],
-      "is_a": "primary_email",
-      "domain": "Sample",
-      "slot_uri": "http://schema.org/email",
-      "alias": "primary_email",
-      "owner": "Sample",
+      "slot_uri": "https://w3id.org/sierra-moxon/linkml-map-example/entries",
+      "alias": "entries",
+      "owner": "PersonCollection",
       "domain_of": [
-        "Sample"
+        "PersonCollection"
       ],
-      "is_usage_slot": true,
-      "usage_slot_name": "primary_email",
-      "range": "string",
-      "pattern": "^\\S+@[\\S+\\.]+\\S+",
+      "range": "Person",
+      "multivalued": true,
+      "inlined": true,
       "@type": "SlotDefinition"
     }
   ],
@@ -530,61 +434,55 @@
         "schema:Thing"
       ],
       "slots": [
-        "id",
-        "name",
-        "description"
+        "id"
       ],
       "slot_usage": {},
       "class_uri": "http://schema.org/Thing",
       "@type": "ClassDefinition"
     },
     {
-      "name": "Sample",
-      "definition_uri": "https://w3id.org/sierra-moxon/linkml-map-example/Sample",
+      "name": "Person",
+      "definition_uri": "https://w3id.org/sierra-moxon/linkml-map-example/Person",
       "description": "Represents a Sample",
       "from_schema": "https://w3id.org/sierra-moxon/linkml-map-example",
       "is_a": "NamedThing",
       "slots": [
         "id",
-        "name",
-        "description",
-        "Sample_primary_email",
-        "birth_date",
-        "age_in_years",
-        "vital_status"
+        "first_name",
+        "last_name"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/sierra-moxon/linkml-map-example/Sample",
+      "class_uri": "https://w3id.org/sierra-moxon/linkml-map-example/Person",
       "@type": "ClassDefinition"
     },
     {
-      "name": "SampleCollection",
-      "definition_uri": "https://w3id.org/sierra-moxon/linkml-map-example/SampleCollection",
+      "name": "PersonCollection",
+      "definition_uri": "https://w3id.org/sierra-moxon/linkml-map-example/PersonCollection",
       "description": "A holder for Sample objects",
       "from_schema": "https://w3id.org/sierra-moxon/linkml-map-example",
       "slots": [
-        "sampleCollection__entries"
+        "personCollection__entries"
       ],
       "slot_usage": {},
       "attributes": [
         {
           "name": "entries",
-          "range": "Sample",
+          "range": "Person",
           "multivalued": true,
           "inlined": true,
           "@type": "SlotDefinition"
         }
       ],
-      "class_uri": "https://w3id.org/sierra-moxon/linkml-map-example/SampleCollection",
+      "class_uri": "https://w3id.org/sierra-moxon/linkml-map-example/PersonCollection",
       "tree_root": true,
       "@type": "ClassDefinition"
     }
   ],
   "metamodel_version": "1.7.0",
   "source_file": "linkml_map_example.yaml",
-  "source_file_date": "2024-07-17T10:50:04",
-  "source_file_size": 2267,
-  "generation_date": "2024-07-17T10:50:45",
+  "source_file_date": "2024-07-17T11:02:42",
+  "source_file_size": 1565,
+  "generation_date": "2024-07-17T11:02:44",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/linkml_map_example.context.jsonld",

@@ -4,7 +4,7 @@ import glob
 import unittest
 
 from linkml_runtime.loaders import yaml_loader
-from linkml_map_example.datamodel.linkml_map_example import SampleCollection
+from linkml_map_example.datamodel.linkml_map_example import PersonCollection
 
 ROOT = os.path.join(os.path.dirname(__file__), '..')
 DATA_DIR = os.path.join(ROOT, "src", "data", "examples")
@@ -18,5 +18,5 @@ class TestData(unittest.TestCase):
     def test_data(self):
         """Data test."""
         for path in EXAMPLE_FILES:
-            obj = yaml_loader.load(path, target_class=SampleCollection)
+            obj = yaml_loader.load(path, target_class=PersonCollection)
             assert obj

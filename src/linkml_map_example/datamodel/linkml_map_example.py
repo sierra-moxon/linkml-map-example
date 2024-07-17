@@ -1,5 +1,5 @@
 # Auto generated from linkml_map_example.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-07-17T10:50:45
+# Generation date: 2024-07-17T11:02:45
 # Schema: linkml-map-example
 #
 # id: https://w3id.org/sierra-moxon/linkml-map-example
@@ -22,8 +22,8 @@ from linkml_runtime.utils.formatutils import camelcase, underscore, sfx
 from linkml_runtime.utils.enumerations import EnumDefinitionImpl
 from rdflib import Namespace, URIRef
 from linkml_runtime.utils.curienamespace import CurieNamespace
-from linkml_runtime.linkml_model.types import Date, Integer, String, Uriorcurie
-from linkml_runtime.utils.metamodelcore import URIorCURIE, XSDDate
+from linkml_runtime.linkml_model.types import String, Uriorcurie
+from linkml_runtime.utils.metamodelcore import URIorCURIE
 
 metamodel_version = "1.7.0"
 version = None
@@ -48,7 +48,7 @@ class NamedThingId(URIorCURIE):
     pass
 
 
-class SampleId(NamedThingId):
+class PersonId(NamedThingId):
     pass
 
 
@@ -65,8 +65,6 @@ class NamedThing(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = LINKML_MAP_EXAMPLE.NamedThing
 
     id: Union[str, NamedThingId] = None
-    name: Optional[str] = None
-    description: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -74,92 +72,62 @@ class NamedThing(YAMLRoot):
         if not isinstance(self.id, NamedThingId):
             self.id = NamedThingId(self.id)
 
-        if self.name is not None and not isinstance(self.name, str):
-            self.name = str(self.name)
-
-        if self.description is not None and not isinstance(self.description, str):
-            self.description = str(self.description)
-
         super().__post_init__(**kwargs)
 
 
 @dataclass
-class Sample(NamedThing):
+class Person(NamedThing):
     """
     Represents a Sample
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = LINKML_MAP_EXAMPLE["Sample"]
-    class_class_curie: ClassVar[str] = "linkml_map_example:Sample"
-    class_name: ClassVar[str] = "Sample"
-    class_model_uri: ClassVar[URIRef] = LINKML_MAP_EXAMPLE.Sample
+    class_class_uri: ClassVar[URIRef] = LINKML_MAP_EXAMPLE["Person"]
+    class_class_curie: ClassVar[str] = "linkml_map_example:Person"
+    class_name: ClassVar[str] = "Person"
+    class_model_uri: ClassVar[URIRef] = LINKML_MAP_EXAMPLE.Person
 
-    id: Union[str, SampleId] = None
-    primary_email: Optional[str] = None
-    birth_date: Optional[Union[str, XSDDate]] = None
-    age_in_years: Optional[int] = None
-    vital_status: Optional[Union[str, "PersonStatus"]] = None
+    id: Union[str, PersonId] = None
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
-        if not isinstance(self.id, SampleId):
-            self.id = SampleId(self.id)
+        if not isinstance(self.id, PersonId):
+            self.id = PersonId(self.id)
 
-        if self.primary_email is not None and not isinstance(self.primary_email, str):
-            self.primary_email = str(self.primary_email)
+        if self.first_name is not None and not isinstance(self.first_name, str):
+            self.first_name = str(self.first_name)
 
-        if self.birth_date is not None and not isinstance(self.birth_date, XSDDate):
-            self.birth_date = XSDDate(self.birth_date)
-
-        if self.age_in_years is not None and not isinstance(self.age_in_years, int):
-            self.age_in_years = int(self.age_in_years)
-
-        if self.vital_status is not None and not isinstance(self.vital_status, PersonStatus):
-            self.vital_status = PersonStatus(self.vital_status)
+        if self.last_name is not None and not isinstance(self.last_name, str):
+            self.last_name = str(self.last_name)
 
         super().__post_init__(**kwargs)
 
 
 @dataclass
-class SampleCollection(YAMLRoot):
+class PersonCollection(YAMLRoot):
     """
     A holder for Sample objects
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = LINKML_MAP_EXAMPLE["SampleCollection"]
-    class_class_curie: ClassVar[str] = "linkml_map_example:SampleCollection"
-    class_name: ClassVar[str] = "SampleCollection"
-    class_model_uri: ClassVar[URIRef] = LINKML_MAP_EXAMPLE.SampleCollection
+    class_class_uri: ClassVar[URIRef] = LINKML_MAP_EXAMPLE["PersonCollection"]
+    class_class_curie: ClassVar[str] = "linkml_map_example:PersonCollection"
+    class_name: ClassVar[str] = "PersonCollection"
+    class_model_uri: ClassVar[URIRef] = LINKML_MAP_EXAMPLE.PersonCollection
 
-    entries: Optional[Union[Dict[Union[str, SampleId], Union[dict, Sample]], List[Union[dict, Sample]]]] = empty_dict()
+    entries: Optional[Union[Dict[Union[str, PersonId], Union[dict, Person]], List[Union[dict, Person]]]] = empty_dict()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        self._normalize_inlined_as_dict(slot_name="entries", slot_type=Sample, key_name="id", keyed=True)
+        self._normalize_inlined_as_dict(slot_name="entries", slot_type=Person, key_name="id", keyed=True)
 
         super().__post_init__(**kwargs)
 
 
 # Enumerations
-class PersonStatus(EnumDefinitionImpl):
 
-    ALIVE = PermissibleValue(
-        text="ALIVE",
-        description="the person is living",
-        meaning=PATO["0001421"])
-    DEAD = PermissibleValue(
-        text="DEAD",
-        description="the person is deceased",
-        meaning=PATO["0001422"])
-    UNKNOWN = PermissibleValue(
-        text="UNKNOWN",
-        description="the vital status is not known")
-
-    _defn = EnumDefinition(
-        name="PersonStatus",
-    )
 
 # Slots
 class slots:
@@ -168,27 +136,14 @@ class slots:
 slots.id = Slot(uri=SCHEMA.identifier, name="id", curie=SCHEMA.curie('identifier'),
                    model_uri=LINKML_MAP_EXAMPLE.id, domain=None, range=URIRef)
 
-slots.name = Slot(uri=SCHEMA.name, name="name", curie=SCHEMA.curie('name'),
-                   model_uri=LINKML_MAP_EXAMPLE.name, domain=None, range=Optional[str])
+slots.first_name = Slot(uri=LINKML_MAP_EXAMPLE.first_name, name="first_name", curie=LINKML_MAP_EXAMPLE.curie('first_name'),
+                   model_uri=LINKML_MAP_EXAMPLE.first_name, domain=Person, range=Optional[str])
 
-slots.description = Slot(uri=SCHEMA.description, name="description", curie=SCHEMA.curie('description'),
-                   model_uri=LINKML_MAP_EXAMPLE.description, domain=None, range=Optional[str])
+slots.last_name = Slot(uri=LINKML_MAP_EXAMPLE.last_name, name="last_name", curie=LINKML_MAP_EXAMPLE.curie('last_name'),
+                   model_uri=LINKML_MAP_EXAMPLE.last_name, domain=Person, range=Optional[str])
 
-slots.primary_email = Slot(uri=SCHEMA.email, name="primary_email", curie=SCHEMA.curie('email'),
-                   model_uri=LINKML_MAP_EXAMPLE.primary_email, domain=None, range=Optional[str])
+slots.entries = Slot(uri=LINKML_MAP_EXAMPLE.entries, name="entries", curie=LINKML_MAP_EXAMPLE.curie('entries'),
+                   model_uri=LINKML_MAP_EXAMPLE.entries, domain=PersonCollection, range=Optional[Union[Dict[Union[str, PersonId], Union[dict, Person]], List[Union[dict, Person]]]])
 
-slots.birth_date = Slot(uri=SCHEMA.birthDate, name="birth_date", curie=SCHEMA.curie('birthDate'),
-                   model_uri=LINKML_MAP_EXAMPLE.birth_date, domain=None, range=Optional[Union[str, XSDDate]])
-
-slots.age_in_years = Slot(uri=LINKML_MAP_EXAMPLE.age_in_years, name="age_in_years", curie=LINKML_MAP_EXAMPLE.curie('age_in_years'),
-                   model_uri=LINKML_MAP_EXAMPLE.age_in_years, domain=None, range=Optional[int])
-
-slots.vital_status = Slot(uri=LINKML_MAP_EXAMPLE.vital_status, name="vital_status", curie=LINKML_MAP_EXAMPLE.curie('vital_status'),
-                   model_uri=LINKML_MAP_EXAMPLE.vital_status, domain=None, range=Optional[Union[str, "PersonStatus"]])
-
-slots.sampleCollection__entries = Slot(uri=LINKML_MAP_EXAMPLE.entries, name="sampleCollection__entries", curie=LINKML_MAP_EXAMPLE.curie('entries'),
-                   model_uri=LINKML_MAP_EXAMPLE.sampleCollection__entries, domain=None, range=Optional[Union[Dict[Union[str, SampleId], Union[dict, Sample]], List[Union[dict, Sample]]]])
-
-slots.Sample_primary_email = Slot(uri=SCHEMA.email, name="Sample_primary_email", curie=SCHEMA.curie('email'),
-                   model_uri=LINKML_MAP_EXAMPLE.Sample_primary_email, domain=Sample, range=Optional[str],
-                   pattern=re.compile(r'^\S+@[\S+\.]+\S+'))
+slots.personCollection__entries = Slot(uri=LINKML_MAP_EXAMPLE.entries, name="personCollection__entries", curie=LINKML_MAP_EXAMPLE.curie('entries'),
+                   model_uri=LINKML_MAP_EXAMPLE.personCollection__entries, domain=None, range=Optional[Union[Dict[Union[str, PersonId], Union[dict, Person]], List[Union[dict, Person]]]])

@@ -5,22 +5,16 @@
 message NamedThing
  {
   uriorcurie id = 0
-  string name = 0
-  string description = 0
  }
 // Represents a Sample
-message Sample
+message Person
  {
   uriorcurie id = 0
-  string name = 0
-  string description = 0
-  string primaryEmail = 0
-  date birthDate = 0
-  integer ageInYears = 0
-  personStatus vitalStatus = 0
+  string firstName = 0
+  string lastName = 0
  }
 // A holder for Sample objects
-message SampleCollection
+message PersonCollection
  {
- repeated  sample entries = 0
+ repeated  person entries = 0
  }

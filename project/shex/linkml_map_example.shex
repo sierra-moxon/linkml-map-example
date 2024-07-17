@@ -46,30 +46,25 @@ linkml:Sparqlpath xsd:string
 
 <NamedThing>  (
     CLOSED {
-       (  $<NamedThing_tes> (  schema1:name @linkml:String ? ;
-             schema1:description @linkml:String ?
-          ) ;
+       (  $<NamedThing_tes> rdf:type . * ;
           rdf:type [ schema1:Thing ]
        )
-    } OR @<Sample>
+    } OR @<Person>
 )
 
-<Sample> CLOSED {
-    (  $<Sample_tes> (  &<NamedThing_tes> ;
+<Person> CLOSED {
+    (  $<Person_tes> (  &<NamedThing_tes> ;
           rdf:type [ schema1:Thing ] ? ;
-          schema1:email @linkml:String ? ;
-          schema1:birthDate @linkml:Date ? ;
-          <age_in_years> @linkml:Integer ? ;
-          <vital_status> [ <http://purl.obolibrary.org/obo/PATO_0001421> <http://purl.obolibrary.org/obo/PATO_0001422>
-             <https://w3id.org/sierra-moxon/linkml-map-example/PersonStatus#UNKNOWN> ] ?
+          <first_name> @linkml:String ? ;
+          <last_name> @linkml:String ?
        ) ;
-       rdf:type [ <Sample> ]
+       rdf:type [ <Person> ]
     )
 }
 
-<SampleCollection> CLOSED {
-    (  $<SampleCollection_tes> <entries> @<Sample> * ;
-       rdf:type [ <SampleCollection> ] ?
+<PersonCollection> CLOSED {
+    (  $<PersonCollection_tes> <entries> @<Person> * ;
+       rdf:type [ <PersonCollection> ] ?
     )
 }
 
