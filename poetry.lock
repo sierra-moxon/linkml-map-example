@@ -1061,6 +1061,20 @@ pydantic = ">=2.0.0"
 ucumvert = ">=0.1.1,<0.2.0"
 
 [[package]]
+name = "linkml-model"
+version = "1.8.0"
+description = "Metamodel schema, documentation, and specification for the Linked Open Data Modeling Language (LinkML)"
+optional = false
+python-versions = "<4.0,>=3.9"
+files = [
+    {file = "linkml_model-1.8.0-py3-none-any.whl", hash = "sha256:e81116e45557107474bba2b1e748564374338c5c6899ffb3838bb71ebbda079b"},
+    {file = "linkml_model-1.8.0.tar.gz", hash = "sha256:f3877057a60dc043b49837d61f2339f38bde7e195fcfa7f8f7fba5e80c7a91a1"},
+]
+
+[package.dependencies]
+linkml-runtime = ">=1.6.3,<2.0.0"
+
+[[package]]
 name = "linkml-runtime"
 version = "1.8.0"
 description = "Runtime environment for LinkML, the Linked open data modeling language"
@@ -2784,4 +2798,4 @@ docs = []
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "37a07e14fe34bd504f9b9243611a64851bf3736e94067d105dd74e3c0d04200f"
+content-hash = "5f4523788eaa52aae31530eb10d963c06140d833d14f8a6b38f75dedeeb9bde3"
