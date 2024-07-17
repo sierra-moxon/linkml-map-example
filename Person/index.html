@@ -205,6 +205,8 @@
 <div class="mermaid"> classDiagram
     class Person
     click Person href "../Person"
+      Person : age_in_years
+
       Person : first_name
 
       Person : last_name
@@ -235,6 +237,12 @@
 <td>A human-readable last name for a Person</td>
 <td>direct</td>
 </tr>
+<tr>
+<td><a href="../age_in_years/">age_in_years</a></td>
+<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
+<td>The age of a Person in years</td>
+<td>direct</td>
+</tr>
 </tbody>
 </table>
 <h2 id="usages">Usages</h2>
@@ -257,6 +265,12 @@
 <tr>
 <td><a href="./">Person</a></td>
 <td><a href="../last_name/">last_name</a></td>
+<td>domain</td>
+<td><a href="./">Person</a></td>
+</tr>
+<tr>
+<td><a href="./">Person</a></td>
+<td><a href="../age_in_years/">age_in_years</a></td>
 <td>domain</td>
 <td><a href="./">Person</a></td>
 </tr>
@@ -296,6 +310,7 @@ from_schema: https://w3id.org/sierra-moxon/linkml-map-example
 slots:
 - first_name
 - last_name
+- age_in_years
 
 </code></pre>
 </details>
@@ -327,6 +342,17 @@ attributes:
     domain_of:
     - Person
     range: string
+  age_in_years:
+    name: age_in_years
+    description: The age of a Person in years
+    from_schema: https://w3id.org/sierra-moxon/linkml-map-example
+    rank: 1000
+    domain: Person
+    alias: age_in_years
+    owner: Person
+    domain_of:
+    - Person
+    range: integer
 
 </code></pre>
 </details>
