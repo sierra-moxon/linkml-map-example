@@ -207,6 +207,8 @@
     click Person href "../Person"
       Person : age_in_years
 
+      Person : aliases
+
       Person : first_name
 
       Person : last_name
@@ -243,6 +245,12 @@
 <td>The age of a Person in years</td>
 <td>direct</td>
 </tr>
+<tr>
+<td><a href="../aliases/">aliases</a></td>
+<td>* <br/> <a href="../String/">String</a></td>
+<td>A list of aliases for a Person</td>
+<td>direct</td>
+</tr>
 </tbody>
 </table>
 <h2 id="usages">Usages</h2>
@@ -271,6 +279,12 @@
 <tr>
 <td><a href="./">Person</a></td>
 <td><a href="../age_in_years/">age_in_years</a></td>
+<td>domain</td>
+<td><a href="./">Person</a></td>
+</tr>
+<tr>
+<td><a href="./">Person</a></td>
+<td><a href="../aliases/">aliases</a></td>
 <td>domain</td>
 <td><a href="./">Person</a></td>
 </tr>
@@ -311,6 +325,7 @@ slots:
 - first_name
 - last_name
 - age_in_years
+- aliases
 
 </code></pre>
 </details>
@@ -353,6 +368,18 @@ attributes:
     domain_of:
     - Person
     range: integer
+  aliases:
+    name: aliases
+    description: A list of aliases for a Person
+    from_schema: https://w3id.org/sierra-moxon/linkml-map-example
+    rank: 1000
+    domain: Person
+    alias: aliases
+    owner: Person
+    domain_of:
+    - Person
+    range: string
+    multivalued: true
 
 </code></pre>
 </details>

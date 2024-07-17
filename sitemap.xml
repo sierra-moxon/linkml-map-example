@@ -116,6 +116,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/aliases/</loc>
+         <lastmod>2024-07-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/first_name/</loc>
          <lastmod>2024-07-17</lastmod>
          <changefreq>daily</changefreq>
