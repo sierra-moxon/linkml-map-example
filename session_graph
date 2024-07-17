@@ -1,0 +1,16 @@
+// UML Class Diagram
+digraph {
+	rankdir=LR
+	sourcePerson [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+            <TR><TD><B>Person</B></TD></TR>
+        <TR><TD SIDES="LRB" PORT="first_name">first_name : string</TD></TR><TR><TD SIDES="LRB" PORT="last_name">last_name : string</TD></TR>
+        </TABLE>> shape=plaintext]
+	targetPerson [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+            <TR><TD><B>Person</B></TD></TR>
+        <TR><TD SIDES="LRB" PORT="given_name">given_name : string</TD></TR><TR><TD SIDES="LRB" PORT="family_name">family_name : string</TD></TR>
+        </TABLE>> shape=plaintext]
+	sourcePerson:first_name -> targetPerson:given_name
+	sourcePerson:last_name -> targetPerson:family_name
+}

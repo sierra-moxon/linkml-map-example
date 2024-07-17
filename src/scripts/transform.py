@@ -1,6 +1,7 @@
 from linkml_map.session import Session
 import graphviz
 from linkml_runtime.utils.schemaview import SchemaView
+from pprint import pprint
 
 # Load the schema
 schema_path = "src/linkml_map_example/schema/linkml_map_example.yaml"
@@ -16,31 +17,22 @@ session.set_source_schema(sv)
 # Transformer specification (in YAML)
 session.set_object_transformer("""
 class_derivations:
-  Person:
-    populated_from: Person
-    slot_derivations:
-        id:
-            populated_from: id
-        given_name:
-            populated_from: first_name
-        family_name:
-            populated_from: last_name
-  PersonCollection:
-        populated_from: PersonCollection
+    Person:
+        populated_from: Person
+        slot_derivations:
+            given_name:
+                populated_from: first_name
+            family_name:
+                populated_from: last_name
 """)
 
 obj = {
-        "given_name": "Jane",
-        "family_name": "Doe",
-    }
+        "first_name": "Jane",
+        "last_name": "Doe"
+}
 
-session.transform(obj)
+pprint(session.transform(obj))
 
-# # Generate and save the graphviz visualization
-# dot = session.graphviz().source  # Ensure that this returns the DOT source
-# graph = graphviz.Source(dot)
-# graph.render('session_graph', format='png', cleanup=True)
-# graph.view()
 
 dot = session.graphviz()
 if isinstance(dot, graphviz.Digraph):

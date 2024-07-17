@@ -22,50 +22,19 @@ imports:
   - linkml:types
 
 classes:
-
-  NamedThing:
-    description: >-
-      A generic grouping for any identifiable entity
-    slots:
-      - id
-    class_uri: schema:Thing
-
   Person:
-    is_a: NamedThing
     description: >-
       Represents a Sample
     slots:
-      - id
       - first_name
       - last_name
-
-  PersonCollection:
-    tree_root: true
-    description: >-
-      A holder for Sample objects
-    attributes:
-      entries:
-        range: Person
-        multivalued: true
-        inlined: true
-
 slots:
-  id:
-    identifier: true
-    slot_uri: schema:identifier
-    range: uriorcurie
-    description: A unique identifier for a thing
   first_name:
     description: A human-readable first name for a Person
     domain: Person
   last_name:
     description: A human-readable last name for a Person
     domain: Person
-  entries:
-    description: A collection of Person objects
-    domain: PersonCollection
-    range: Person
-    multivalued: true
-    inlined: true
+
 
 enums:
