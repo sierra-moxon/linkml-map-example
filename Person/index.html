@@ -142,11 +142,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#inheritance">
-    Inheritance
-  </a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
     Slots
   </a>
@@ -210,24 +205,13 @@
 <div class="mermaid"> classDiagram
     class Person
     click Person href "../Person"
-      NamedThing &lt;|-- Person
-        click NamedThing href "../NamedThing"
-
       Person : first_name
-
-      Person : id
 
       Person : last_name
 
 
 </div>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
-<li><strong>Person</strong></li>
-</ul>
-</li>
-</ul>
+<!-- no inheritance hierarchy -->
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -239,12 +223,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><a href="../id/">id</a></td>
-<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>A unique identifier for a thing</td>
-<td>direct</td>
-</tr>
 <tr>
 <td><a href="../first_name/">first_name</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
@@ -282,12 +260,6 @@
 <td>domain</td>
 <td><a href="./">Person</a></td>
 </tr>
-<tr>
-<td><a href="../PersonCollection/">PersonCollection</a></td>
-<td><a href="../entries/">entries</a></td>
-<td>range</td>
-<td><a href="./">Person</a></td>
-</tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
@@ -321,9 +293,7 @@
 <pre><code class="language-yaml">name: Person
 description: Represents a Sample
 from_schema: https://w3id.org/sierra-moxon/linkml-map-example
-is_a: NamedThing
 slots:
-- id
 - first_name
 - last_name
 
@@ -334,22 +304,7 @@ slots:
 <pre><code class="language-yaml">name: Person
 description: Represents a Sample
 from_schema: https://w3id.org/sierra-moxon/linkml-map-example
-is_a: NamedThing
 attributes:
-  id:
-    name: id
-    description: A unique identifier for a thing
-    from_schema: https://w3id.org/sierra-moxon/linkml-map-example
-    rank: 1000
-    slot_uri: schema:identifier
-    identifier: true
-    alias: id
-    owner: Person
-    domain_of:
-    - NamedThing
-    - Person
-    range: uriorcurie
-    required: true
   first_name:
     name: first_name
     description: A human-readable first name for a Person
