@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "linkml_map_example"
+version = "0.1.0"
+description = "An example repo showing the usage and application of linkml-map"
+authors = ["Sierra Moxon <smoxon@lbl.gov>"]
+license = "MIT"
+readme = "README.md"
+include = ["README.md", "src/linkml_map_example/schema", "project"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+linkml-runtime = "^1.1.24"
+
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+style = "pep440"
+
+[tool.poetry.dev-dependencies]
+linkml = "^1.3.5"
+mkdocs-material = "^8.2.8"
+mkdocs-mermaid2-plugin = "^1.1.1"
+schemasheets = "^0.1.14"
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"
+
+[tool.poetry.extras]
+docs = ["linkml", "mkdocs-material"]

@@ -1,0 +1,182 @@
+@prefix PATO: <http://purl.obolibrary.org/obo/PATO_> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix linkml_map_example: <https://w3id.org/sierra-moxon/linkml-map-example/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+linkml_map_example:SampleCollection a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "SampleCollection" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml_map_example:Sample ;
+            owl:onProperty linkml_map_example:entries ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_map_example:entries ] ;
+    skos:definition "A holder for Sample objects" ;
+    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
+
+linkml_map_example:NamedThing a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "NamedThing" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_map_example:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_map_example:description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_map_example:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_map_example:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_map_example:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty linkml_map_example:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty linkml_map_example:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty linkml_map_example:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty linkml_map_example:id ] ;
+    skos:definition "A generic grouping for any identifiable entity" ;
+    skos:exactMatch schema1:Thing ;
+    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
+
+linkml_map_example:Sample a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Sample" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_map_example:birth_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty linkml_map_example:age_in_years ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Date ;
+            owl:onProperty linkml_map_example:birth_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_map_example:primary_email ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_map_example:PersonStatus ;
+            owl:onProperty linkml_map_example:vital_status ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_map_example:vital_status ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_map_example:age_in_years ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_map_example:primary_email ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_map_example:age_in_years ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_map_example:vital_status ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_map_example:birth_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^\\S+@[\\S+\\.]+\\S+" ] ) ] ;
+            owl:onProperty linkml_map_example:primary_email ],
+        linkml_map_example:NamedThing ;
+    skos:definition "Represents a Sample" ;
+    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
+
+PATO:0001421 a owl:Class,
+        linkml_map_example:PersonStatus ;
+    rdfs:label "ALIVE" ;
+    rdfs:subClassOf linkml_map_example:PersonStatus .
+
+PATO:0001422 a owl:Class,
+        linkml_map_example:PersonStatus ;
+    rdfs:label "DEAD" ;
+    rdfs:subClassOf linkml_map_example:PersonStatus .
+
+<https://w3id.org/sierra-moxon/linkml-map-example/PersonStatus#UNKNOWN> a owl:Class,
+        linkml_map_example:PersonStatus ;
+    rdfs:label "UNKNOWN" ;
+    rdfs:subClassOf linkml_map_example:PersonStatus .
+
+linkml_map_example:entries a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "entries" ;
+    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
+
+linkml_map_example:age_in_years a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "age_in_years" ;
+    rdfs:range linkml:Integer ;
+    skos:definition "Number of years since birth" ;
+    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
+
+linkml_map_example:birth_date a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "birth_date" ;
+    rdfs:range linkml:Date ;
+    skos:definition "Date on which a person is born" ;
+    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
+
+linkml_map_example:description a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "description" ;
+    skos:definition "A human-readable description for a thing" ;
+    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
+
+linkml_map_example:id a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "id" ;
+    rdfs:range linkml:Uriorcurie ;
+    skos:definition "A unique identifier for a thing" ;
+    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
+
+linkml_map_example:name a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "name" ;
+    skos:definition "A human-readable name for a thing" ;
+    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
+
+linkml_map_example:primary_email a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "primary_email" ;
+    skos:definition "The main email address of a person" ;
+    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
+
+linkml_map_example:vital_status a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "vital_status" ;
+    rdfs:range linkml_map_example:PersonStatus ;
+    skos:definition "living or dead status" ;
+    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
+
+linkml_map_example:PersonStatus a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( PATO:0001421 PATO:0001422 <https://w3id.org/sierra-moxon/linkml-map-example/PersonStatus#UNKNOWN> ) ;
+    linkml:permissible_values PATO:0001421,
+        PATO:0001422,
+        <https://w3id.org/sierra-moxon/linkml-map-example/PersonStatus#UNKNOWN> .
+
+<https://w3id.org/sierra-moxon/linkml-map-example> a owl:Ontology ;
+    rdfs:label "linkml-map-example" ;
+    dcterms:license "MIT" ;
+    dcterms:title "linkml-map-example" ;
+    rdfs:seeAlso <https://sierra-moxon.github.io/linkml-map-example> ;
+    skos:definition "An example repo showing the usage and application of linkml-map" .
+

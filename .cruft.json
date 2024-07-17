@@ -1,0 +1,27 @@
+{
+  "template": "https://github.com/linkml/linkml-project-cookiecutter",
+  "commit": "b2da87eb7835bfec748a76823d098cac85e8363a",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_name": "linkml-map-example",
+      "__project_slug": "linkml_map_example",
+      "github_org": "sierra-moxon",
+      "__source_path": "src/linkml_map_example/schema/linkml_map_example.yaml",
+      "project_description": "An example repo showing the usage and application of linkml-map",
+      "full_name": "Sierra Moxon",
+      "email": "smoxon@lbl.gov",
+      "__author": "Sierra Moxon <smoxon@lbl.gov>",
+      "license": "MIT",
+      "main_schema_class": "Sample",
+      "create_python_classes": "Yes",
+      "use_schemasheets": "No",
+      "google_sheet_id": "1wVoaiFg47aT9YWNeRfTZ8tYHN8s8PAuDx5i2HUcDpvQ",
+      "google_sheet_tabs": "personinfo enums",
+      "__google_sheet_module": "personinfo_enums",
+      "github_token_for_pypi_deployment": "PYPI_PASSWORD",
+      "_template": "https://github.com/linkml/linkml-project-cookiecutter"
+    }
+  },
+  "directory": null
+}
