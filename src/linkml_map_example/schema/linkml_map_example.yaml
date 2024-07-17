@@ -30,6 +30,12 @@ classes:
       - last_name
       - age_in_years
       - aliases
+    tree_root: true
+  NamedThing:
+    description: >-
+      Represents a NamedThing
+    slots:
+      - first_name
 slots:
   first_name:
     description: A human-readable first name for a Person

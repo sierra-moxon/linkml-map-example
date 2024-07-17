@@ -3,7 +3,6 @@ import graphviz
 from linkml_runtime.utils.schemaview import SchemaView
 from pprint import pprint
 from linkml_runtime.dumpers import yaml_dumper
-from linkml_runtime.linkml_model.units import UnitOfMeasure
 
 # Load the schema
 schema_path = "src/linkml_map_example/schema/linkml_map_example.yaml"
@@ -31,20 +30,16 @@ class_derivations:
             age_in_months:
                 expr: age_in_years * 12
                 range: integer
-            aliases:
-                populated_from: aliases
-                stringification:
-                    delimiter: '|'
 """)
 
 obj = {
         "first_name": "Jane",
         "last_name": "Doe",
         "age_in_years": 25,
-        "aliases": ["Janey", "JD", "J-low"]
 }
 
-print(session.transform(obj))
+# print(session.transform(obj))
+print(yaml_dumper.dumps(session.target_schema))
 
 dot = session.graphviz()
 if isinstance(dot, graphviz.Digraph):
