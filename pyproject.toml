@@ -10,6 +10,7 @@ include = ["README.md", "src/linkml_map_example/schema", "project"]
 [tool.poetry.dependencies]
 python = "^3.9"
 linkml-runtime = "^1.1.24"
+linkml-map = "^0.3.7"
 
 [tool.poetry-dynamic-versioning]
 enable = true
