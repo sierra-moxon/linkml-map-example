@@ -324,6 +324,7 @@
 
 
 <h1 id="slot-entries">Slot: entries</h1>
+<p><em>A collection of Person objects</em></p>
 <p>URI: <a href="https://w3id.org/sierra-moxon/linkml-map-example/entries">linkml_map_example:entries</a></p>
 <!-- no inheritance hierarchy -->
 
@@ -338,7 +339,7 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../SampleCollection/">SampleCollection</a></td>
+<td><a href="../PersonCollection/">PersonCollection</a></td>
 <td>A holder for Sample objects</td>
 <td>no</td>
 </tr>
@@ -347,7 +348,7 @@
 <h2 id="properties">Properties</h2>
 <ul>
 <li>
-<p>Range: <a href="../Sample/">Sample</a></p>
+<p>Range: <a href="../Person/">Person</a></p>
 </li>
 <li>
 <p>Multivalued: True</p>
@@ -381,13 +382,14 @@
 <details>
 
 <pre><code class="language-yaml">name: entries
+description: A collection of Person objects
 from_schema: https://w3id.org/sierra-moxon/linkml-map-example
 rank: 1000
+domain: PersonCollection
 alias: entries
-owner: SampleCollection
 domain_of:
-- SampleCollection
-range: Sample
+- PersonCollection
+range: Person
 multivalued: true
 inlined: true
 

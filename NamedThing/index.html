@@ -205,21 +205,17 @@
 <div class="mermaid"> classDiagram
     class NamedThing
     click NamedThing href "../NamedThing"
-      NamedThing &lt;|-- Sample
-        click Sample href "../Sample"
-
-      NamedThing : description
+      NamedThing &lt;|-- Person
+        click Person href "../Person"
 
       NamedThing : id
-
-      NamedThing : name
 
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
 <li><strong>NamedThing</strong><ul>
-<li><a href="../Sample/">Sample</a></li>
+<li><a href="../Person/">Person</a></li>
 </ul>
 </li>
 </ul>
@@ -238,18 +234,6 @@
 <td><a href="../id/">id</a></td>
 <td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a thing</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../name/">name</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable name for a thing</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable description for a thing</td>
 <td>direct</td>
 </tr>
 </tbody>
@@ -287,8 +271,6 @@ description: A generic grouping for any identifiable entity
 from_schema: https://w3id.org/sierra-moxon/linkml-map-example
 slots:
 - id
-- name
-- description
 class_uri: schema:Thing
 
 </code></pre>
@@ -310,29 +292,8 @@ attributes:
     owner: NamedThing
     domain_of:
     - NamedThing
+    - Person
     range: uriorcurie
-  name:
-    name: name
-    description: A human-readable name for a thing
-    from_schema: https://w3id.org/sierra-moxon/linkml-map-example
-    rank: 1000
-    slot_uri: schema:name
-    alias: name
-    owner: NamedThing
-    domain_of:
-    - NamedThing
-    range: string
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/sierra-moxon/linkml-map-example
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: NamedThing
-    domain_of:
-    - NamedThing
-    range: string
 class_uri: schema:Thing
 
 </code></pre>

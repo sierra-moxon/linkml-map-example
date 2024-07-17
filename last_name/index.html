@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://sierra-moxon.github.io/linkml-map-example/name/">
+        <link rel="canonical" href="https://sierra-moxon.github.io/linkml-map-example/last_name/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-8.5.10">
     
     
       
-        <title>Slot: name - linkml-map-example</title>
+        <title>Slot: last_name - linkml-map-example</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-name" class="md-skip">
+        <a href="#slot-last_name" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: name
+              Slot: last_name
             
           </span>
         </div>
@@ -317,15 +317,15 @@
                 
                   
 
-  <a href="https://github.com/sierra-moxon/linkml-map-example/edit/master/docs/name.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/sierra-moxon/linkml-map-example/edit/master/docs/last_name.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="slot-name">Slot: name</h1>
-<p><em>A human-readable name for a thing</em></p>
-<p>URI: <a href="http://schema.org/name">schema:name</a></p>
+<h1 id="slot-last_name">Slot: last_name</h1>
+<p><em>A human-readable last name for a Person</em></p>
+<p>URI: <a href="https://w3id.org/sierra-moxon/linkml-map-example/last_name">linkml_map_example:last_name</a></p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -339,12 +339,7 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../NamedThing/">NamedThing</a></td>
-<td>A generic grouping for any identifiable entity</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Sample/">Sample</a></td>
+<td><a href="../Person/">Person</a></td>
 <td>Represents a Sample</td>
 <td>no</td>
 </tr>
@@ -370,25 +365,25 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>schema:name</td>
+<td>linkml_map_example:last_name</td>
 </tr>
 <tr>
 <td>native</td>
-<td>linkml_map_example:name</td>
+<td>linkml_map_example:last_name</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: name
-description: A human-readable name for a thing
+<pre><code class="language-yaml">name: last_name
+description: A human-readable last name for a Person
 from_schema: https://w3id.org/sierra-moxon/linkml-map-example
 rank: 1000
-slot_uri: schema:name
-alias: name
+domain: Person
+alias: last_name
 domain_of:
-- NamedThing
+- Person
 range: string
 
 </code></pre>
