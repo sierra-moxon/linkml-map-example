@@ -1,53 +1,234 @@
-@prefix linkml_map_example: <https://w3id.org/sierra-moxon/linkml-map-example/> .
+@prefix cmdr: <https://w3id.org/linkml/cmdr/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix schema1: <http://schema.org/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-schema1:Thing a sh:NodeShape ;
+cmdr:Container a sh:NodeShape ;
     sh:closed true ;
-    sh:description "A generic grouping for any identifiable entity" ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:anyURI ;
-            sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path schema1:identifier ] ;
-    sh:targetClass schema1:Thing .
-
-linkml_map_example:PersonCollection a sh:NodeShape ;
-    sh:closed true ;
-    sh:description "A holder for Sample objects" ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class linkml_map_example:Person ;
+    sh:property [ sh:class cmdr:MaterialEntity ;
             sh:nodeKind sh:IRI ;
             sh:order 0 ;
-            sh:path linkml_map_example:entries ] ;
-    sh:targetClass linkml_map_example:PersonCollection .
+            sh:path cmdr:materials ],
+        [ sh:class cmdr:Participation ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path cmdr:participations ],
+        [ sh:class <OBI:0000094> ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path cmdr:material_processings ],
+        [ sh:class cmdr:Subject ;
+            sh:nodeKind sh:IRI ;
+            sh:order 5 ;
+            sh:path cmdr:subjects ],
+        [ sh:class <OBI:0000659> ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path cmdr:specimen_collection_processes ],
+        [ sh:class cmdr:Investigation ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path cmdr:investigations ] ;
+    sh:targetClass cmdr:Container .
 
-linkml_map_example:Person a sh:NodeShape ;
+cmdr:DataObject a sh:NodeShape ;
     sh:closed true ;
-    sh:description "Represents a Sample" ;
+    sh:description "A DataFile Associated with a Subject or Investigation or MaterialEntity" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:targetClass cmdr:DataObject .
+
+cmdr:Process a sh:NodeShape ;
+    sh:closed false ;
+    sh:description "A planned process resulting in a material or data" ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "A human-readable last name for a Person" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path linkml_map_example:last_name ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable first name for a Person" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 1 ;
-            sh:path linkml_map_example:first_name ],
+            sh:path cmdr:name ],
         [ sh:datatype xsd:anyURI ;
-            sh:description "A unique identifier for a thing" ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
-            sh:path schema1:identifier ] ;
-    sh:targetClass linkml_map_example:Person .
+            sh:path cmdr:id ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path cmdr:has_input ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path cmdr:has_output ] ;
+    sh:targetClass cmdr:Process .
+
+<OBI:0000094> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A planned process which results in physical changes in a specified input material" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path cmdr:name ],
+        [ sh:class cmdr:MaterialEntity ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path cmdr:has_output ],
+        [ sh:datatype xsd:anyURI ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path cmdr:id ],
+        [ sh:class cmdr:MaterialEntity ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path cmdr:has_input ] ;
+    sh:targetClass <OBI:0000094> .
+
+<OBI:0000659> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A planned process with the objective of collecting a specimen" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:anyURI ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path cmdr:id ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path cmdr:name ],
+        [ sh:class cmdr:Subject ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path cmdr:has_input ],
+        [ sh:class cmdr:MaterialEntity ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path cmdr:has_output ] ;
+    sh:targetClass <OBI:0000659> .
+
+cmdr:Participation a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Subject/Study participation information" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class cmdr:Subject ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path cmdr:includes ],
+        [ sh:datatype xsd:anyURI ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path cmdr:id ],
+        [ sh:class cmdr:Investigation ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path cmdr:involved_in ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path cmdr:name ] ;
+    sh:targetClass cmdr:Participation .
+
+cmdr:Quantity a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path cmdr:has_unit ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path cmdr:comparator ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path cmdr:has_raw_value ],
+        [ sh:datatype xsd:float ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path cmdr:has_numeric_value ] ;
+    sh:targetClass cmdr:Quantity .
+
+cmdr:Investigation a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "General information about the Investigation" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:anyURI ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path cmdr:id ],
+        [ sh:class cmdr:Investigation ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path cmdr:part_of ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path cmdr:name ] ;
+    sh:targetClass cmdr:Investigation .
+
+cmdr:MaterialEntity a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Physical entity that is an input our output of a process from a Subject" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class cmdr:Quantity ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path cmdr:concentration ],
+        [ sh:class cmdr:Quantity ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path cmdr:volume ],
+        [ sh:class cmdr:Subject ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path cmdr:source ],
+        [ sh:class cmdr:Investigation ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path cmdr:used_in ],
+        [ sh:datatype xsd:anyURI ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path cmdr:id ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path cmdr:name ] ;
+    sh:targetClass cmdr:MaterialEntity .
+
+cmdr:Subject a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Demographic and clinical information about the subject" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path cmdr:name ],
+        [ sh:datatype xsd:anyURI ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path cmdr:id ] ;
+    sh:targetClass cmdr:Subject .
 

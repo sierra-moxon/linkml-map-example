@@ -1,107 +1,455 @@
+@prefix cmdr: <https://w3id.org/linkml/cmdr/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix linkml: <https://w3id.org/linkml/> .
-@prefix linkml_map_example: <https://w3id.org/sierra-moxon/linkml-map-example/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema1: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-linkml_map_example:NamedThing a owl:Class,
+cmdr:Container a owl:Class,
         linkml:ClassDefinition ;
-    rdfs:label "NamedThing" ;
+    rdfs:label "Container" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty linkml_map_example:id ],
+            owl:allValuesFrom cmdr:Participation ;
+            owl:onProperty cmdr:participations ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty linkml_map_example:id ],
+            owl:allValuesFrom cmdr:MaterialEntity ;
+            owl:onProperty cmdr:materials ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty linkml_map_example:id ] ;
-    skos:definition "A generic grouping for any identifiable entity" ;
-    skos:exactMatch schema1:Thing ;
-    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
+            owl:allValuesFrom cmdr:SpecimenCollectionProcess ;
+            owl:onProperty cmdr:specimen_collection_processes ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:subjects ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:investigations ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:Investigation ;
+            owl:onProperty cmdr:investigations ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:material_processings ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:MaterialProcessing ;
+            owl:onProperty cmdr:material_processings ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:materials ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:Subject ;
+            owl:onProperty cmdr:subjects ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:participations ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:specimen_collection_processes ] ;
+    skos:inScheme linkml:cmdr .
 
-linkml_map_example:PersonCollection a owl:Class,
+cmdr:DataObject a owl:Class,
         linkml:ClassDefinition ;
-    rdfs:label "PersonCollection" ;
+    rdfs:label "DataObject" ;
+    rdfs:seeAlso <include:DataFile> ;
+    skos:altLabel "Data",
+        "DataFile",
+        "File" ;
+    skos:definition "A DataFile Associated with a Subject or Investigation or MaterialEntity" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:MaterialProcessing a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "MaterialProcessing" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:MaterialEntity ;
+            owl:onProperty cmdr:has_input ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:has_input ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:MaterialEntity ;
+            owl:onProperty cmdr:has_output ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:has_output ],
+        cmdr:Process ;
+    skos:definition "A planned process which results in physical changes in a specified input material" ;
+    skos:exactMatch <OBI:0000094> ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:Participation a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Participation" ;
+    rdfs:seeAlso <include:Participant> ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty linkml_map_example:entries ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml_map_example:Person ;
-            owl:onProperty linkml_map_example:entries ] ;
-    skos:definition "A holder for Sample objects" ;
-    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
-
-linkml_map_example:entries a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "entries" ;
-    rdfs:domain linkml_map_example:PersonCollection ;
-    rdfs:range linkml_map_example:Person ;
-    skos:definition "A collection of Person objects" ;
-    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
-
-linkml_map_example:first_name a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "first_name" ;
-    rdfs:domain linkml_map_example:Person ;
-    skos:definition "A human-readable first name for a Person" ;
-    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
-
-linkml_map_example:last_name a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "last_name" ;
-    rdfs:domain linkml_map_example:Person ;
-    skos:definition "A human-readable last name for a Person" ;
-    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
-
-linkml_map_example:Person a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "Person" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty linkml_map_example:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty linkml_map_example:first_name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty linkml_map_example:id ],
+            owl:onProperty cmdr:involved_in ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
-            owl:onProperty linkml_map_example:last_name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty linkml_map_example:last_name ],
+            owl:onProperty cmdr:name ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty linkml_map_example:last_name ],
+            owl:onProperty cmdr:includes ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:Subject ;
+            owl:onProperty cmdr:includes ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty linkml_map_example:first_name ],
+            owl:onProperty cmdr:name ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty linkml_map_example:first_name ],
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:Investigation ;
+            owl:onProperty cmdr:involved_in ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty linkml_map_example:id ],
-        linkml_map_example:NamedThing ;
-    skos:definition "Represents a Sample" ;
-    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:includes ] ;
+    skos:definition "Subject/Study participation information" ;
+    skos:inScheme linkml:cmdr .
 
-linkml_map_example:id a owl:ObjectProperty,
+cmdr:SpecimenCollectionProcess a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "SpecimenCollectionProcess" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:has_input ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:Subject ;
+            owl:onProperty cmdr:has_input ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:has_output ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:MaterialEntity ;
+            owl:onProperty cmdr:has_output ],
+        cmdr:Process ;
+    skos:altLabel "MaterialCollectionProcess" ;
+    skos:definition "A planned process with the objective of collecting a specimen" ;
+    skos:exactMatch <OBI:0000659> ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:Process a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Process" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:has_input ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:has_input ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:has_output ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:has_output ] ;
+    skos:definition "A planned process resulting in a material or data" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:Quantity a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Quantity" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:has_unit ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:has_raw_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:has_numeric_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:has_unit ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Float ;
+            owl:onProperty cmdr:has_numeric_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:comparator ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:has_unit ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:has_raw_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:comparator ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:comparator ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:has_numeric_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:has_raw_value ] ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:investigations a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "investigations" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:involved_in a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "involved_in" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:material_processings a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "material_processings" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:materials a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "materials" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:participations a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "participations" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:specimen_collection_processes a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "specimen_collection_processes" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:subjects a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "subjects" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:used_in a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "used_in" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:comparator a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "comparator" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:concentration a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "concentration" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:has_numeric_value a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has_numeric_value" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:has_raw_value a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has_raw_value" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:has_unit a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has_unit" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:includes a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "includes" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:part_of a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "part_of" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:source a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "source" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:volume a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "volume" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:Investigation a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Investigation" ;
+    rdfs:seeAlso <include:Study> ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:part_of ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:Investigation ;
+            owl:onProperty cmdr:part_of ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:part_of ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:name ] ;
+    skos:altLabel "Proposal",
+        "Study" ;
+    skos:definition "General information about the Investigation" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:MaterialEntity a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "MaterialEntity" ;
+    rdfs:seeAlso <include:Biospecimen> ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:concentration ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:volume ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:concentration ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:used_in ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:source ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:Investigation ;
+            owl:onProperty cmdr:used_in ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:volume ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:Subject ;
+            owl:onProperty cmdr:source ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:Quantity ;
+            owl:onProperty cmdr:concentration ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:Quantity ;
+            owl:onProperty cmdr:volume ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:source ] ;
+    skos:altLabel "Biosample",
+        "Biospecimen",
+        "Sample",
+        "Specimen",
+        "Substance" ;
+    skos:definition "Physical entity that is an input our output of a process from a Subject" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:Subject a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Subject" ;
+    rdfs:seeAlso <include:Participant> ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:name ] ;
+    skos:altLabel "Participant",
+        "Site" ;
+    skos:definition "Demographic and clinical information about the subject" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:has_input a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has_input" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:has_output a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has_output" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:id a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "id" ;
-    rdfs:range linkml:Uriorcurie ;
-    skos:definition "A unique identifier for a thing" ;
-    skos:inScheme <https://w3id.org/sierra-moxon/linkml-map-example> .
+    skos:inScheme linkml:cmdr .
 
-<https://w3id.org/sierra-moxon/linkml-map-example> a owl:Ontology ;
-    rdfs:label "linkml-map-example" ;
+cmdr:name a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "name" ;
+    skos:inScheme linkml:cmdr .
+
+linkml:cmdr a owl:Ontology ;
+    rdfs:label "cmdr" ;
     dcterms:license "MIT" ;
-    dcterms:title "linkml-map-example" ;
-    rdfs:seeAlso <https://sierra-moxon.github.io/linkml-map-example> ;
-    skos:definition "An example repo showing the usage and application of linkml-map" .
+    dcterms:title "cmdr" ;
+    rdfs:seeAlso <https://linkml.github.io/cmdr> ;
+    skos:definition "Core Model for Data Research (Tentative)" .
 

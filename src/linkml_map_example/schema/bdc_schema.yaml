@@ -1,0 +1,860 @@
+---
+id: https://w3id.org/nhlbidatastage/bdchm
+name: bdchm
+title: BioData Catalyst Harmonized Model (bdchm)
+description: |-
+  This is the harmonized data model for use in the BioData Catalyst project.
+license: MIT
+see_also:
+  - https://bfurner.github.io/bdchm
+
+prefixes:
+  bdchm: https://w3id.org/nhlbidatastage/bdchm/
+  linkml: https://w3id.org/linkml/
+  schema: http://schema.org/
+  OMOP: https://athena.ohdsi.org/search-terms/terms/
+  DUO: http://purl.obolibrary.org/obo/DUO_
+  VBO: http://purl.obolibrary.org/obo/VBO_
+  ncbitaxon: http://purl.obolibrary.org/obo/NCBITaxon_
+  MONDO: http://purl.obolibrary.org/obo/MONDO_
+  HP: http://purl.obolibrary.org/obo/HP_
+
+default_prefix: bdchm
+default_range: string
+
+imports:
+  - linkml:types
+
+classes:
+  Entity:
+    abstract: true
+    description: >-
+      Any resource that has its own identifier
+    slots:
+      - id
+    class_uri: schema:Thing
+  Person:
+    is_a: Entity
+    description: >-
+      Demographics and other administrative information about an individual or animal receiving care or other health-related services.
+    attributes:
+      species:
+        range: CellularOrganismSpeciesEnum
+        description: The scientific binomial name for the species of the Person (e.g. Homo sapiens, Mus musculus, etc.). Values should be derived from the NCBI organismal taxonomy (http://purl.obolibrary.org/obo/ncbitaxon.owl).
+      breed:
+        range: VertebrateBreedEnum
+        description: A label given to a group of animals homogeneous in appearance and other characteristics that distinguish it from other animals of the same species. Values should be derived from the Vertebrate Breed Ontology (http://purl.obolibrary.org/obo/vbo.owl).
+      sex:
+        range: SexEnum
+        description: The biologic character or quality that distinguishes male and female from one another as expressed by analysis of the person's gonadal, morphologic (internal and external), chromosomal, and hormonal characteristics.
+      ethnicity:
+        range: EthnicityEnum
+        description: An individual's self-described social and cultural grouping, specifically whether an individual describes themselves as Hispanic or Latino. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau
+      race:
+        range: RaceEnum
+        description: An arbitrary classification of a taxonomic group that is a division of a species. It usually arises as a consequence of geographical isolation within a species and is characterized by shared heredity, physical attributes and behavior, and in the case of humans, by common history, nationality, or geographic distribution. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau.
+      year_of_birth:
+        range: integer
+        description: Numeric value to represent the calendar year in which an individual was born.
+      vital_status:
+        range: VitalStatusEnum
+        description: Coded value indicating the state or condition of being living or deceased; also includes the case where the vital status is unknown.
+      age_at_death:
+        range: integer
+        description: The age of an individual at the time of death, expressed in days since birth
+        unit:
+          ucum_code: d
+      year_of_death:
+        range: integer
+        description: Numeric value to represent the calendar year in which an individual died.
+      cause_of_death:
+        range: string
+        description: Coded value indicating the circumstance or condition that results in the death of the individual.
+    slots:
+      - identity
+
+  Participant:
+    is_a: Entity
+    description: >-
+       A Participant is the entity of interest in a research study, typically a human being or an animal, but can also be a device, group of humans or animals, or a tissue sample. Human research subjects are usually not traceable to a particular person to protect the subject’s privacy.
+    attributes:
+      description:
+        range: string
+        description: A free text field to capture additional info/explanation about the research subject.
+      member_of_research_study:
+        range: ResearchStudy
+        description: A reference to the Study(s) of which this Participant is a member
+      age_at_enrollment:
+        range: integer
+        description: The age in days when the Participant enrolled on the ResearchStudy
+        unit:
+          ucum_code: d
+      index_timepoint:
+        range: string
+        description: The text term used to describe the reference or anchor date used for date obfuscation, where a single date is obscured by creating one or more date ranges in relation to this date.
+      originating_site:
+        range: Organization
+        description: The Organization through which a subject was enrolled on a ResearchStudy.
+      study_arm:
+        range: string
+        description: The arm(s) of the study on which the Participant is enrolled
+        multivalued: true
+    slots:
+      - associated_person
+      - identity
+
+  ResearchStudy:
+    is_a: Entity
+    description: >-
+      A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge. This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques. A ResearchStudy involves the gathering of information about human or animal subjects.
+    attributes:
+      - name:
+          range: string
+          description: An unabridged name of a research program, project, or study.
+      - name_shortened:
+          range: string
+          description: An abbreviated name of a research program, project, or study.
+      - description:
+          range: string
+          description: An unabridged description of a research program, project, or study.
+      - description_shortened:
+          range: string
+          description: An abbreviated description of a research program, project, or study.
+      - sponsor:
+          range: string
+          description: An entity that is responsible for the initiation, management, and/or financing of a research project.
+      - date_started:
+          range: TimePoint
+          description: The date when the research project began.
+      - date_ended:
+          range: TimePoint
+          description: The date when the research project ended.
+      - url:
+          range: uriorcurie
+          description: A URL address for a resource that provides information about a research program, project, or study.
+      - part_of:
+          range: ResearchStudy
+          description: A reference to a parent ResearchStudy (e.g. a link to the overarching CPTAC ResearchStudy from a substudy of CPTAC)
+      - research_project_type:
+          range: string
+          description: The 'type' of ResearchStudy represented (e.g. a broad-based Program like 'CPTAC' or a more focused Project like 'CPTAC PDAC Discovery Study')
+      - associated_timepoint:
+          range: TimePoint
+          multivalued: true
+          description: A collection of timepoint observations that are relevant to research projects (e.g. date of IACUC approval, date of IRB approval, date of embargo end, etc.)
+      - principal_investigator:
+          range: string
+          multivalued: true
+          description: The investigator or investigators leading a project.
+      - consent_code:
+          range: DataUseEnum
+          description: 'Data Use Restrictions that are used to indicate permissions/restrictions for datasets and/or materials, and relates to the purposes for which datasets and/or material might be removed, stored or used. Based on the Data Use Ontology : see http://www.obofoundry.org/ontology/duo.html'
+          multivalued: true
+    slots:
+      - identity
+
+  Visit:
+    is_a: Entity
+    description: >-
+      Events where Persons engage with the healthcare system for a duration of time. They are often also called “Encounters”. Visits are defined by a configuration of circumstances under which they occur, such as (i) whether the patient comes to a healthcare institution, the other way around, or the interaction is remote, (ii) whether and what kind of trained medical staff is delivering the service during the Visit, and (iii) whether the Visit is transient or for a longer period involving a stay in bed. (OMOP)
+    attributes:
+      - visit_category:
+          range: VisitCategoryEnum
+          description: A value representing the kind (or category) of visit, like inpatient or outpatient.
+      - age_at_visit_start:
+          range: integer
+          description: The age of the Participant (in days) at the start of the Visit.
+          unit:
+            ucum_code: d
+      - age_at_visit_end:
+          range: integer
+          description: The age of the Participant (in days) at the end of the Visit.
+          unit:
+            ucum_code: d
+      - visit_provenance:
+          range: VisitProvenanceEnum
+          description: A value representing the provenance of the visit record, or where the record comes from.
+      - associated_participant:
+          range: Participant
+          description: A reference to the Participant for whom this Visit occurred.
+
+  Organization:
+    is_a: Entity
+    description: >-
+      A grouping of people or organizations with a common purpose such as a data coordinating center, an university, or an institute within a university.
+    attributes:
+      name:
+        range: string
+        description: The full legal name by which the organization is known (e.g. 'National Cancer Institute')
+      alias:
+        range: string
+        description: A secondary name for the organization such as a short name or abbreviation (e.g. 'NCI')
+      organization_type:
+        range: string
+        description: The type of the organization (e.g. 'Cancer Genome Characterization Center')
+    slots:
+      - identity
+
+  TimePoint:
+    is_a: Entity
+    description: >-
+      A structured representation of a single point in time that allows direct/explicit declaration as a dateTime, specification in terms of offset from a defined index, or description of an event type as a proxy for the time point when it occurred.
+    attributes:
+      - date_time:
+          range: datetime
+          description: An explicitly specified timepoint described in terms of a date and optionally a time on that date.
+      - index_time_point:
+          range: TimePoint
+          description: Another TimePoint from which this point is offset.
+      - offset_from_index:
+          range: integer
+          description: A quantity of time that, together with the index date or event, can be used to derive a specific timepoint.
+      - event_type:
+          range: string
+          description: An event that occurred at the point in time specified by this TimePoint.
+
+  TimePeriod:
+    description: >-
+      A period of time between a start and end time point.
+    attributes:
+      - period_start:
+          range: TimePoint
+          description: When a period of time started.
+      - period_end:
+          range: TimePoint
+          description: When a period of time ended.
+
+  Identifier:
+    description: >-
+      An Identifier is associated with a unique object or entity within a given system.
+    attributes:
+      - value:
+          range: string
+          required: true
+          description: The value of the identifier, as defined by the system.
+      - system:
+          range: string
+          description: The system or namespace that defines the identifier.
+
+  ResearchStudyCollection:
+    tree_root: true
+    description: >-
+      A holder for ResearchStudy objects
+    attributes:
+      entries:
+        range: ResearchStudy
+        multivalued: true
+        inlined: true
+
+  Questionnaire:
+    is_a: Entity
+    description: A Questionnaire is an organized collection of questions intended to solicit information from patients, providers or other individuals involved in the healthcare domain. They may be simple flat lists of questions or can be hierarchically organized in groups and sub-groups, each containing questions. The Questionnaire defines the questions to be asked, how they are ordered and grouped, any intervening instructional text and what the constraints are on the allowed answers. The results of a Questionnaire can be communicated using the QuestionnaireResponse. (FHIR)
+    attributes:
+      name:
+        description: Name for this Questionnaire (computer friendly)
+        range: string
+      title:
+        description: Name for this Questionnaire (human friendly)
+        range: string
+      description:
+        description: Natural language description of the Questionnaire
+        range: string
+      url:
+        description: Canonical identifier for this Questionnaire, represented as an absolute URI (globally unique)
+        range: uriorcurie
+      version:
+        description: The identifier that is used to identify this version of the questionnaire when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the questionnaire author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.
+        range: string
+      publisher:
+        description: Name of the publisher/steward (organization or individual) of this Questionnaire
+        range: string
+      copyright:
+        description: Textual description of any use and/or publishing restrictions
+        range: string
+      copyright_label:
+        description: Copyright holder and year(s)
+        range: string
+      language:
+        description: The language(s) in which questions are presented.
+        range: string
+        multivalued: true
+      items:
+        description: A collection of QuestionnaireItem objects which encapsulate the question being asked.
+        range: QuestionnaireItem
+        multivalued: true
+        required: true
+    slots:
+      - identity
+
+  QuestionnaireItem:
+    is_a: Entity
+    description: QuestionnaireItem defines a question or section within the Questionnaire
+    attributes:
+      text:
+        range: string
+        description: Name for group or question text
+      code:
+        range: string
+        description: Corresponding concept for this item in a terminology
+      part_of:
+        range: QuestionnaireItem
+        description: A reference to a parent QuestionnaireItem.
+    slots:
+      - identity
+
+  QuestionnaireResponse:
+    is_a: Entity
+    description: QuestionnaireResponse provides a complete or partial list of answers to a set of questions filled when responding to a questionnaire. (FHIR)
+    attributes:
+      age_at_response:
+        description: The age (in days) of the Participant when the QuestionnaireResponse was captured.
+        range: integer
+        unit:
+          ucum_code: d
+      items:
+        description: A collection of QuestionnaireResponseItem objects which encapsulate the question being asked and the response.
+        range: QuestionnaireResponseItem
+        multivalued: true
+        required: true
+      associated_visit:
+        description: A reference to the Visit during which this QuestionnaireResponse was captured.
+        range: Visit
+
+  QuestionnaireResponseItem:
+    description: QuestionnaireResponseItem provides a complete or partial list of answers to a set of questions filled when responding to a questionnaire. (FHIR)
+    attributes:
+      has_questionnaire_item:
+        range: QuestionnaireItem
+        description: A reference to the QuestionnaireItem that this QuestionnaireResponseItem responds to.
+      text:
+        range: string
+        description: Name for group or question text
+      response_value:
+        range: QuestionnaireResponseValue
+        required: true
+
+  QuestionnaireResponseValue:
+    description: Single-valued answer to the question. (FHIR)
+    attributes:
+      type:
+        range: string
+        designates_type: true
+      name:
+        range: string
+    slots:
+      - value
+
+  QuestionnaireResponseValueDecimal:
+    is_a: QuestionnaireResponseValue
+    description: Single-valued decimal answer to the question
+    slot_usage:
+      value:
+        range: decimal
+        required: true
+
+  QuestionnaireResponseValueBoolean:
+    is_a: QuestionnaireResponseValue
+    description: Single-valued boolean answer to the question
+    slot_usage:
+      value:
+        range: boolean
+        required: true
+
+  QuestionnaireResponseValueString:
+    is_a: QuestionnaireResponseValue
+    description: Single-valued string answer to the question
+    slot_usage:
+      value:
+        range: string
+        required: true
+
+  Condition:
+    is_a: Entity
+    description: >-
+       Conditions are records of a Person suggesting the presence of a disease or medical condition stated as a diagnosis, a sign or a symptom, which is either observed by a Provider or reported by the patient. Conditions are recorded in different sources and levels of standardization.
+    attributes:
+      condition_concept:
+        range: ConditionConceptEnum
+        description: The coded value for the presence of a disease or medical condition stated as a diagnosis, a sign or a symptom, coded to the Human Phenotype Ontology or MONDO.
+      age_at_condition_start:
+        range: integer
+        description: The Participant's age (expressed in days) when the condition was first recorded.
+        unit:
+          ucum_code: d
+      age_at_condition_end:
+        range: integer
+        description: The Participant's age (expressed in days) when the condition was recorded as having been resolved.
+        unit:
+          ucum_code: d
+      condition_provenance:
+        range: ConditionProvenanceEnum
+        description: A value representing the provenance of the Condition record
+      relationship_to_participant:
+        range: string
+        description: A value indicating the relationship between the Participant to which the Condition is attributed and the individual who had the reported Condition.  If the Condition is affecting the participant themselves, then 'Self' is the appropriate relationship.  If the Condition is affecting a family member (e.g. a parent of the Participant) then an appropriate relationship should be provided (e.g. 'Parent')
+      associated_participant:
+        range: Participant
+        description: A reference to the Participant to which the Condition is attributed.
+      associated_visit:
+        description: A reference to the Visit during which this QuestionnaireResponse was captured.
+        range: Visit
+    slots:
+      - identity
+
+slots:
+  id:
+    identifier: true
+    slot_uri: schema:identifier
+    range: uriorcurie
+    description: The 'logical' identifier of the entity within the system of record.  The simple value of this attribute stands for an identifier of this data object within the system, it can be used as a reference from other objects within the same system (i.e. primary and foreign keys), and it should be unique per type of object. The same data object copied to a different system will likely have a different "id" in the new system since "id" values are system specific and do not represent persistent business identifiers. Business identifiers are assigned outside the information system and are captured in the "identifier" field. The "id" field is more likely to be a serially or randomly generated value that is assigned to the data object as it is created in a system.
+  identity:
+    slot_uri: schema:identifier
+    range: Identifier
+    description: A 'business' identifier or accession number for the entity, typically as provided by an external system or authority, that are globally unique and persist across implementing systems. Also, since these identifiers are created outside the information system through a specific business process, the Identifier type has additional attributes to capture this additional metadata so the actual identifier values are qualified by the context that created those values. This additional context allows "identifier" instances to be transmitted as business data across systems while still being able to trace them back to the system of origin.
+    multivalued: true
+  associated_person:
+    range: Person
+    description: A reference to the Person that is associated with this record.
+  value:
+    range: string
+    description: A general slot to hold a value.
+
+
+enums:
+  DataUseEnum:
+    description: >-
+      A constrained set of enumerative values drawn from the Data Use Ontology (DUO). The DUO is an ontology which represent data use conditions.
+    permissible_values:
+      GRU:
+        description: 'This data use permission indicates that use is allowed for general research use for any research purpose. This includes but is not limited to: health/medical/biomedical purposes, fundamental biology research, the study of population origins or ancestry, statistical methods and algorithms development, and social-sciences research.'
+        meaning: DUO:0000042
+      HMB:
+        description: 'This data use permission indicates that use is allowed for health/medical/biomedical purposes; does not include the study of population origins or ancestry.'
+        meaning: DUO:0000006
+      DS:
+        description: 'This data use permission indicates that use is allowed provided it is related to the specified disease. This term should be coupled with a term describing a disease from an ontology to specify the disease the restriction applies to. DUO recommends MONDO be used, to provide the basis for automated evaluation. For more information see https://github.com/EBISPOT/DUO/blob/master/MONDO_Overview.md Other resources, such as the Disease Ontology, HPO, SNOMED-CT or others, can also be used. When those other resources are being used, this may require an extra mapping step to leverage automated matching algorithms.'
+        meaning: DUO:0000007
+      NPUNCU:
+        description: 'This data use modifier indicates that use of the data is limited to not-for-profit organizations and not-for-profit use, non-commercial use.'
+        meaning: DUO:0000018
+      IRB:
+        description: 'This data use modifier indicates that the requestor must provide documentation of local IRB/ERB approval.'
+        meaning: DUO:0000021
+  EthnicityEnum:
+    description: >-
+      A constrained set of enumerative values containing the United States Office of Management and Budget (OMB) values for ethnicity.
+    permissible_values:
+      HISPANIC_OR_LATINO:
+        description: 'A person of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or origin, regardless of race. The term, "Spanish origin" can be used in addition to "Hispanic or Latino". (OMB)'
+        meaning: OMOP:38003563
+      NOT_HISPANIC_OR_LATINO:
+        description: 'A person not of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or origin, regardless of race.'
+        meaning: OMOP:38003564
+  RaceEnum:
+    description: >-
+      A constrained set of enumerative values containing the United States Office of Management and Budget (OMB) values for race.
+    permissible_values:
+      AMERICAN_INDIAN_OR_ALASKA_NATIVE:
+        description: 'A person having origins in any of the original peoples of North and South America (including Central America) and who maintains tribal affiliation or community attachment. (OMB)'
+        meaning: OMOP:8657
+      ASIAN:
+        description: 'A person having origins in any of the original peoples of the Far East, Southeast Asia, or the Indian subcontinent, including for example, Cambodia, China, India, Japan, Korea, Malaysia, Pakistan, the Philippine Islands, Thailand, and Vietnam. (OMB)'
+        meaning: OMOP:8515
+      BLACK_OR_AFRICAN_AMERICAN:
+        description: 'A person having origins in any of the Black racial groups of Africa. Terms such as "Haitian" or "Negro" can be used in addition to "Black or African American". (OMB)'
+        meaning: OMOP:8516
+      NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER:
+        description: 'Denotes a person having origins in any of the original peoples of Hawaii, Guam, Samoa, or other Pacific Islands. The term covers particularly people who identify themselves as part-Hawaiian, Native Hawaiian, Guamanian or Chamorro, Carolinian, Samoan, Chuukese (Trukese), Fijian, Kosraean, Melanesian, Micronesian, Northern Mariana Islander, Palauan, Papua New Guinean, Pohnpeian, Polynesian, Solomon Islander, Tahitian, Tokelauan, Tongan, Yapese, or Pacific Islander, not specified.'
+        meaning: OMOP:8557
+      UNKNOWN:
+        description: 'Not known, not observed, not recorded, or refused.'
+        meaning: OMOP:8552
+      WHITE:
+        description: 'Denotes person with European, Middle Eastern, or North African ancestral origin who identifies, or is identified, as White.'
+        meaning: OMOP:8527
+  SexEnum:
+    description: >-
+      A constrained set of enumerative values containing the OMOP values for sex.
+    permissible_values:
+      MALE:
+        description: A person who belongs to the sex that normally produces sperm.
+        meaning: OMOP:8507
+      FEMALE:
+        description: A person who belongs to the sex that normally produces ova.
+        meaning: OMOP:8532
+      UNKNOWN:
+        description: 'Not known, not observed, not recorded, or refused.'
+        meaning: OMOP:8552
+  CellularOrganismSpeciesEnum:
+    description: >-
+      A constrained set of enumerative values containing the NCBITaxon values for cellular organisms.
+    reachable_from:
+      source_ontology: obo:ncbitaxon
+      source_nodes:
+        - ncbitaxon:131567 ## Cellular Organisms
+      include_self: false
+      relationship_types:
+        - rdfs:subClassOf
+  VitalStatusEnum:
+    description: >-
+      A constrained set of enumerative values containing the OMOP values for vital status.
+    permissible_values:
+      ALIVE:
+        description: 'Showing characteristics of life; displaying signs of life. (NCIt)'
+        meaning: OMOP:4230556
+      DEAD:
+        description: 'The cessation of life. (NCIt)'
+        meaning: OMOP:434489
+  VertebrateBreedEnum:
+    description: >-
+      A constrained set of enumerative values containing the VBO values for vertebrate breeds.
+    reachable_from:
+      source_ontology: obo:vbo
+      source_nodes:
+        - VBO:0400000 ## Vertebrate Breed
+      include_self: false
+      relationship_types:
+        - rdfs:subClassOf
+
+  VisitCategoryEnum:
+    description: >-
+      A constrained set of enumerative values containing the OMOP values for visit categories.
+    permissible_values:
+      INPATIENT:
+        description: Person visiting hospital, at a care stie, in bed, for duration of more than one day, with physicians and other Providers permanently available to deliver service around the clock
+        meaning: OMOP:9201
+      EMERGENCY_ROOM:
+        description: Person visiting dedicated healthcare institution for treating emergencies, at a Care Site, within one day, with physicians and Providers permanently available to deliver service around the clock
+        meaning: OMOP:9203
+      EMERGENCY_ROOM_AND_INPATIENT:
+        description: Person visiting ER followed by a subsequent Inpatient Visit, where Emergency department is part of hospital, and transition from the ER to other hospital departments is undefined
+        meaning: OMOP:262
+      NON_HOSPITAL_INSTITUTION:
+        description: Person visiting dedicated institution for reasons of poor health, at a Care Site, long-term or permanently, with no physician but possibly other Providers permanently available to deliver service around the clock
+        meaning: OMOP:42898160
+      OUTPATIENT:
+        description: Person visiting dedicated ambulatory healthcare institution, at a Care Site, within one day, without bed, with physicians or medical Providers delivering service during Visit
+        meaning: OMOP:9202
+      HOME:
+        description: Provider visiting Person, without a Care Site, within one day, delivering service
+        meaning: OMOP:581476
+      TELEHEALTH:
+        description: Patient engages with Provider through communication media
+        meaning: OMOP:5083
+      PHARMACY:
+        description: Person visiting pharmacy for dispensing of Drug, at a Care Site, within one day
+        meaning: OMOP:581458
+      LABORATORY:
+        description: Patient visiting dedicated institution, at a Care Site, within one day, for the purpose of a Measurement.
+        meaning: OMOP:32036
+      AMBULANCE:
+          description: Person using transportation service for the purpose of initiating one of the other Visits, without a Care Site, within one day, potentially with Providers accompanying the Visit and delivering service
+          meaning: OMOP:581478
+      CASE_MANAGEMENT:
+          description: Person interacting with healthcare system, without a Care Site, within a day, with no Providers involved, for administrative purposes
+          meaning: OMOP:38004193
+
+  VisitProvenanceEnum:
+    description: >-
+      A constrained set of enumerative values containing the OMOP values for visit provenance.
+    permissible_values:
+      CASE_REPORT_FORM:
+        description: Case Report Form
+        meaning: OMOP:32809
+      CLAIM:
+          description: Claim
+          meaning: OMOP:32810
+      CLAIM_AUTHORIZATION:
+          description: Claim authorization
+          meaning: OMOP:32811
+      CLAIM_DISCHARGE_RECORD:
+          description: Claim discharge record
+          meaning: OMOP:32812
+      CLAIM_ENROLMENT_RECORD:
+        description: Claim enrolment record
+        meaning: OMOP:32813
+      COST_RECORD:
+        description: Cost record
+        meaning: OMOP:32814
+      DEATH_CERTIFICATE:
+        description: Death Certificate
+        meaning: OMOP:32815
+      DENTAL_CLAIM:
+        description: Dental claim
+        meaning: OMOP:32816
+      EHR:
+        description: EHR
+        meaning: OMOP:32817
+      EHR_PATHOLOGY_REPORT:
+        description: EHR Pathology report
+        meaning: OMOP:32835
+      EHR_ADMINISTRATION_RECORD:
+        description: EHR administration record
+        meaning: OMOP:32818
+      EHR_ADMISSION_NOTE:
+        description: EHR admission note
+        meaning: OMOP:32819
+      EHR_ANCILLARY_REPORT:
+        description: EHR ancillary report
+        meaning: OMOP:32820
+      EHR_BILLING_RECORD:
+        description: EHR billing record
+        meaning: OMOP:32821
+      EHR_CHIEF_COMPLAINT:
+        description: EHR chief complaint
+        meaning: OMOP:32822
+      EHR_DISCHARGE_RECORD:
+        description: EHR discharge record
+        meaning: OMOP:32823
+      EHR_DISCHARGE_SUMMARY:
+        description: EHR discharge summary
+        meaning: OMOP:32824
+      EHR_DISPENSING_RECORD:
+        description: EHR dispensing record
+        meaning: OMOP:32825
+      EHR_EMERGENCY_ROOM_NOTE:
+        description: EHR emergency room note
+        meaning: OMOP:32826
+      EHR_ENCOUNTER_RECORD:
+        description: EHR encounter record
+        meaning: OMOP:32827
+      EHR_EPISODE_RECORD:
+        description: EHR episode record
+        meaning: OMOP:32828
+      EHR_INPATIENT_NOTE:
+        description: EHR inpatient note
+        meaning: OMOP:32829
+      EHR_MEDICATION_LIST:
+        description: EHR medication list
+        meaning: OMOP:32830
+      EHR_NOTE:
+        description: EHR note
+        meaning: OMOP:32831
+      EHR_NURSING_REPORT:
+        description: EHR nursing report
+        meaning: OMOP:32832
+      EHR_ORDER:
+        description: EHR order
+        meaning: OMOP:32833
+      EHR_OUTPATIENT_NOTE:
+        description: EHR outpatient note
+        meaning: OMOP:32834
+      EHR_PHYSICAL_EXAMINATION:
+        description: EHR physical examination
+        meaning: OMOP:32836
+      EHR_PLANNED_DISPENSING_RECORD:
+        description: EHR planned dispensing record
+        meaning: OMOP:32837
+      EHR_PRESCRIPTION:
+        description: EHR prescription
+        meaning: OMOP:32838
+      EHR_PRESCRIPTION_ISSUE_RECORD:
+        description: EHR prescription issue record
+        meaning: OMOP:32839
+      EHR_PROBLEM_LIST:
+        description: EHR problem list
+        meaning: OMOP:32840
+      EHR_RADIOLOGY_REPORT:
+        description: EHR radiology report
+        meaning: OMOP:32841
+      EHR_REFERRAL_RECORD:
+        description: EHR referral record
+        meaning: OMOP:32842
+      EXTERNAL_CDM_INSTANCE:
+        description: External CDM instance
+        meaning: OMOP:32843
+      FACILITY_CLAIM:
+        description: Facility claim
+        meaning: OMOP:32844
+      FACILITY_CLAIM_DETAIL:
+        description: Facility claim detail
+        meaning: OMOP:32845
+      FACILITY_CLAIM_HEADER:
+        description: Facility claim header
+        meaning: OMOP:32846
+      GEOGRAPHIC_ISOLATION_RECORD:
+        description: Geographic isolation record
+        meaning: OMOP:32847
+      GOVERNMENT_REPORT:
+        description: Government report
+        meaning: OMOP:32848
+      HEALTH_INFORMATION_EXCHANGE_RECORD:
+        description: Health Information Exchange record
+        meaning: OMOP:32849
+      HEALTH_RISK_ASSESSMENT:
+        description: Health Risk Assessment
+        meaning: OMOP:32850
+      HEALTHCARE_PROFESSIONAL_FILLED_SURVEY:
+        description: Healthcare professional filled survey
+        meaning: OMOP:32851
+      HOSPITAL_COST:
+        description: Hospital cost
+        meaning: OMOP:32852
+      INPATIENT_CLAIM:
+        description: Inpatient claim
+        meaning: OMOP:32853
+      INPATIENT_CLAIM_DETAIL:
+        description: Inpatient claim detail
+        meaning: OMOP:32854
+      INPATIENT_CLAIM_HEADER:
+        description: Inpatient claim header
+        meaning: OMOP:32855
+      LAB:
+        description: Lab
+        meaning: OMOP:32856
+      MAIL_ORDER_RECORD:
+        description: Mail order record
+        meaning: OMOP:32857
+      NLP:
+        description: NLP
+        meaning: OMOP:32858
+      OUTPATIENT_CLAIM:
+        description: Outpatient claim
+        meaning: OMOP:32859
+      OUTPATIENT_CLAIM_DETAIL:
+        description: Outpatient claim detail
+        meaning: OMOP:32860
+      OUTPATIENT_CLAIM_HEADER:
+        description: Outpatient claim header
+        meaning: OMOP:32861
+      PATIENT_FILLED_SURVEY:
+        description: Patient filled survey
+        meaning: OMOP:32862
+      PATIENT_OR_PAYER_PAID_RECORD:
+        description: Patient or payer paid record
+        meaning: OMOP:32863
+      PATIENT_REPORTED_COST:
+        description: Patient reported cost
+        meaning: OMOP:32864
+      PATIENT_SELF-REPORT:
+        description: Patient self-report
+        meaning: OMOP:32865
+      PATIENT_SELF-TESTED:
+        description: Patient self-tested
+        meaning: OMOP:705183
+      PAYER_SYSTEM_RECORD_(PAID_PREMIUM):
+        description: Payer system record (paid premium)
+        meaning: OMOP:32866
+      PAYER_SYSTEM_RECORD_(PRIMARY_PAYER):
+        description: Payer system record (primary payer)
+        meaning: OMOP:32867
+      PAYER_SYSTEM_RECORD_(SECONDARY_PAYER):
+        description: Payer system record (secondary payer)
+        meaning: OMOP:32868
+      PHARMACY_CLAIM:
+        description: Pharmacy claim
+        meaning: OMOP:32869
+      POINT_OF_CARE/EXPRESS_LAB:
+        description: Point of care/express lab
+        meaning: OMOP:703249
+      PRE-QUALIFICATION_TIME_PERIOD:
+        description: Pre-qualification time period
+        meaning: OMOP:32870
+      PROFESSIONAL_CLAIM:
+        description: Professional claim
+        meaning: OMOP:32871
+      PROFESSIONAL_CLAIM_DETAIL:
+        description: Professional claim detail
+        meaning: OMOP:32872
+      PROFESSIONAL_CLAIM_HEADER:
+        description: Professional claim header
+        meaning: OMOP:32873
+      PROVIDER_CHARGE_LIST_PRICE:
+        description: Provider charge list price
+        meaning: OMOP:32874
+      PROVIDER_FINANCIAL_SYSTEM:
+        description: Provider financial system
+        meaning: OMOP:32875
+      PROVIDER_INCURRED_COST_RECORD:
+        description: Provider incurred cost record
+        meaning: OMOP:32876
+      RANDOMIZATION_RECORD:
+        description: Randomization record
+        meaning: OMOP:32877
+      REFERENCE_LAB:
+        description: Reference lab
+        meaning: OMOP:32878
+      REGISTRY:
+        description: Registry
+        meaning: OMOP:32879
+      STANDARD_ALGORITHM:
+        description: Standard algorithm
+        meaning: OMOP:32880
+      STANDARD_ALGORITHM_FROM_EHR:
+        description: Standard algorithm from EHR
+        meaning: OMOP:32882
+      STANDARD_ALGORITHM_FROM_CLAIMS:
+        description: Standard algorithm from claims
+        meaning: OMOP:32881
+      SURVEY:
+        description: Survey
+        meaning: OMOP:32883
+      US_SOCIAL_SECURITY_DEATH_MASTER_FILE:
+        description: US Social Security Death Master File
+        meaning: OMOP:32885
+      URGENT_LAB:
+        description: Urgent lab
+        meaning: OMOP:32884
+      VISION_CLAIM:
+        description: Vision claim
+        meaning: OMOP:32886
+
+  MondoHumanDiseaseEnum:
+    description: >-
+      A constrained set of enumerative values containing the MONDO values for human diseases.
+    reachable_from:
+      source_ontology: obo:mondo
+      source_nodes:
+        - MONDO:0700096 ## Human Disease
+      include_self: false
+      relationship_types:
+        - rdfs:subClassOf
+
+  HpoPhenotypicAbnormalityEnum:
+    description: >-
+      A constrained set of enumerative values containing the HPO values for phenotypic abnormalities.
+    reachable_from:
+      source_ontology: obo:hp
+      source_nodes:
+        - HP:0000118 ## Phenotypic Abnormality
+      include_self: false
+      relationship_types:
+        - rdfs:subClassOf
+
+  ConditionConceptEnum:
+    description: >-
+      A constrained set of enumerative values containing both the MONDO values for human diseases and the HPO values for phenotypic abnormalities.
+    inherits:
+      - MondoHumanDiseaseEnum
+      - HpoPhenotypicAbnormalityEnum
+
+  ConditionProvenanceEnum:
+    description: >-
+      A constrained set of enumerative values containing the OMOP values for visit provenance.
+    permissible_values:
+      EHR_BILLING_DIAGNOSIS:
+        meaning: OMOP:4822159
+      EHR_CHIEF_COMPLAINT:
+        meaning: OMOP:4822124
+      EHR_ENCOUNTER_DIAGNOSIS:
+        meaning: OMOP:4822160
+      EHR_EPISODE_ENTRY:
+        meaning: OMOP:4822135
+      EHR_PROBLEM_LIST_ENTRY:
+        meaning: OMOP:4822121
+      FIRST_POSITION_CONDITION:
+        meaning: OMOP:4822128
+      NLP_DERIVED:
+        meaning: OMOP:4822058
+      OBSERVATION_RECORDED_FROM_EHR:
+        meaning: OMOP:4822126
+      PATIENT_SELF-REPORTED_CONDITION:
+        meaning: OMOP:4822157
+      PRIMARY_CONDITION:
+        meaning: OMOP:4822127
+      REFERRAL_RECORD:
+        meaning: OMOP:4822125
+      SECONDARY_CONDITION:
+        meaning: OMOP:4822129
+      TUMOR_REGISTRY:
+        meaning: OMOP:4822266

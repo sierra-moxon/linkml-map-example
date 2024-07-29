@@ -1,107 +1,273 @@
 {
     "$defs": {
-        "NamedThing": {
+        "Container": {
             "additionalProperties": false,
-            "description": "A generic grouping for any identifiable entity",
+            "description": "",
             "properties": {
-                "id": {
-                    "description": "A unique identifier for a thing",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id"
-            ],
-            "title": "NamedThing",
-            "type": "object"
-        },
-        "Person": {
-            "additionalProperties": false,
-            "description": "Represents a Sample",
-            "properties": {
-                "first_name": {
-                    "description": "A human-readable first name for a Person",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for a thing",
-                    "type": "string"
-                },
-                "last_name": {
-                    "description": "A human-readable last name for a Person",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id"
-            ],
-            "title": "Person",
-            "type": "object"
-        },
-        "PersonCollection": {
-            "additionalProperties": false,
-            "description": "A holder for Sample objects",
-            "properties": {
-                "entries": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/Person__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
+                "investigations": {
+                    "items": {
+                        "$ref": "#/$defs/Investigation"
                     },
-                    "type": "object"
+                    "type": "array"
+                },
+                "material_processings": {
+                    "items": {
+                        "$ref": "#/$defs/MaterialProcessing"
+                    },
+                    "type": "array"
+                },
+                "materials": {
+                    "items": {
+                        "$ref": "#/$defs/MaterialEntity"
+                    },
+                    "type": "array"
+                },
+                "participations": {
+                    "items": {
+                        "$ref": "#/$defs/Participation"
+                    },
+                    "type": "array"
+                },
+                "specimen_collection_processes": {
+                    "items": {
+                        "$ref": "#/$defs/SpecimenCollectionProcess"
+                    },
+                    "type": "array"
+                },
+                "subjects": {
+                    "items": {
+                        "$ref": "#/$defs/Subject"
+                    },
+                    "type": "array"
                 }
             },
-            "title": "PersonCollection",
+            "title": "Container",
             "type": "object"
         },
-        "Person__identifier_optional": {
+        "DataObject": {
             "additionalProperties": false,
-            "description": "Represents a Sample",
+            "description": "A DataFile Associated with a Subject or Investigation or MaterialEntity",
+            "title": "DataObject",
+            "type": "object"
+        },
+        "Investigation": {
+            "additionalProperties": false,
+            "description": "General information about the Investigation",
             "properties": {
-                "first_name": {
-                    "description": "A human-readable first name for a Person",
-                    "type": "string"
-                },
                 "id": {
-                    "description": "A unique identifier for a thing",
                     "type": "string"
                 },
-                "last_name": {
-                    "description": "A human-readable last name for a Person",
+                "name": {
+                    "type": "string"
+                },
+                "part_of": {
                     "type": "string"
                 }
             },
-            "required": [],
-            "title": "Person",
+            "required": [
+                "id"
+            ],
+            "title": "Investigation",
+            "type": "object"
+        },
+        "MaterialEntity": {
+            "additionalProperties": false,
+            "description": "Physical entity that is an input our output of a process from a Subject",
+            "properties": {
+                "concentration": {
+                    "$ref": "#/$defs/Quantity"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "used_in": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "volume": {
+                    "$ref": "#/$defs/Quantity"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "MaterialEntity",
+            "type": "object"
+        },
+        "MaterialProcessing": {
+            "additionalProperties": false,
+            "description": "A planned process which results in physical changes in a specified input material",
+            "properties": {
+                "has_input": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "has_output": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "MaterialProcessing",
+            "type": "object"
+        },
+        "Participation": {
+            "additionalProperties": false,
+            "description": "Subject/Study participation information",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "includes": {
+                    "type": "string"
+                },
+                "involved_in": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Participation",
+            "type": "object"
+        },
+        "Quantity": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "comparator": {
+                    "type": "string"
+                },
+                "has_numeric_value": {
+                    "type": "number"
+                },
+                "has_raw_value": {
+                    "type": "string"
+                },
+                "has_unit": {
+                    "type": "string"
+                }
+            },
+            "title": "Quantity",
+            "type": "object"
+        },
+        "SpecimenCollectionProcess": {
+            "additionalProperties": false,
+            "description": "A planned process with the objective of collecting a specimen",
+            "properties": {
+                "has_input": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "has_output": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "SpecimenCollectionProcess",
+            "type": "object"
+        },
+        "Subject": {
+            "additionalProperties": false,
+            "description": "Demographic and clinical information about the subject",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Subject",
             "type": "object"
         }
     },
-    "$id": "https://w3id.org/sierra-moxon/linkml-map-example",
+    "$id": "https://w3id.org/linkml/cmdr",
     "$schema": "https://json-schema.org/draft/2019-09/schema",
     "additionalProperties": true,
-    "description": "A holder for Sample objects",
+    "description": "",
     "metamodel_version": "1.7.0",
     "properties": {
-        "entries": {
-            "additionalProperties": {
-                "anyOf": [
-                    {
-                        "$ref": "#/$defs/Person__identifier_optional"
-                    },
-                    {
-                        "type": "null"
-                    }
-                ]
+        "investigations": {
+            "items": {
+                "$ref": "#/$defs/Investigation"
             },
-            "type": "object"
+            "type": "array"
+        },
+        "material_processings": {
+            "items": {
+                "$ref": "#/$defs/MaterialProcessing"
+            },
+            "type": "array"
+        },
+        "materials": {
+            "items": {
+                "$ref": "#/$defs/MaterialEntity"
+            },
+            "type": "array"
+        },
+        "participations": {
+            "items": {
+                "$ref": "#/$defs/Participation"
+            },
+            "type": "array"
+        },
+        "specimen_collection_processes": {
+            "items": {
+                "$ref": "#/$defs/SpecimenCollectionProcess"
+            },
+            "type": "array"
+        },
+        "subjects": {
+            "items": {
+                "$ref": "#/$defs/Subject"
+            },
+            "type": "array"
         }
     },
-    "title": "linkml-map-example",
+    "title": "cmdr",
     "type": "object",
     "version": null
 }

@@ -1,9 +1,9 @@
 # metamodel_version: 1.7.0
-BASE <https://w3id.org/sierra-moxon/linkml-map-example/>
+BASE <https://w3id.org/linkml/cmdr/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX linkml: <https://w3id.org/linkml/>
-PREFIX schema1: <http://schema.org/>
+PREFIX OBI: <http://example.org/UNKNOWN/OBI/>
 
 
 linkml:String xsd:string
@@ -44,27 +44,98 @@ linkml:Jsonpath xsd:string
 
 linkml:Sparqlpath xsd:string
 
-<NamedThing>  (
-    CLOSED {
-       (  $<NamedThing_tes> rdf:type . * ;
-          rdf:type [ schema1:Thing ]
-       )
-    } OR @<Person>
-)
-
-<Person> CLOSED {
-    (  $<Person_tes> (  &<NamedThing_tes> ;
-          rdf:type [ schema1:Thing ] ? ;
-          <first_name> @linkml:String ? ;
-          <last_name> @linkml:String ?
+<Container> CLOSED {
+    (  $<Container_tes> (  <materials> @<MaterialEntity> * ;
+          <participations> @<Participation> * ;
+          <material_processings> @<MaterialProcessing> * ;
+          <specimen_collection_processes> @<SpecimenCollectionProcess> * ;
+          <investigations> @<Investigation> * ;
+          <subjects> @<Subject> *
        ) ;
-       rdf:type [ <Person> ]
+       rdf:type [ <Container> ] ?
     )
 }
 
-<PersonCollection> CLOSED {
-    (  $<PersonCollection_tes> <entries> @<Person> * ;
-       rdf:type [ <PersonCollection> ] ?
+<DataObject> CLOSED {
+    (  $<DataObject_tes> rdf:type . * ;
+       rdf:type [ <DataObject> ] ?
+    )
+}
+
+<Investigation> CLOSED {
+    (  $<Investigation_tes> (  <name> @linkml:String ? ;
+          <part_of> @<Investigation> ?
+       ) ;
+       rdf:type [ <Investigation> ]
+    )
+}
+
+<MaterialEntity> CLOSED {
+    (  $<MaterialEntity_tes> (  <name> @linkml:String ? ;
+          <used_in> @<Investigation> * ;
+          <source> @<Subject> ? ;
+          <volume> @<Quantity> ? ;
+          <concentration> @<Quantity> ?
+       ) ;
+       rdf:type [ <MaterialEntity> ]
+    )
+}
+
+<MaterialProcessing> CLOSED {
+    (  $<MaterialProcessing_tes> (  &<Process_tes> ;
+          rdf:type [ <Process> ] ? ;
+          <has_input> @<MaterialEntity> * ;
+          <has_output> @<MaterialEntity> *
+       ) ;
+       rdf:type [ OBI:0000094 ]
+    )
+}
+
+<Participation> CLOSED {
+    (  $<Participation_tes> (  <name> @linkml:String ? ;
+          <involved_in> @<Investigation> * ;
+          <includes> @<Subject> ?
+       ) ;
+       rdf:type [ <Participation> ]
+    )
+}
+
+<Process>  (
+    @<MaterialProcessing> OR @<SpecimenCollectionProcess>
+)
+
+<Process_struct> {
+    (  $<Process_tes> (  <name> @linkml:String ? ;
+          <has_input> @linkml:String * ;
+          <has_output> @linkml:String *
+       ) ;
+       rdf:type [ <Process> ]
+    )
+}
+
+<Quantity> CLOSED {
+    (  $<Quantity_tes> (  <has_raw_value> @linkml:String ? ;
+          <has_numeric_value> @linkml:Float ? ;
+          <has_unit> @linkml:String ? ;
+          <comparator> @linkml:String ?
+       ) ;
+       rdf:type [ <Quantity> ] ?
+    )
+}
+
+<SpecimenCollectionProcess> CLOSED {
+    (  $<SpecimenCollectionProcess_tes> (  &<Process_tes> ;
+          rdf:type [ <Process> ] ? ;
+          <has_input> @linkml:String ? ;
+          <has_output> @linkml:String ?
+       ) ;
+       rdf:type [ OBI:0000659 ]
+    )
+}
+
+<Subject> CLOSED {
+    (  $<Subject_tes> <name> @linkml:String ? ;
+       rdf:type [ <Subject> ]
     )
 }
 
