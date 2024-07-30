@@ -3,6 +3,9 @@ BASE <https://w3id.org/linkml/cmdr/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX schema1: <http://schema.org/>
+PREFIX bdchm: <https://w3id.org/nhlbidatastage/bdchm/>
+PREFIX OMOP: <https://athena.ohdsi.org/search-terms/terms/>
 PREFIX OBI: <http://example.org/UNKNOWN/OBI/>
 
 
@@ -44,6 +47,23 @@ linkml:Jsonpath xsd:string
 
 linkml:Sparqlpath xsd:string
 
+bdchm:Condition CLOSED {
+    (  $bdchm:Condition_tes (  &bdchm:Entity_tes ;
+          rdf:type [ schema1:Thing ] ? ;
+          schema1:identifier @bdchm:Identifier * ;
+          bdchm:condition_concept . ? ;
+          bdchm:age_at_condition_start @linkml:Integer ? ;
+          bdchm:age_at_condition_end @linkml:Integer ? ;
+          bdchm:condition_provenance [ OMOP:4822159 OMOP:4822124 OMOP:4822160 OMOP:4822135 OMOP:4822121 OMOP:4822128 OMOP:4822058
+             OMOP:4822126 OMOP:4822157 OMOP:4822127 OMOP:4822125 OMOP:4822129 OMOP:4822266 ] ? ;
+          bdchm:relationship_to_participant @linkml:String ? ;
+          bdchm:associated_participant @bdchm:Participant ? ;
+          bdchm:associated_visit @bdchm:Visit ?
+       ) ;
+       rdf:type [ bdchm:Condition ] ?
+    )
+}
+
 <Container> CLOSED {
     (  $<Container_tes> (  <materials> @<MaterialEntity> * ;
           <participations> @<Participation> * ;
@@ -59,6 +79,25 @@ linkml:Sparqlpath xsd:string
 <DataObject> CLOSED {
     (  $<DataObject_tes> rdf:type . * ;
        rdf:type [ <DataObject> ] ?
+    )
+}
+
+bdchm:Entity  (
+    @bdchm:Condition OR @bdchm:Organization OR @bdchm:Participant OR @bdchm:Person OR @bdchm:Questionnaire OR
+    @bdchm:QuestionnaireItem OR @bdchm:QuestionnaireResponse OR @bdchm:ResearchStudy OR @bdchm:TimePoint OR @bdchm:Visit
+)
+
+bdchm:Entity_struct {
+    (  $bdchm:Entity_tes <id> @linkml:String ? ;
+       rdf:type [ schema1:Thing ] ?
+    )
+}
+
+bdchm:Identifier CLOSED {
+    (  $bdchm:Identifier_tes (  bdchm:value @linkml:String ;
+          bdchm:system @linkml:String ?
+       ) ;
+       rdf:type [ bdchm:Identifier ] ?
     )
 }
 
@@ -91,12 +130,59 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+bdchm:Organization CLOSED {
+    (  $bdchm:Organization_tes (  &bdchm:Entity_tes ;
+          rdf:type [ schema1:Thing ] ? ;
+          schema1:identifier @bdchm:Identifier * ;
+          bdchm:name @linkml:String ? ;
+          bdchm:alias @linkml:String ? ;
+          bdchm:organization_type @linkml:String ?
+       ) ;
+       rdf:type [ bdchm:Organization ] ?
+    )
+}
+
+bdchm:Participant CLOSED {
+    (  $bdchm:Participant_tes (  &bdchm:Entity_tes ;
+          rdf:type [ schema1:Thing ] ? ;
+          bdchm:associated_person @bdchm:Person ? ;
+          schema1:identifier @bdchm:Identifier * ;
+          bdchm:description @linkml:String ? ;
+          bdchm:member_of_research_study @bdchm:ResearchStudy ? ;
+          bdchm:age_at_enrollment @linkml:Integer ? ;
+          bdchm:index_timepoint @linkml:String ? ;
+          bdchm:originating_site @bdchm:Organization ? ;
+          bdchm:study_arm @linkml:String *
+       ) ;
+       rdf:type [ bdchm:Participant ] ?
+    )
+}
+
 <Participation> CLOSED {
     (  $<Participation_tes> (  <name> @linkml:String ? ;
           <involved_in> @<Investigation> * ;
           <includes> @<Subject> ?
        ) ;
        rdf:type [ <Participation> ]
+    )
+}
+
+bdchm:Person CLOSED {
+    (  $bdchm:Person_tes (  &bdchm:Entity_tes ;
+          rdf:type [ schema1:Thing ] ? ;
+          schema1:identifier @bdchm:Identifier * ;
+          bdchm:species . ? ;
+          bdchm:breed . ? ;
+          bdchm:sex [ OMOP:8507 OMOP:8532 OMOP:8552 ] ? ;
+          bdchm:ethnicity [ OMOP:38003563 OMOP:38003564 ] ? ;
+          bdchm:race [ OMOP:8657 OMOP:8515 OMOP:8516 OMOP:8557 OMOP:8552 OMOP:8527 ] ? ;
+          bdchm:year_of_birth @linkml:Integer ? ;
+          bdchm:vital_status [ OMOP:4230556 OMOP:434489 ] ? ;
+          bdchm:age_at_death @linkml:Integer ? ;
+          bdchm:year_of_death @linkml:Integer ? ;
+          bdchm:cause_of_death @linkml:String ?
+       ) ;
+       rdf:type [ bdchm:Person ] ?
     )
 }
 
@@ -123,6 +209,126 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+bdchm:Questionnaire CLOSED {
+    (  $bdchm:Questionnaire_tes (  &bdchm:Entity_tes ;
+          rdf:type [ schema1:Thing ] ? ;
+          schema1:identifier @bdchm:Identifier * ;
+          bdchm:name @linkml:String ? ;
+          bdchm:title @linkml:String ? ;
+          bdchm:description @linkml:String ? ;
+          bdchm:url @linkml:Uriorcurie ? ;
+          bdchm:version @linkml:String ? ;
+          bdchm:publisher @linkml:String ? ;
+          bdchm:copyright @linkml:String ? ;
+          bdchm:copyright_label @linkml:String ? ;
+          bdchm:language @linkml:String * ;
+          bdchm:items @bdchm:QuestionnaireItem +
+       ) ;
+       rdf:type [ bdchm:Questionnaire ] ?
+    )
+}
+
+bdchm:QuestionnaireItem CLOSED {
+    (  $bdchm:QuestionnaireItem_tes (  &bdchm:Entity_tes ;
+          rdf:type [ schema1:Thing ] ? ;
+          schema1:identifier @bdchm:Identifier * ;
+          bdchm:text @linkml:String ? ;
+          bdchm:code @linkml:String ? ;
+          bdchm:part_of @bdchm:QuestionnaireItem ?
+       ) ;
+       rdf:type [ bdchm:QuestionnaireItem ] ?
+    )
+}
+
+bdchm:QuestionnaireResponse CLOSED {
+    (  $bdchm:QuestionnaireResponse_tes (  &bdchm:Entity_tes ;
+          rdf:type [ schema1:Thing ] ? ;
+          bdchm:age_at_response @linkml:Integer ? ;
+          bdchm:items @bdchm:QuestionnaireResponseItem + ;
+          bdchm:associated_visit @bdchm:Visit ?
+       ) ;
+       rdf:type [ bdchm:QuestionnaireResponse ] ?
+    )
+}
+
+bdchm:QuestionnaireResponseItem CLOSED {
+    (  $bdchm:QuestionnaireResponseItem_tes (  bdchm:has_questionnaire_item @bdchm:QuestionnaireItem ? ;
+          bdchm:text @linkml:String ? ;
+          bdchm:response_value @bdchm:QuestionnaireResponseValue
+       ) ;
+       rdf:type [ bdchm:QuestionnaireResponseItem ] ?
+    )
+}
+
+bdchm:QuestionnaireResponseValue  (
+    CLOSED {
+       (  $bdchm:QuestionnaireResponseValue_tes (  bdchm:value @linkml:String ? ;
+             bdchm:type @linkml:String ? ;
+             bdchm:name @linkml:String ?
+          ) ;
+          rdf:type [ bdchm:QuestionnaireResponseValue ] ?
+       )
+    } OR @bdchm:QuestionnaireResponseValueBoolean OR @bdchm:QuestionnaireResponseValueDecimal OR
+    @bdchm:QuestionnaireResponseValueString
+)
+
+bdchm:QuestionnaireResponseValueBoolean CLOSED {
+    (  $bdchm:QuestionnaireResponseValueBoolean_tes (  &bdchm:QuestionnaireResponseValue_tes ;
+          rdf:type [ bdchm:QuestionnaireResponseValue ] ? ;
+          bdchm:value @linkml:Boolean
+       ) ;
+       rdf:type [ bdchm:QuestionnaireResponseValueBoolean ] ?
+    )
+}
+
+bdchm:QuestionnaireResponseValueDecimal CLOSED {
+    (  $bdchm:QuestionnaireResponseValueDecimal_tes (  &bdchm:QuestionnaireResponseValue_tes ;
+          rdf:type [ bdchm:QuestionnaireResponseValue ] ? ;
+          bdchm:value @linkml:Decimal
+       ) ;
+       rdf:type [ bdchm:QuestionnaireResponseValueDecimal ] ?
+    )
+}
+
+bdchm:QuestionnaireResponseValueString CLOSED {
+    (  $bdchm:QuestionnaireResponseValueString_tes (  &bdchm:QuestionnaireResponseValue_tes ;
+          rdf:type [ bdchm:QuestionnaireResponseValue ] ? ;
+          bdchm:value @linkml:String
+       ) ;
+       rdf:type [ bdchm:QuestionnaireResponseValueString ] ?
+    )
+}
+
+bdchm:ResearchStudy CLOSED {
+    (  $bdchm:ResearchStudy_tes (  &bdchm:Entity_tes ;
+          rdf:type [ schema1:Thing ] ? ;
+          schema1:identifier @bdchm:Identifier * ;
+          bdchm:name @linkml:String ? ;
+          bdchm:name_shortened @linkml:String ? ;
+          bdchm:description @linkml:String ? ;
+          bdchm:description_shortened @linkml:String ? ;
+          bdchm:sponsor @linkml:String ? ;
+          bdchm:date_started @bdchm:TimePoint ? ;
+          bdchm:date_ended @bdchm:TimePoint ? ;
+          bdchm:url @linkml:Uriorcurie ? ;
+          bdchm:part_of @bdchm:ResearchStudy ? ;
+          bdchm:research_project_type @linkml:String ? ;
+          bdchm:associated_timepoint @bdchm:TimePoint * ;
+          bdchm:principal_investigator @linkml:String * ;
+          bdchm:consent_code [ <http://purl.obolibrary.org/obo/DUO_0000042> <http://purl.obolibrary.org/obo/DUO_0000006>
+             <http://purl.obolibrary.org/obo/DUO_0000007> <http://purl.obolibrary.org/obo/DUO_0000018>
+             <http://purl.obolibrary.org/obo/DUO_0000021> ] *
+       ) ;
+       rdf:type [ bdchm:ResearchStudy ] ?
+    )
+}
+
+bdchm:ResearchStudyCollection CLOSED {
+    (  $bdchm:ResearchStudyCollection_tes bdchm:entries @bdchm:ResearchStudy * ;
+       rdf:type [ bdchm:ResearchStudyCollection ] ?
+    )
+}
+
 <SpecimenCollectionProcess> CLOSED {
     (  $<SpecimenCollectionProcess_tes> (  &<Process_tes> ;
           rdf:type [ <Process> ] ? ;
@@ -136,6 +342,48 @@ linkml:Sparqlpath xsd:string
 <Subject> CLOSED {
     (  $<Subject_tes> <name> @linkml:String ? ;
        rdf:type [ <Subject> ]
+    )
+}
+
+bdchm:TimePeriod CLOSED {
+    (  $bdchm:TimePeriod_tes (  bdchm:period_start @bdchm:TimePoint ? ;
+          bdchm:period_end @bdchm:TimePoint ?
+       ) ;
+       rdf:type [ bdchm:TimePeriod ] ?
+    )
+}
+
+bdchm:TimePoint CLOSED {
+    (  $bdchm:TimePoint_tes (  &bdchm:Entity_tes ;
+          rdf:type [ schema1:Thing ] ? ;
+          bdchm:date_time @linkml:Datetime ? ;
+          bdchm:index_time_point @bdchm:TimePoint ? ;
+          bdchm:offset_from_index @linkml:Integer ? ;
+          bdchm:event_type @linkml:String ?
+       ) ;
+       rdf:type [ bdchm:TimePoint ] ?
+    )
+}
+
+bdchm:Visit CLOSED {
+    (  $bdchm:Visit_tes (  &bdchm:Entity_tes ;
+          rdf:type [ schema1:Thing ] ? ;
+          bdchm:visit_category [ OMOP:9201 OMOP:9203 OMOP:262 OMOP:42898160 OMOP:9202 OMOP:581476 OMOP:5083 OMOP:581458 OMOP:32036
+             OMOP:581478 OMOP:38004193 ] ? ;
+          bdchm:age_at_visit_start @linkml:Integer ? ;
+          bdchm:age_at_visit_end @linkml:Integer ? ;
+          bdchm:visit_provenance [ OMOP:32809 OMOP:32810 OMOP:32811 OMOP:32812 OMOP:32813 OMOP:32814 OMOP:32815 OMOP:32816
+             OMOP:32817 OMOP:32835 OMOP:32818 OMOP:32819 OMOP:32820 OMOP:32821 OMOP:32822 OMOP:32823 OMOP:32824 OMOP:32825
+             OMOP:32826 OMOP:32827 OMOP:32828 OMOP:32829 OMOP:32830 OMOP:32831 OMOP:32832 OMOP:32833 OMOP:32834 OMOP:32836
+             OMOP:32837 OMOP:32838 OMOP:32839 OMOP:32840 OMOP:32841 OMOP:32842 OMOP:32843 OMOP:32844 OMOP:32845 OMOP:32846
+             OMOP:32847 OMOP:32848 OMOP:32849 OMOP:32850 OMOP:32851 OMOP:32852 OMOP:32853 OMOP:32854 OMOP:32855 OMOP:32856
+             OMOP:32857 OMOP:32858 OMOP:32859 OMOP:32860 OMOP:32861 OMOP:32862 OMOP:32863 OMOP:32864 OMOP:32865 OMOP:705183
+             OMOP:32866 OMOP:32867 OMOP:32868 OMOP:32869 OMOP:703249 OMOP:32870 OMOP:32871 OMOP:32872 OMOP:32873 OMOP:32874
+             OMOP:32875 OMOP:32876 OMOP:32877 OMOP:32878 OMOP:32879 OMOP:32880 OMOP:32882 OMOP:32881 OMOP:32883 OMOP:32885
+             OMOP:32884 OMOP:32886 ] ? ;
+          bdchm:associated_participant @bdchm:Participant ?
+       ) ;
+       rdf:type [ bdchm:Visit ] ?
     )
 }
 

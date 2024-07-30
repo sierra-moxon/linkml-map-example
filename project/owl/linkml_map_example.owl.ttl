@@ -2,7 +2,9 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix linkml: <https://w3id.org/linkml/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -10,38 +12,38 @@ cmdr:Container a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Container" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:Participation ;
-            owl:onProperty cmdr:participations ],
+            owl:allValuesFrom cmdr:Subject ;
+            owl:onProperty cmdr:subjects ],
         [ a owl:Restriction ;
             owl:allValuesFrom cmdr:MaterialEntity ;
             owl:onProperty cmdr:materials ],
         [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:SpecimenCollectionProcess ;
-            owl:onProperty cmdr:specimen_collection_processes ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:subjects ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:investigations ],
-        [ a owl:Restriction ;
             owl:allValuesFrom cmdr:Investigation ;
             owl:onProperty cmdr:investigations ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:material_processings ],
         [ a owl:Restriction ;
             owl:allValuesFrom cmdr:MaterialProcessing ;
             owl:onProperty cmdr:material_processings ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty cmdr:materials ],
+            owl:onProperty cmdr:material_processings ],
         [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:Subject ;
+            owl:minCardinality 0 ;
             owl:onProperty cmdr:subjects ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty cmdr:participations ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:materials ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:Participation ;
+            owl:onProperty cmdr:participations ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:SpecimenCollectionProcess ;
+            owl:onProperty cmdr:specimen_collection_processes ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:investigations ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty cmdr:specimen_collection_processes ] ;
@@ -57,21 +59,273 @@ cmdr:DataObject a owl:Class,
     skos:definition "A DataFile Associated with a Subject or Investigation or MaterialEntity" ;
     skos:inScheme linkml:cmdr .
 
+cmdr:HpoPhenotypicAbnormalityEnum a owl:Class,
+        linkml:EnumDefinition .
+
+cmdr:MondoHumanDiseaseEnum a owl:Class,
+        linkml:EnumDefinition .
+
+<https://w3id.org/nhlbidatastage/bdchm/Condition> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Condition" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_participant> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:ConditionProvenanceEnum ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/condition_provenance> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/condition_concept> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_condition_start> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/condition_concept> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Visit> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_visit> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_condition_end> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_visit> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_condition_start> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_condition_end> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Participant> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_participant> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/condition_provenance> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/relationship_to_participant> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_condition_start> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:ConditionConceptEnum ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/condition_concept> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/relationship_to_participant> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_participant> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_condition_end> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/condition_provenance> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/relationship_to_participant> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_visit> ],
+        <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
+    skos:definition "Conditions are records of a Person suggesting the presence of a disease or medical condition stated as a diagnosis, a sign or a symptom, which is either observed by a Provider or reported by the patient. Conditions are recorded in different sources and levels of standardization." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/Questionnaire> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Questionnaire" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/title> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/language> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/url> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/url> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/language> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/copyright_label> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/copyright_label> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/items> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/copyright> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/version> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/publisher> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/copyright_label> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/publisher> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/version> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/title> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/publisher> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireItem> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/items> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/title> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/copyright> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/url> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/copyright> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/version> ],
+        <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
+    skos:definition "A Questionnaire is an organized collection of questions intended to solicit information from patients, providers or other individuals involved in the healthcare domain. They may be simple flat lists of questions or can be hierarchically organized in groups and sub-groups, each containing questions. The Questionnaire defines the questions to be asked, how they are ordered and grouped, any intervening instructional text and what the constraints are on the allowed answers. The results of a Questionnaire can be communicated using the QuestionnaireResponse. (FHIR)" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponse> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "QuestionnaireResponse" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseItem> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/items> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Visit> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_visit> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_response> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/items> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_visit> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_visit> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_response> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_response> ],
+        <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
+    skos:definition "QuestionnaireResponse provides a complete or partial list of answers to a set of questions filled when responding to a questionnaire. (FHIR)" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/ResearchStudyCollection> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "ResearchStudyCollection" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/ResearchStudy> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/entries> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/entries> ] ;
+    skos:definition "A holder for ResearchStudy objects" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/TimePeriod> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "TimePeriod" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/period_end> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/period_start> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/period_start> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/period_end> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/period_end> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/period_start> ] ;
+    skos:definition "A period of time between a start and end time point." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+cmdr:CellularOrganismSpeciesEnum a owl:Class,
+        linkml:EnumDefinition .
+
+cmdr:ConditionConceptEnum a owl:Class,
+        linkml:EnumDefinition .
+
 cmdr:MaterialProcessing a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "MaterialProcessing" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom cmdr:MaterialEntity ;
-            owl:onProperty cmdr:has_input ],
+            owl:onProperty cmdr:has_output ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty cmdr:has_input ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:has_output ],
         [ a owl:Restriction ;
             owl:allValuesFrom cmdr:MaterialEntity ;
-            owl:onProperty cmdr:has_output ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:has_output ],
+            owl:onProperty cmdr:has_input ],
         cmdr:Process ;
     skos:definition "A planned process which results in physical changes in a specified input material" ;
     skos:exactMatch <OBI:0000094> ;
@@ -82,38 +336,38 @@ cmdr:Participation a owl:Class,
     rdfs:label "Participation" ;
     rdfs:seeAlso <include:Participant> ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:involved_in ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty cmdr:name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:includes ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:name ],
-        [ a owl:Restriction ;
             owl:allValuesFrom cmdr:Subject ;
             owl:onProperty cmdr:includes ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty cmdr:name ],
+            owl:onProperty cmdr:includes ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty cmdr:id ],
         [ a owl:Restriction ;
             owl:allValuesFrom cmdr:Investigation ;
             owl:onProperty cmdr:involved_in ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty cmdr:id ],
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:name ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty cmdr:id ],
         [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty cmdr:includes ] ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:includes ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:involved_in ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:name ] ;
     skos:definition "Subject/Study participation information" ;
     skos:inScheme linkml:cmdr .
 
@@ -121,14 +375,14 @@ cmdr:SpecimenCollectionProcess a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "SpecimenCollectionProcess" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:has_input ],
-        [ a owl:Restriction ;
             owl:allValuesFrom cmdr:Subject ;
             owl:onProperty cmdr:has_input ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty cmdr:has_output ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:has_input ],
         [ a owl:Restriction ;
             owl:allValuesFrom cmdr:MaterialEntity ;
             owl:onProperty cmdr:has_output ],
@@ -138,24 +392,688 @@ cmdr:SpecimenCollectionProcess a owl:Class,
     skos:exactMatch <OBI:0000659> ;
     skos:inScheme linkml:cmdr .
 
+cmdr:VertebrateBreedEnum a owl:Class,
+        linkml:EnumDefinition .
+
+<https://w3id.org/nhlbidatastage/bdchm/Organization> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Organization" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/alias> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/organization_type> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/organization_type> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/alias> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/organization_type> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/alias> ],
+        <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
+    skos:definition "A grouping of people or organizations with a common purpose such as a data coordinating center, an university, or an institute within a university." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseItem> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "QuestionnaireResponseItem" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/response_value> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/text> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/has_questionnaire_item> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/text> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/text> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireItem> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/has_questionnaire_item> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/response_value> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/has_questionnaire_item> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValue> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/response_value> ] ;
+    skos:definition "QuestionnaireResponseItem provides a complete or partial list of answers to a set of questions filled when responding to a questionnaire. (FHIR)" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<http://purl.obolibrary.org/obo/DUO_0000006> a owl:Class,
+        cmdr:DataUseEnum ;
+    rdfs:label "HMB" ;
+    rdfs:subClassOf cmdr:DataUseEnum .
+
+<http://purl.obolibrary.org/obo/DUO_0000007> a owl:Class,
+        cmdr:DataUseEnum ;
+    rdfs:label "DS" ;
+    rdfs:subClassOf cmdr:DataUseEnum .
+
+<http://purl.obolibrary.org/obo/DUO_0000018> a owl:Class,
+        cmdr:DataUseEnum ;
+    rdfs:label "NPUNCU" ;
+    rdfs:subClassOf cmdr:DataUseEnum .
+
+<http://purl.obolibrary.org/obo/DUO_0000021> a owl:Class,
+        cmdr:DataUseEnum ;
+    rdfs:label "IRB" ;
+    rdfs:subClassOf cmdr:DataUseEnum .
+
+<http://purl.obolibrary.org/obo/DUO_0000042> a owl:Class,
+        cmdr:DataUseEnum ;
+    rdfs:label "GRU" ;
+    rdfs:subClassOf cmdr:DataUseEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/262> a owl:Class,
+        cmdr:VisitCategoryEnum ;
+    rdfs:label "EMERGENCY_ROOM_AND_INPATIENT" ;
+    rdfs:subClassOf cmdr:VisitCategoryEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32036> a owl:Class,
+        cmdr:VisitCategoryEnum ;
+    rdfs:label "LABORATORY" ;
+    rdfs:subClassOf cmdr:VisitCategoryEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32809> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "CASE_REPORT_FORM" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32810> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "CLAIM" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32811> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "CLAIM_AUTHORIZATION" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32812> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "CLAIM_DISCHARGE_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32813> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "CLAIM_ENROLMENT_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32814> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "COST_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32815> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "DEATH_CERTIFICATE" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32816> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "DENTAL_CLAIM" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32817> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32818> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_ADMINISTRATION_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32819> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_ADMISSION_NOTE" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32820> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_ANCILLARY_REPORT" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32821> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_BILLING_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32822> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_CHIEF_COMPLAINT" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32823> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_DISCHARGE_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32824> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_DISCHARGE_SUMMARY" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32825> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_DISPENSING_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32826> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_EMERGENCY_ROOM_NOTE" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32827> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_ENCOUNTER_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32828> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_EPISODE_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32829> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_INPATIENT_NOTE" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32830> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_MEDICATION_LIST" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32831> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_NOTE" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32832> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_NURSING_REPORT" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32833> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_ORDER" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32834> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_OUTPATIENT_NOTE" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32835> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_PATHOLOGY_REPORT" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32836> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_PHYSICAL_EXAMINATION" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32837> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_PLANNED_DISPENSING_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32838> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_PRESCRIPTION" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32839> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_PRESCRIPTION_ISSUE_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32840> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_PROBLEM_LIST" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32841> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_RADIOLOGY_REPORT" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32842> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EHR_REFERRAL_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32843> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "EXTERNAL_CDM_INSTANCE" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32844> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "FACILITY_CLAIM" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32845> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "FACILITY_CLAIM_DETAIL" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32846> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "FACILITY_CLAIM_HEADER" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32847> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "GEOGRAPHIC_ISOLATION_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32848> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "GOVERNMENT_REPORT" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32849> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "HEALTH_INFORMATION_EXCHANGE_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32850> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "HEALTH_RISK_ASSESSMENT" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32851> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "HEALTHCARE_PROFESSIONAL_FILLED_SURVEY" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32852> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "HOSPITAL_COST" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32853> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "INPATIENT_CLAIM" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32854> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "INPATIENT_CLAIM_DETAIL" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32855> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "INPATIENT_CLAIM_HEADER" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32856> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "LAB" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32857> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "MAIL_ORDER_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32858> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "NLP" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32859> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "OUTPATIENT_CLAIM" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32860> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "OUTPATIENT_CLAIM_DETAIL" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32861> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "OUTPATIENT_CLAIM_HEADER" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32862> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "PATIENT_FILLED_SURVEY" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32863> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "PATIENT_OR_PAYER_PAID_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32864> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "PATIENT_REPORTED_COST" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32865> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "PATIENT_SELF-REPORT" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32866> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "PAYER_SYSTEM_RECORD_(PAID_PREMIUM)" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32867> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "PAYER_SYSTEM_RECORD_(PRIMARY_PAYER)" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32868> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "PAYER_SYSTEM_RECORD_(SECONDARY_PAYER)" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32869> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "PHARMACY_CLAIM" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32870> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "PRE-QUALIFICATION_TIME_PERIOD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32871> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "PROFESSIONAL_CLAIM" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32872> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "PROFESSIONAL_CLAIM_DETAIL" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32873> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "PROFESSIONAL_CLAIM_HEADER" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32874> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "PROVIDER_CHARGE_LIST_PRICE" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32875> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "PROVIDER_FINANCIAL_SYSTEM" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32876> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "PROVIDER_INCURRED_COST_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32877> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "RANDOMIZATION_RECORD" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32878> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "REFERENCE_LAB" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32879> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "REGISTRY" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32880> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "STANDARD_ALGORITHM" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32881> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "STANDARD_ALGORITHM_FROM_CLAIMS" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32882> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "STANDARD_ALGORITHM_FROM_EHR" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32883> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "SURVEY" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32884> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "URGENT_LAB" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32885> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "US_SOCIAL_SECURITY_DEATH_MASTER_FILE" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/32886> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "VISION_CLAIM" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/38003563> a owl:Class,
+        cmdr:EthnicityEnum ;
+    rdfs:label "HISPANIC_OR_LATINO" ;
+    rdfs:subClassOf cmdr:EthnicityEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/38003564> a owl:Class,
+        cmdr:EthnicityEnum ;
+    rdfs:label "NOT_HISPANIC_OR_LATINO" ;
+    rdfs:subClassOf cmdr:EthnicityEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/38004193> a owl:Class,
+        cmdr:VisitCategoryEnum ;
+    rdfs:label "CASE_MANAGEMENT" ;
+    rdfs:subClassOf cmdr:VisitCategoryEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/4230556> a owl:Class,
+        cmdr:VitalStatusEnum ;
+    rdfs:label "ALIVE" ;
+    rdfs:subClassOf cmdr:VitalStatusEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/42898160> a owl:Class,
+        cmdr:VisitCategoryEnum ;
+    rdfs:label "NON_HOSPITAL_INSTITUTION" ;
+    rdfs:subClassOf cmdr:VisitCategoryEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/434489> a owl:Class,
+        cmdr:VitalStatusEnum ;
+    rdfs:label "DEAD" ;
+    rdfs:subClassOf cmdr:VitalStatusEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/4822058> a owl:Class,
+        cmdr:ConditionProvenanceEnum ;
+    rdfs:label "NLP_DERIVED" ;
+    rdfs:subClassOf cmdr:ConditionProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/4822121> a owl:Class,
+        cmdr:ConditionProvenanceEnum ;
+    rdfs:label "EHR_PROBLEM_LIST_ENTRY" ;
+    rdfs:subClassOf cmdr:ConditionProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/4822124> a owl:Class,
+        cmdr:ConditionProvenanceEnum ;
+    rdfs:label "EHR_CHIEF_COMPLAINT" ;
+    rdfs:subClassOf cmdr:ConditionProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/4822125> a owl:Class,
+        cmdr:ConditionProvenanceEnum ;
+    rdfs:label "REFERRAL_RECORD" ;
+    rdfs:subClassOf cmdr:ConditionProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/4822126> a owl:Class,
+        cmdr:ConditionProvenanceEnum ;
+    rdfs:label "OBSERVATION_RECORDED_FROM_EHR" ;
+    rdfs:subClassOf cmdr:ConditionProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/4822127> a owl:Class,
+        cmdr:ConditionProvenanceEnum ;
+    rdfs:label "PRIMARY_CONDITION" ;
+    rdfs:subClassOf cmdr:ConditionProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/4822128> a owl:Class,
+        cmdr:ConditionProvenanceEnum ;
+    rdfs:label "FIRST_POSITION_CONDITION" ;
+    rdfs:subClassOf cmdr:ConditionProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/4822129> a owl:Class,
+        cmdr:ConditionProvenanceEnum ;
+    rdfs:label "SECONDARY_CONDITION" ;
+    rdfs:subClassOf cmdr:ConditionProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/4822135> a owl:Class,
+        cmdr:ConditionProvenanceEnum ;
+    rdfs:label "EHR_EPISODE_ENTRY" ;
+    rdfs:subClassOf cmdr:ConditionProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/4822157> a owl:Class,
+        cmdr:ConditionProvenanceEnum ;
+    rdfs:label "PATIENT_SELF-REPORTED_CONDITION" ;
+    rdfs:subClassOf cmdr:ConditionProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/4822159> a owl:Class,
+        cmdr:ConditionProvenanceEnum ;
+    rdfs:label "EHR_BILLING_DIAGNOSIS" ;
+    rdfs:subClassOf cmdr:ConditionProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/4822160> a owl:Class,
+        cmdr:ConditionProvenanceEnum ;
+    rdfs:label "EHR_ENCOUNTER_DIAGNOSIS" ;
+    rdfs:subClassOf cmdr:ConditionProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/4822266> a owl:Class,
+        cmdr:ConditionProvenanceEnum ;
+    rdfs:label "TUMOR_REGISTRY" ;
+    rdfs:subClassOf cmdr:ConditionProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/5083> a owl:Class,
+        cmdr:VisitCategoryEnum ;
+    rdfs:label "TELEHEALTH" ;
+    rdfs:subClassOf cmdr:VisitCategoryEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/581458> a owl:Class,
+        cmdr:VisitCategoryEnum ;
+    rdfs:label "PHARMACY" ;
+    rdfs:subClassOf cmdr:VisitCategoryEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/581476> a owl:Class,
+        cmdr:VisitCategoryEnum ;
+    rdfs:label "HOME" ;
+    rdfs:subClassOf cmdr:VisitCategoryEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/581478> a owl:Class,
+        cmdr:VisitCategoryEnum ;
+    rdfs:label "AMBULANCE" ;
+    rdfs:subClassOf cmdr:VisitCategoryEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/703249> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "POINT_OF_CARE/EXPRESS_LAB" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/705183> a owl:Class,
+        cmdr:VisitProvenanceEnum ;
+    rdfs:label "PATIENT_SELF-TESTED" ;
+    rdfs:subClassOf cmdr:VisitProvenanceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/8507> a owl:Class,
+        cmdr:SexEnum ;
+    rdfs:label "MALE" ;
+    rdfs:subClassOf cmdr:SexEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/8515> a owl:Class,
+        cmdr:RaceEnum ;
+    rdfs:label "ASIAN" ;
+    rdfs:subClassOf cmdr:RaceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/8516> a owl:Class,
+        cmdr:RaceEnum ;
+    rdfs:label "BLACK_OR_AFRICAN_AMERICAN" ;
+    rdfs:subClassOf cmdr:RaceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/8527> a owl:Class,
+        cmdr:RaceEnum ;
+    rdfs:label "WHITE" ;
+    rdfs:subClassOf cmdr:RaceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/8532> a owl:Class,
+        cmdr:SexEnum ;
+    rdfs:label "FEMALE" ;
+    rdfs:subClassOf cmdr:SexEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/8557> a owl:Class,
+        cmdr:RaceEnum ;
+    rdfs:label "NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER" ;
+    rdfs:subClassOf cmdr:RaceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/8657> a owl:Class,
+        cmdr:RaceEnum ;
+    rdfs:label "AMERICAN_INDIAN_OR_ALASKA_NATIVE" ;
+    rdfs:subClassOf cmdr:RaceEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/9201> a owl:Class,
+        cmdr:VisitCategoryEnum ;
+    rdfs:label "INPATIENT" ;
+    rdfs:subClassOf cmdr:VisitCategoryEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/9202> a owl:Class,
+        cmdr:VisitCategoryEnum ;
+    rdfs:label "OUTPATIENT" ;
+    rdfs:subClassOf cmdr:VisitCategoryEnum .
+
+<https://athena.ohdsi.org/search-terms/terms/9203> a owl:Class,
+        cmdr:VisitCategoryEnum ;
+    rdfs:label "EMERGENCY_ROOM" ;
+    rdfs:subClassOf cmdr:VisitCategoryEnum .
+
 cmdr:Process a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Process" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
-            owl:onProperty cmdr:name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:has_input ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:name ],
+            owl:onProperty cmdr:has_output ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty cmdr:id ],
@@ -166,11 +1084,23 @@ cmdr:Process a owl:Class,
             owl:minCardinality 0 ;
             owl:onProperty cmdr:id ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
-            owl:onProperty cmdr:has_output ],
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:id ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty cmdr:has_output ] ;
+            owl:onProperty cmdr:has_input ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:has_output ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:name ] ;
     skos:definition "A planned process resulting in a material or data" ;
     skos:inScheme linkml:cmdr .
 
@@ -178,41 +1108,41 @@ cmdr:Quantity a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Quantity" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty cmdr:has_unit ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty cmdr:has_raw_value ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty cmdr:has_numeric_value ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:has_unit ],
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:has_raw_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:comparator ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:Float ;
             owl:onProperty cmdr:has_numeric_value ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:has_unit ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:comparator ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
             owl:onProperty cmdr:comparator ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty cmdr:has_unit ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom linkml:String ;
             owl:onProperty cmdr:has_raw_value ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty cmdr:comparator ],
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:has_unit ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty cmdr:comparator ],
+            owl:onProperty cmdr:has_raw_value ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty cmdr:has_numeric_value ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:has_raw_value ] ;
+            owl:onProperty cmdr:has_numeric_value ] ;
     skos:inScheme linkml:cmdr .
 
 cmdr:investigations a owl:ObjectProperty,
@@ -254,6 +1184,317 @@ cmdr:used_in a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "used_in" ;
     skos:inScheme linkml:cmdr .
+
+<https://w3id.org/nhlbidatastage/bdchm/Participant> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Participant" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_enrollment> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_enrollment> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/study_arm> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Person> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_person> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/originating_site> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/member_of_research_study> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_timepoint> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Organization> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/originating_site> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_enrollment> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/originating_site> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/member_of_research_study> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_person> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_timepoint> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/ResearchStudy> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/member_of_research_study> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/study_arm> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_person> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_timepoint> ],
+        <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
+    skos:definition "A Participant is the entity of interest in a research study, typically a human being or an animal, but can also be a device, group of humans or animals, or a tissue sample. Human research subjects are usually not traceable to a particular person to protect the subject’s privacy." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/Person> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Person" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:CellularOrganismSpeciesEnum ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/species> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:VitalStatusEnum ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/vital_status> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/sex> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/breed> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/breed> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/year_of_death> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/year_of_death> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/vital_status> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/year_of_birth> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/ethnicity> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/race> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/species> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_death> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:SexEnum ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/sex> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_death> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/sex> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/species> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/cause_of_death> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/year_of_death> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:EthnicityEnum ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/ethnicity> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_death> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/ethnicity> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:VertebrateBreedEnum ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/breed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/race> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/cause_of_death> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/year_of_birth> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/cause_of_death> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:RaceEnum ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/race> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/vital_status> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/year_of_birth> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
+    skos:definition "Demographics and other administrative information about an individual or animal receiving care or other health-related services." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueBoolean> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "QuestionnaireResponseValueBoolean" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty cmdr:value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Boolean ;
+            owl:onProperty cmdr:value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:value ],
+        <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValue> ;
+    skos:definition "Single-valued boolean answer to the question" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueDecimal> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "QuestionnaireResponseValueDecimal" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Decimal ;
+            owl:onProperty cmdr:value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty cmdr:value ],
+        <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValue> ;
+    skos:definition "Single-valued decimal answer to the question" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueString> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "QuestionnaireResponseValueString" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty cmdr:value ],
+        <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValue> ;
+    skos:definition "Single-valued string answer to the question" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/Visit> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Visit" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Participant> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_participant> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_end> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/visit_category> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_start> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_participant> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_end> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:VisitProvenanceEnum ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/visit_provenance> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/visit_provenance> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/visit_category> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_start> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_participant> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/visit_provenance> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:VisitCategoryEnum ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/visit_category> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_end> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_start> ],
+        <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
+    skos:definition "Events where Persons engage with the healthcare system for a duration of time. They are often also called “Encounters”. Visits are defined by a configuration of circumstances under which they occur, such as (i) whether the patient comes to a healthcare institution, the other way around, or the interaction is remote, (ii) whether and what kind of trained medical staff is delivering the service during the Visit, and (iii) whether the Visit is transient or for a longer period involving a stay in bed. (OMOP)" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/associated_timepoint> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "associated_timepoint" ;
+    skos:definition "A collection of timepoint observations that are relevant to research projects (e.g. date of IACUC approval, date of IRB approval, date of embargo end, etc.)" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/consent_code> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "consent_code" ;
+    skos:definition "Data Use Restrictions that are used to indicate permissions/restrictions for datasets and/or materials, and relates to the purposes for which datasets and/or material might be removed, stored or used. Based on the Data Use Ontology : see http://www.obofoundry.org/ontology/duo.html" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/entries> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "entries" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/language> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "language" ;
+    skos:definition "The language(s) in which questions are presented." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/principal_investigator> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "principal_investigator" ;
+    skos:definition "The investigator or investigators leading a project." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/study_arm> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "study_arm" ;
+    skos:definition "The arm(s) of the study on which the Participant is enrolled" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
 
 cmdr:comparator a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -300,6 +1541,462 @@ cmdr:volume a owl:ObjectProperty,
     rdfs:label "volume" ;
     skos:inScheme linkml:cmdr .
 
+<https://w3id.org/nhlbidatastage/bdchm/QuestionnaireItem> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "QuestionnaireItem" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireItem> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/part_of> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/text> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/part_of> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/code> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/part_of> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/text> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/code> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/text> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/code> ],
+        <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
+    skos:definition "QuestionnaireItem defines a question or section within the Questionnaire" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/ResearchStudy> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "ResearchStudy" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/sponsor> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_started> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_ended> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/principal_investigator> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_ended> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/ResearchStudy> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/part_of> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name_shortened> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/principal_investigator> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/sponsor> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_started> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/url> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/research_project_type> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description_shortened> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name_shortened> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/research_project_type> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:DataUseEnum ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/consent_code> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/consent_code> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description_shortened> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_started> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/part_of> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name_shortened> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/sponsor> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description_shortened> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/url> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_timepoint> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_timepoint> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_ended> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/research_project_type> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/url> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/part_of> ],
+        <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
+    skos:definition "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge. This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques. A ResearchStudy involves the gathering of information about human or animal subjects." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/age_at_condition_end> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "age_at_condition_end" ;
+    skos:definition "The Participant's age (expressed in days) when the condition was recorded as having been resolved." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/age_at_condition_start> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "age_at_condition_start" ;
+    skos:definition "The Participant's age (expressed in days) when the condition was first recorded." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/age_at_death> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "age_at_death" ;
+    skos:definition "The age of an individual at the time of death, expressed in days since birth" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/age_at_enrollment> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "age_at_enrollment" ;
+    skos:definition "The age in days when the Participant enrolled on the ResearchStudy" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/age_at_response> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "age_at_response" ;
+    skos:definition "The age (in days) of the Participant when the QuestionnaireResponse was captured." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/age_at_visit_end> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "age_at_visit_end" ;
+    skos:definition "The age of the Participant (in days) at the end of the Visit." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/age_at_visit_start> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "age_at_visit_start" ;
+    skos:definition "The age of the Participant (in days) at the start of the Visit." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/alias> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "alias" ;
+    skos:definition "A secondary name for the organization such as a short name or abbreviation (e.g. 'NCI')" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/associated_person> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "associated_person" ;
+    rdfs:range <https://w3id.org/nhlbidatastage/bdchm/Person> ;
+    skos:definition "A reference to the Person that is associated with this record." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/breed> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "breed" ;
+    skos:definition "A label given to a group of animals homogeneous in appearance and other characteristics that distinguish it from other animals of the same species. Values should be derived from the Vertebrate Breed Ontology (http://purl.obolibrary.org/obo/vbo.owl)." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/cause_of_death> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "cause_of_death" ;
+    skos:definition "Coded value indicating the circumstance or condition that results in the death of the individual." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/code> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "code" ;
+    skos:definition "Corresponding concept for this item in a terminology" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/condition_concept> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "condition_concept" ;
+    skos:definition "The coded value for the presence of a disease or medical condition stated as a diagnosis, a sign or a symptom, coded to the Human Phenotype Ontology or MONDO." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/condition_provenance> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "condition_provenance" ;
+    skos:definition "A value representing the provenance of the Condition record" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/copyright> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "copyright" ;
+    skos:definition "Textual description of any use and/or publishing restrictions" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/copyright_label> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "copyright_label" ;
+    skos:definition "Copyright holder and year(s)" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/date_ended> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "date_ended" ;
+    skos:definition "The date when the research project ended." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/date_started> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "date_started" ;
+    skos:definition "The date when the research project began." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/date_time> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "date_time" ;
+    skos:definition "An explicitly specified timepoint described in terms of a date and optionally a time on that date." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/description_shortened> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "description_shortened" ;
+    skos:definition "An abbreviated description of a research program, project, or study." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/ethnicity> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "ethnicity" ;
+    skos:definition "An individual's self-described social and cultural grouping, specifically whether an individual describes themselves as Hispanic or Latino. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/event_type> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "event_type" ;
+    skos:definition "An event that occurred at the point in time specified by this TimePoint." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/has_questionnaire_item> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has_questionnaire_item" ;
+    skos:definition "A reference to the QuestionnaireItem that this QuestionnaireResponseItem responds to." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/index_time_point> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "index_time_point" ;
+    skos:definition "Another TimePoint from which this point is offset." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/index_timepoint> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "index_timepoint" ;
+    skos:definition "The text term used to describe the reference or anchor date used for date obfuscation, where a single date is obscured by creating one or more date ranges in relation to this date." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/member_of_research_study> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "member_of_research_study" ;
+    skos:definition "A reference to the Study(s) of which this Participant is a member" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/name_shortened> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "name_shortened" ;
+    skos:definition "An abbreviated name of a research program, project, or study." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/offset_from_index> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "offset_from_index" ;
+    skos:definition "A quantity of time that, together with the index date or event, can be used to derive a specific timepoint." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/organization_type> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "organization_type" ;
+    skos:definition "The type of the organization (e.g. 'Cancer Genome Characterization Center')" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/originating_site> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "originating_site" ;
+    skos:definition "The Organization through which a subject was enrolled on a ResearchStudy." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/period_end> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "period_end" ;
+    skos:definition "When a period of time ended." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/period_start> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "period_start" ;
+    skos:definition "When a period of time started." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/publisher> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "publisher" ;
+    skos:definition "Name of the publisher/steward (organization or individual) of this Questionnaire" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/race> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "race" ;
+    skos:definition "An arbitrary classification of a taxonomic group that is a division of a species. It usually arises as a consequence of geographical isolation within a species and is characterized by shared heredity, physical attributes and behavior, and in the case of humans, by common history, nationality, or geographic distribution. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/relationship_to_participant> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "relationship_to_participant" ;
+    skos:definition "A value indicating the relationship between the Participant to which the Condition is attributed and the individual who had the reported Condition.  If the Condition is affecting the participant themselves, then 'Self' is the appropriate relationship.  If the Condition is affecting a family member (e.g. a parent of the Participant) then an appropriate relationship should be provided (e.g. 'Parent')" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/research_project_type> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "research_project_type" ;
+    skos:definition "The 'type' of ResearchStudy represented (e.g. a broad-based Program like 'CPTAC' or a more focused Project like 'CPTAC PDAC Discovery Study')" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/response_value> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "response_value" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/sex> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "sex" ;
+    skos:definition "The biologic character or quality that distinguishes male and female from one another as expressed by analysis of the person's gonadal, morphologic (internal and external), chromosomal, and hormonal characteristics." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/species> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "species" ;
+    skos:definition "The scientific binomial name for the species of the Person (e.g. Homo sapiens, Mus musculus, etc.). Values should be derived from the NCBI organismal taxonomy (http://purl.obolibrary.org/obo/ncbitaxon.owl)." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/sponsor> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "sponsor" ;
+    skos:definition "An entity that is responsible for the initiation, management, and/or financing of a research project." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/system> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "system" ;
+    skos:definition "The system or namespace that defines the identifier." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/title> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "title" ;
+    skos:definition "Name for this Questionnaire (human friendly)" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/version> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "version" ;
+    skos:definition "The identifier that is used to identify this version of the questionnaire when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the questionnaire author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/visit_category> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "visit_category" ;
+    skos:definition "A value representing the kind (or category) of visit, like inpatient or outpatient." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/visit_provenance> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "visit_provenance" ;
+    skos:definition "A value representing the provenance of the visit record, or where the record comes from." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/vital_status> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "vital_status" ;
+    skos:definition "Coded value indicating the state or condition of being living or deceased; also includes the case where the vital status is unknown." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/year_of_birth> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "year_of_birth" ;
+    skos:definition "Numeric value to represent the calendar year in which an individual was born." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/year_of_death> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "year_of_death" ;
+    skos:definition "Numeric value to represent the calendar year in which an individual died." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://athena.ohdsi.org/search-terms/terms/8552> a owl:Class,
+        cmdr:RaceEnum,
+        cmdr:SexEnum ;
+    rdfs:label "UNKNOWN" ;
+    rdfs:subClassOf cmdr:RaceEnum,
+        cmdr:SexEnum .
+
 cmdr:Investigation a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Investigation" ;
@@ -308,19 +2005,10 @@ cmdr:Investigation a owl:Class,
             owl:maxCardinality 1 ;
             owl:onProperty cmdr:id ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:part_of ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:Investigation ;
-            owl:onProperty cmdr:part_of ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:name ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty cmdr:id ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom cmdr:Investigation ;
             owl:onProperty cmdr:part_of ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
@@ -329,7 +2017,16 @@ cmdr:Investigation a owl:Class,
             owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty cmdr:id ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:part_of ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:part_of ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty cmdr:name ] ;
     skos:altLabel "Proposal",
         "Study" ;
@@ -342,55 +2039,55 @@ cmdr:MaterialEntity a owl:Class,
     rdfs:seeAlso <include:Biospecimen> ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty cmdr:name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty cmdr:concentration ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:volume ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:concentration ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:used_in ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty cmdr:source ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty cmdr:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty cmdr:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:Investigation ;
-            owl:onProperty cmdr:used_in ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:volume ],
         [ a owl:Restriction ;
             owl:allValuesFrom cmdr:Subject ;
             owl:onProperty cmdr:source ],
         [ a owl:Restriction ;
             owl:allValuesFrom cmdr:Quantity ;
-            owl:onProperty cmdr:concentration ],
+            owl:onProperty cmdr:volume ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:volume ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty cmdr:id ],
         [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:Quantity ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:used_in ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty cmdr:volume ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty cmdr:source ] ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:Quantity ;
+            owl:onProperty cmdr:concentration ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:Investigation ;
+            owl:onProperty cmdr:used_in ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:source ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:concentration ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:id ] ;
     skos:altLabel "Biosample",
         "Biospecimen",
         "Sample",
@@ -404,27 +2101,42 @@ cmdr:Subject a owl:Class,
     rdfs:label "Subject" ;
     rdfs:seeAlso <include:Participant> ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty cmdr:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:name ],
-        [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty cmdr:name ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty cmdr:name ] ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty cmdr:id ] ;
     skos:altLabel "Participant",
         "Site" ;
     skos:definition "Demographic and clinical information about the subject" ;
     skos:inScheme linkml:cmdr .
+
+<https://w3id.org/nhlbidatastage/bdchm/items> a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+cmdr:EthnicityEnum a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <https://athena.ohdsi.org/search-terms/terms/38003563> <https://athena.ohdsi.org/search-terms/terms/38003564> ) ;
+    linkml:permissible_values <https://athena.ohdsi.org/search-terms/terms/38003563>,
+        <https://athena.ohdsi.org/search-terms/terms/38003564> .
+
+cmdr:VitalStatusEnum a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <https://athena.ohdsi.org/search-terms/terms/4230556> <https://athena.ohdsi.org/search-terms/terms/434489> ) ;
+    linkml:permissible_values <https://athena.ohdsi.org/search-terms/terms/4230556>,
+        <https://athena.ohdsi.org/search-terms/terms/434489> .
 
 cmdr:has_input a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -436,15 +2148,230 @@ cmdr:has_output a owl:ObjectProperty,
     rdfs:label "has_output" ;
     skos:inScheme linkml:cmdr .
 
-cmdr:id a owl:ObjectProperty,
+<https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValue> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "QuestionnaireResponseValue" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/type> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/value> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/type> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/value> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/value> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/type> ] ;
+    skos:definition "Single-valued answer to the question. (FHIR)" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/TimePoint> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "TimePoint" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_time_point> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_time_point> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_time> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_time> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_time_point> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/event_type> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/offset_from_index> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/event_type> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Datetime ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_time> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/offset_from_index> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/offset_from_index> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/event_type> ],
+        <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
+    skos:definition "A structured representation of a single point in time that allows direct/explicit declaration as a dateTime, specification in terms of offset from a defined index, or description of an event type as a proxy for the time point when it occurred." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/associated_participant> a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+<https://w3id.org/nhlbidatastage/bdchm/associated_visit> a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+<https://w3id.org/nhlbidatastage/bdchm/part_of> a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+<https://w3id.org/nhlbidatastage/bdchm/text> a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+<https://w3id.org/nhlbidatastage/bdchm/url> a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+<https://w3id.org/nhlbidatastage/bdchm/value> a owl:ObjectProperty,
         linkml:SlotDefinition ;
-    rdfs:label "id" ;
-    skos:inScheme linkml:cmdr .
+    rdfs:label "value" ;
+    rdfs:range linkml:String ;
+    skos:definition "A general slot to hold a value.",
+        "The value of the identifier, as defined by the system." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+cmdr:SexEnum a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <https://athena.ohdsi.org/search-terms/terms/8507> <https://athena.ohdsi.org/search-terms/terms/8532> <https://athena.ohdsi.org/search-terms/terms/8552> ) ;
+    linkml:permissible_values <https://athena.ohdsi.org/search-terms/terms/8507>,
+        <https://athena.ohdsi.org/search-terms/terms/8532>,
+        <https://athena.ohdsi.org/search-terms/terms/8552> .
+
+<https://w3id.org/nhlbidatastage/bdchm/type> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "type" ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/Identifier> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Identifier" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/value> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/system> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/system> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/value> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/system> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/value> ] ;
+    skos:definition "An Identifier is associated with a unique object or entity within a given system." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+<https://w3id.org/nhlbidatastage/bdchm/description> a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+<https://w3id.org/nhlbidatastage/bdchm/Entity> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Entity" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:id ] ;
+    skos:definition "Any resource that has its own identifier" ;
+    skos:exactMatch schema1:Thing ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
+cmdr:DataUseEnum a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <http://purl.obolibrary.org/obo/DUO_0000042> <http://purl.obolibrary.org/obo/DUO_0000006> <http://purl.obolibrary.org/obo/DUO_0000007> <http://purl.obolibrary.org/obo/DUO_0000018> <http://purl.obolibrary.org/obo/DUO_0000021> ) ;
+    linkml:permissible_values <http://purl.obolibrary.org/obo/DUO_0000006>,
+        <http://purl.obolibrary.org/obo/DUO_0000007>,
+        <http://purl.obolibrary.org/obo/DUO_0000018>,
+        <http://purl.obolibrary.org/obo/DUO_0000021>,
+        <http://purl.obolibrary.org/obo/DUO_0000042> .
+
+<https://w3id.org/nhlbidatastage/bdchm/name> a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+cmdr:RaceEnum a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <https://athena.ohdsi.org/search-terms/terms/8657> <https://athena.ohdsi.org/search-terms/terms/8515> <https://athena.ohdsi.org/search-terms/terms/8516> <https://athena.ohdsi.org/search-terms/terms/8557> <https://athena.ohdsi.org/search-terms/terms/8552> <https://athena.ohdsi.org/search-terms/terms/8527> ) ;
+    linkml:permissible_values <https://athena.ohdsi.org/search-terms/terms/8515>,
+        <https://athena.ohdsi.org/search-terms/terms/8516>,
+        <https://athena.ohdsi.org/search-terms/terms/8527>,
+        <https://athena.ohdsi.org/search-terms/terms/8552>,
+        <https://athena.ohdsi.org/search-terms/terms/8557>,
+        <https://athena.ohdsi.org/search-terms/terms/8657> .
+
+<https://w3id.org/nhlbidatastage/bdchm/identity> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "identity" ;
+    rdfs:range <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
+    skos:definition "A 'business' identifier or accession number for the entity, typically as provided by an external system or authority, that are globally unique and persist across implementing systems. Also, since these identifiers are created outside the information system through a specific business process, the Identifier type has additional attributes to capture this additional metadata so the actual identifier values are qualified by the context that created those values. This additional context allows \"identifier\" instances to be transmitted as business data across systems while still being able to trace them back to the system of origin." ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
 
 cmdr:name a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "name" ;
     skos:inScheme linkml:cmdr .
+
+cmdr:id a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "id" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:VisitCategoryEnum a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <https://athena.ohdsi.org/search-terms/terms/9201> <https://athena.ohdsi.org/search-terms/terms/9203> <https://athena.ohdsi.org/search-terms/terms/262> <https://athena.ohdsi.org/search-terms/terms/42898160> <https://athena.ohdsi.org/search-terms/terms/9202> <https://athena.ohdsi.org/search-terms/terms/581476> <https://athena.ohdsi.org/search-terms/terms/5083> <https://athena.ohdsi.org/search-terms/terms/581458> <https://athena.ohdsi.org/search-terms/terms/32036> <https://athena.ohdsi.org/search-terms/terms/581478> <https://athena.ohdsi.org/search-terms/terms/38004193> ) ;
+    linkml:permissible_values <https://athena.ohdsi.org/search-terms/terms/262>,
+        <https://athena.ohdsi.org/search-terms/terms/32036>,
+        <https://athena.ohdsi.org/search-terms/terms/38004193>,
+        <https://athena.ohdsi.org/search-terms/terms/42898160>,
+        <https://athena.ohdsi.org/search-terms/terms/5083>,
+        <https://athena.ohdsi.org/search-terms/terms/581458>,
+        <https://athena.ohdsi.org/search-terms/terms/581476>,
+        <https://athena.ohdsi.org/search-terms/terms/581478>,
+        <https://athena.ohdsi.org/search-terms/terms/9201>,
+        <https://athena.ohdsi.org/search-terms/terms/9202>,
+        <https://athena.ohdsi.org/search-terms/terms/9203> .
+
+cmdr:ConditionProvenanceEnum a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <https://athena.ohdsi.org/search-terms/terms/4822159> <https://athena.ohdsi.org/search-terms/terms/4822124> <https://athena.ohdsi.org/search-terms/terms/4822160> <https://athena.ohdsi.org/search-terms/terms/4822135> <https://athena.ohdsi.org/search-terms/terms/4822121> <https://athena.ohdsi.org/search-terms/terms/4822128> <https://athena.ohdsi.org/search-terms/terms/4822058> <https://athena.ohdsi.org/search-terms/terms/4822126> <https://athena.ohdsi.org/search-terms/terms/4822157> <https://athena.ohdsi.org/search-terms/terms/4822127> <https://athena.ohdsi.org/search-terms/terms/4822125> <https://athena.ohdsi.org/search-terms/terms/4822129> <https://athena.ohdsi.org/search-terms/terms/4822266> ) ;
+    linkml:permissible_values <https://athena.ohdsi.org/search-terms/terms/4822058>,
+        <https://athena.ohdsi.org/search-terms/terms/4822121>,
+        <https://athena.ohdsi.org/search-terms/terms/4822124>,
+        <https://athena.ohdsi.org/search-terms/terms/4822125>,
+        <https://athena.ohdsi.org/search-terms/terms/4822126>,
+        <https://athena.ohdsi.org/search-terms/terms/4822127>,
+        <https://athena.ohdsi.org/search-terms/terms/4822128>,
+        <https://athena.ohdsi.org/search-terms/terms/4822129>,
+        <https://athena.ohdsi.org/search-terms/terms/4822135>,
+        <https://athena.ohdsi.org/search-terms/terms/4822157>,
+        <https://athena.ohdsi.org/search-terms/terms/4822159>,
+        <https://athena.ohdsi.org/search-terms/terms/4822160>,
+        <https://athena.ohdsi.org/search-terms/terms/4822266> .
 
 linkml:cmdr a owl:Ontology ;
     rdfs:label "cmdr" ;
@@ -452,4 +2379,108 @@ linkml:cmdr a owl:Ontology ;
     dcterms:title "cmdr" ;
     rdfs:seeAlso <https://linkml.github.io/cmdr> ;
     skos:definition "Core Model for Data Research (Tentative)" .
+
+cmdr:VisitProvenanceEnum a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <https://athena.ohdsi.org/search-terms/terms/32809> <https://athena.ohdsi.org/search-terms/terms/32810> <https://athena.ohdsi.org/search-terms/terms/32811> <https://athena.ohdsi.org/search-terms/terms/32812> <https://athena.ohdsi.org/search-terms/terms/32813> <https://athena.ohdsi.org/search-terms/terms/32814> <https://athena.ohdsi.org/search-terms/terms/32815> <https://athena.ohdsi.org/search-terms/terms/32816> <https://athena.ohdsi.org/search-terms/terms/32817> <https://athena.ohdsi.org/search-terms/terms/32835> <https://athena.ohdsi.org/search-terms/terms/32818> <https://athena.ohdsi.org/search-terms/terms/32819> <https://athena.ohdsi.org/search-terms/terms/32820> <https://athena.ohdsi.org/search-terms/terms/32821> <https://athena.ohdsi.org/search-terms/terms/32822> <https://athena.ohdsi.org/search-terms/terms/32823> <https://athena.ohdsi.org/search-terms/terms/32824> <https://athena.ohdsi.org/search-terms/terms/32825> <https://athena.ohdsi.org/search-terms/terms/32826> <https://athena.ohdsi.org/search-terms/terms/32827> <https://athena.ohdsi.org/search-terms/terms/32828> <https://athena.ohdsi.org/search-terms/terms/32829> <https://athena.ohdsi.org/search-terms/terms/32830> <https://athena.ohdsi.org/search-terms/terms/32831> <https://athena.ohdsi.org/search-terms/terms/32832> <https://athena.ohdsi.org/search-terms/terms/32833> <https://athena.ohdsi.org/search-terms/terms/32834> <https://athena.ohdsi.org/search-terms/terms/32836> <https://athena.ohdsi.org/search-terms/terms/32837> <https://athena.ohdsi.org/search-terms/terms/32838> <https://athena.ohdsi.org/search-terms/terms/32839> <https://athena.ohdsi.org/search-terms/terms/32840> <https://athena.ohdsi.org/search-terms/terms/32841> <https://athena.ohdsi.org/search-terms/terms/32842> <https://athena.ohdsi.org/search-terms/terms/32843> <https://athena.ohdsi.org/search-terms/terms/32844> <https://athena.ohdsi.org/search-terms/terms/32845> <https://athena.ohdsi.org/search-terms/terms/32846> <https://athena.ohdsi.org/search-terms/terms/32847> <https://athena.ohdsi.org/search-terms/terms/32848> <https://athena.ohdsi.org/search-terms/terms/32849> <https://athena.ohdsi.org/search-terms/terms/32850> <https://athena.ohdsi.org/search-terms/terms/32851> <https://athena.ohdsi.org/search-terms/terms/32852> <https://athena.ohdsi.org/search-terms/terms/32853> <https://athena.ohdsi.org/search-terms/terms/32854> <https://athena.ohdsi.org/search-terms/terms/32855> <https://athena.ohdsi.org/search-terms/terms/32856> <https://athena.ohdsi.org/search-terms/terms/32857> <https://athena.ohdsi.org/search-terms/terms/32858> <https://athena.ohdsi.org/search-terms/terms/32859> <https://athena.ohdsi.org/search-terms/terms/32860> <https://athena.ohdsi.org/search-terms/terms/32861> <https://athena.ohdsi.org/search-terms/terms/32862> <https://athena.ohdsi.org/search-terms/terms/32863> <https://athena.ohdsi.org/search-terms/terms/32864> <https://athena.ohdsi.org/search-terms/terms/32865> <https://athena.ohdsi.org/search-terms/terms/705183> <https://athena.ohdsi.org/search-terms/terms/32866> <https://athena.ohdsi.org/search-terms/terms/32867> <https://athena.ohdsi.org/search-terms/terms/32868> <https://athena.ohdsi.org/search-terms/terms/32869> <https://athena.ohdsi.org/search-terms/terms/703249> <https://athena.ohdsi.org/search-terms/terms/32870> <https://athena.ohdsi.org/search-terms/terms/32871> <https://athena.ohdsi.org/search-terms/terms/32872> <https://athena.ohdsi.org/search-terms/terms/32873> <https://athena.ohdsi.org/search-terms/terms/32874> <https://athena.ohdsi.org/search-terms/terms/32875> <https://athena.ohdsi.org/search-terms/terms/32876> <https://athena.ohdsi.org/search-terms/terms/32877> <https://athena.ohdsi.org/search-terms/terms/32878> <https://athena.ohdsi.org/search-terms/terms/32879> <https://athena.ohdsi.org/search-terms/terms/32880> <https://athena.ohdsi.org/search-terms/terms/32882> <https://athena.ohdsi.org/search-terms/terms/32881> <https://athena.ohdsi.org/search-terms/terms/32883> <https://athena.ohdsi.org/search-terms/terms/32885> <https://athena.ohdsi.org/search-terms/terms/32884> <https://athena.ohdsi.org/search-terms/terms/32886> ) ;
+    linkml:permissible_values <https://athena.ohdsi.org/search-terms/terms/32809>,
+        <https://athena.ohdsi.org/search-terms/terms/32810>,
+        <https://athena.ohdsi.org/search-terms/terms/32811>,
+        <https://athena.ohdsi.org/search-terms/terms/32812>,
+        <https://athena.ohdsi.org/search-terms/terms/32813>,
+        <https://athena.ohdsi.org/search-terms/terms/32814>,
+        <https://athena.ohdsi.org/search-terms/terms/32815>,
+        <https://athena.ohdsi.org/search-terms/terms/32816>,
+        <https://athena.ohdsi.org/search-terms/terms/32817>,
+        <https://athena.ohdsi.org/search-terms/terms/32818>,
+        <https://athena.ohdsi.org/search-terms/terms/32819>,
+        <https://athena.ohdsi.org/search-terms/terms/32820>,
+        <https://athena.ohdsi.org/search-terms/terms/32821>,
+        <https://athena.ohdsi.org/search-terms/terms/32822>,
+        <https://athena.ohdsi.org/search-terms/terms/32823>,
+        <https://athena.ohdsi.org/search-terms/terms/32824>,
+        <https://athena.ohdsi.org/search-terms/terms/32825>,
+        <https://athena.ohdsi.org/search-terms/terms/32826>,
+        <https://athena.ohdsi.org/search-terms/terms/32827>,
+        <https://athena.ohdsi.org/search-terms/terms/32828>,
+        <https://athena.ohdsi.org/search-terms/terms/32829>,
+        <https://athena.ohdsi.org/search-terms/terms/32830>,
+        <https://athena.ohdsi.org/search-terms/terms/32831>,
+        <https://athena.ohdsi.org/search-terms/terms/32832>,
+        <https://athena.ohdsi.org/search-terms/terms/32833>,
+        <https://athena.ohdsi.org/search-terms/terms/32834>,
+        <https://athena.ohdsi.org/search-terms/terms/32835>,
+        <https://athena.ohdsi.org/search-terms/terms/32836>,
+        <https://athena.ohdsi.org/search-terms/terms/32837>,
+        <https://athena.ohdsi.org/search-terms/terms/32838>,
+        <https://athena.ohdsi.org/search-terms/terms/32839>,
+        <https://athena.ohdsi.org/search-terms/terms/32840>,
+        <https://athena.ohdsi.org/search-terms/terms/32841>,
+        <https://athena.ohdsi.org/search-terms/terms/32842>,
+        <https://athena.ohdsi.org/search-terms/terms/32843>,
+        <https://athena.ohdsi.org/search-terms/terms/32844>,
+        <https://athena.ohdsi.org/search-terms/terms/32845>,
+        <https://athena.ohdsi.org/search-terms/terms/32846>,
+        <https://athena.ohdsi.org/search-terms/terms/32847>,
+        <https://athena.ohdsi.org/search-terms/terms/32848>,
+        <https://athena.ohdsi.org/search-terms/terms/32849>,
+        <https://athena.ohdsi.org/search-terms/terms/32850>,
+        <https://athena.ohdsi.org/search-terms/terms/32851>,
+        <https://athena.ohdsi.org/search-terms/terms/32852>,
+        <https://athena.ohdsi.org/search-terms/terms/32853>,
+        <https://athena.ohdsi.org/search-terms/terms/32854>,
+        <https://athena.ohdsi.org/search-terms/terms/32855>,
+        <https://athena.ohdsi.org/search-terms/terms/32856>,
+        <https://athena.ohdsi.org/search-terms/terms/32857>,
+        <https://athena.ohdsi.org/search-terms/terms/32858>,
+        <https://athena.ohdsi.org/search-terms/terms/32859>,
+        <https://athena.ohdsi.org/search-terms/terms/32860>,
+        <https://athena.ohdsi.org/search-terms/terms/32861>,
+        <https://athena.ohdsi.org/search-terms/terms/32862>,
+        <https://athena.ohdsi.org/search-terms/terms/32863>,
+        <https://athena.ohdsi.org/search-terms/terms/32864>,
+        <https://athena.ohdsi.org/search-terms/terms/32865>,
+        <https://athena.ohdsi.org/search-terms/terms/32866>,
+        <https://athena.ohdsi.org/search-terms/terms/32867>,
+        <https://athena.ohdsi.org/search-terms/terms/32868>,
+        <https://athena.ohdsi.org/search-terms/terms/32869>,
+        <https://athena.ohdsi.org/search-terms/terms/32870>,
+        <https://athena.ohdsi.org/search-terms/terms/32871>,
+        <https://athena.ohdsi.org/search-terms/terms/32872>,
+        <https://athena.ohdsi.org/search-terms/terms/32873>,
+        <https://athena.ohdsi.org/search-terms/terms/32874>,
+        <https://athena.ohdsi.org/search-terms/terms/32875>,
+        <https://athena.ohdsi.org/search-terms/terms/32876>,
+        <https://athena.ohdsi.org/search-terms/terms/32877>,
+        <https://athena.ohdsi.org/search-terms/terms/32878>,
+        <https://athena.ohdsi.org/search-terms/terms/32879>,
+        <https://athena.ohdsi.org/search-terms/terms/32880>,
+        <https://athena.ohdsi.org/search-terms/terms/32881>,
+        <https://athena.ohdsi.org/search-terms/terms/32882>,
+        <https://athena.ohdsi.org/search-terms/terms/32883>,
+        <https://athena.ohdsi.org/search-terms/terms/32884>,
+        <https://athena.ohdsi.org/search-terms/terms/32885>,
+        <https://athena.ohdsi.org/search-terms/terms/32886>,
+        <https://athena.ohdsi.org/search-terms/terms/703249>,
+        <https://athena.ohdsi.org/search-terms/terms/705183> .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueBoolean> ;
+    owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/type> ;
+    owl:someValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueBoolean> .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueDecimal> ;
+    owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/type> ;
+    owl:someValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueDecimal> .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValue> ;
+    owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/type> ;
+    owl:someValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValue> .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueString> ;
+    owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/type> ;
+    owl:someValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueString> .
 

@@ -20,6 +20,7 @@ default_range: string
 
 imports:
   - linkml:types
+  - bdc_schema
 
 
 classes:

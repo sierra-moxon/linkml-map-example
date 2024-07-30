@@ -1,5 +1,81 @@
 {
     "$defs": {
+        "CellularOrganismSpeciesEnum": {
+            "description": "A constrained set of enumerative values containing the NCBITaxon values for cellular organisms.",
+            "title": "CellularOrganismSpeciesEnum",
+            "type": "string"
+        },
+        "Condition": {
+            "additionalProperties": false,
+            "description": "Conditions are records of a Person suggesting the presence of a disease or medical condition stated as a diagnosis, a sign or a symptom, which is either observed by a Provider or reported by the patient. Conditions are recorded in different sources and levels of standardization.",
+            "properties": {
+                "age_at_condition_end": {
+                    "description": "The Participant's age (expressed in days) when the condition was recorded as having been resolved.",
+                    "type": "integer"
+                },
+                "age_at_condition_start": {
+                    "description": "The Participant's age (expressed in days) when the condition was first recorded.",
+                    "type": "integer"
+                },
+                "associated_participant": {
+                    "$ref": "#/$defs/Participant",
+                    "description": "A reference to the Participant to which the Condition is attributed."
+                },
+                "associated_visit": {
+                    "$ref": "#/$defs/Visit",
+                    "description": "A reference to the Visit during which this QuestionnaireResponse was captured."
+                },
+                "condition_concept": {
+                    "$ref": "#/$defs/ConditionConceptEnum",
+                    "description": "The coded value for the presence of a disease or medical condition stated as a diagnosis, a sign or a symptom, coded to the Human Phenotype Ontology or MONDO."
+                },
+                "condition_provenance": {
+                    "$ref": "#/$defs/ConditionProvenanceEnum",
+                    "description": "A value representing the provenance of the Condition record"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "identity": {
+                    "description": "A 'business' identifier or accession number for the entity, typically as provided by an external system or authority, that are globally unique and persist across implementing systems. Also, since these identifiers are created outside the information system through a specific business process, the Identifier type has additional attributes to capture this additional metadata so the actual identifier values are qualified by the context that created those values. This additional context allows \"identifier\" instances to be transmitted as business data across systems while still being able to trace them back to the system of origin.",
+                    "items": {
+                        "$ref": "#/$defs/Identifier"
+                    },
+                    "type": "array"
+                },
+                "relationship_to_participant": {
+                    "description": "A value indicating the relationship between the Participant to which the Condition is attributed and the individual who had the reported Condition.  If the Condition is affecting the participant themselves, then 'Self' is the appropriate relationship.  If the Condition is affecting a family member (e.g. a parent of the Participant) then an appropriate relationship should be provided (e.g. 'Parent')",
+                    "type": "string"
+                }
+            },
+            "title": "Condition",
+            "type": "object"
+        },
+        "ConditionConceptEnum": {
+            "description": "A constrained set of enumerative values containing both the MONDO values for human diseases and the HPO values for phenotypic abnormalities.",
+            "title": "ConditionConceptEnum",
+            "type": "string"
+        },
+        "ConditionProvenanceEnum": {
+            "description": "A constrained set of enumerative values containing the OMOP values for visit provenance.",
+            "enum": [
+                "EHR_BILLING_DIAGNOSIS",
+                "EHR_CHIEF_COMPLAINT",
+                "EHR_ENCOUNTER_DIAGNOSIS",
+                "EHR_EPISODE_ENTRY",
+                "EHR_PROBLEM_LIST_ENTRY",
+                "FIRST_POSITION_CONDITION",
+                "NLP_DERIVED",
+                "OBSERVATION_RECORDED_FROM_EHR",
+                "PATIENT_SELF-REPORTED_CONDITION",
+                "PRIMARY_CONDITION",
+                "REFERRAL_RECORD",
+                "SECONDARY_CONDITION",
+                "TUMOR_REGISTRY"
+            ],
+            "title": "ConditionProvenanceEnum",
+            "type": "string"
+        },
         "Container": {
             "additionalProperties": false,
             "description": "",
@@ -48,6 +124,51 @@
             "additionalProperties": false,
             "description": "A DataFile Associated with a Subject or Investigation or MaterialEntity",
             "title": "DataObject",
+            "type": "object"
+        },
+        "DataUseEnum": {
+            "description": "A constrained set of enumerative values drawn from the Data Use Ontology (DUO). The DUO is an ontology which represent data use conditions.",
+            "enum": [
+                "GRU",
+                "HMB",
+                "DS",
+                "NPUNCU",
+                "IRB"
+            ],
+            "title": "DataUseEnum",
+            "type": "string"
+        },
+        "EthnicityEnum": {
+            "description": "A constrained set of enumerative values containing the United States Office of Management and Budget (OMB) values for ethnicity.",
+            "enum": [
+                "HISPANIC_OR_LATINO",
+                "NOT_HISPANIC_OR_LATINO"
+            ],
+            "title": "EthnicityEnum",
+            "type": "string"
+        },
+        "HpoPhenotypicAbnormalityEnum": {
+            "description": "A constrained set of enumerative values containing the HPO values for phenotypic abnormalities.",
+            "title": "HpoPhenotypicAbnormalityEnum",
+            "type": "string"
+        },
+        "Identifier": {
+            "additionalProperties": false,
+            "description": "An Identifier is associated with a unique object or entity within a given system.",
+            "properties": {
+                "system": {
+                    "description": "The system or namespace that defines the identifier.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The value of the identifier, as defined by the system.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "title": "Identifier",
             "type": "object"
         },
         "Investigation": {
@@ -131,6 +252,90 @@
             "title": "MaterialProcessing",
             "type": "object"
         },
+        "MondoHumanDiseaseEnum": {
+            "description": "A constrained set of enumerative values containing the MONDO values for human diseases.",
+            "title": "MondoHumanDiseaseEnum",
+            "type": "string"
+        },
+        "Organization": {
+            "additionalProperties": false,
+            "description": "A grouping of people or organizations with a common purpose such as a data coordinating center, an university, or an institute within a university.",
+            "properties": {
+                "alias": {
+                    "description": "A secondary name for the organization such as a short name or abbreviation (e.g. 'NCI')",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "identity": {
+                    "description": "A 'business' identifier or accession number for the entity, typically as provided by an external system or authority, that are globally unique and persist across implementing systems. Also, since these identifiers are created outside the information system through a specific business process, the Identifier type has additional attributes to capture this additional metadata so the actual identifier values are qualified by the context that created those values. This additional context allows \"identifier\" instances to be transmitted as business data across systems while still being able to trace them back to the system of origin.",
+                    "items": {
+                        "$ref": "#/$defs/Identifier"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "The full legal name by which the organization is known (e.g. 'National Cancer Institute')",
+                    "type": "string"
+                },
+                "organization_type": {
+                    "description": "The type of the organization (e.g. 'Cancer Genome Characterization Center')",
+                    "type": "string"
+                }
+            },
+            "title": "Organization",
+            "type": "object"
+        },
+        "Participant": {
+            "additionalProperties": false,
+            "description": "A Participant is the entity of interest in a research study, typically a human being or an animal, but can also be a device, group of humans or animals, or a tissue sample. Human research subjects are usually not traceable to a particular person to protect the subject\u2019s privacy.",
+            "properties": {
+                "age_at_enrollment": {
+                    "description": "The age in days when the Participant enrolled on the ResearchStudy",
+                    "type": "integer"
+                },
+                "associated_person": {
+                    "$ref": "#/$defs/Person",
+                    "description": "A reference to the Person that is associated with this record."
+                },
+                "description": {
+                    "description": "A free text field to capture additional info/explanation about the research subject.",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "identity": {
+                    "description": "A 'business' identifier or accession number for the entity, typically as provided by an external system or authority, that are globally unique and persist across implementing systems. Also, since these identifiers are created outside the information system through a specific business process, the Identifier type has additional attributes to capture this additional metadata so the actual identifier values are qualified by the context that created those values. This additional context allows \"identifier\" instances to be transmitted as business data across systems while still being able to trace them back to the system of origin.",
+                    "items": {
+                        "$ref": "#/$defs/Identifier"
+                    },
+                    "type": "array"
+                },
+                "index_timepoint": {
+                    "description": "The text term used to describe the reference or anchor date used for date obfuscation, where a single date is obscured by creating one or more date ranges in relation to this date.",
+                    "type": "string"
+                },
+                "member_of_research_study": {
+                    "$ref": "#/$defs/ResearchStudy",
+                    "description": "A reference to the Study(s) of which this Participant is a member"
+                },
+                "originating_site": {
+                    "$ref": "#/$defs/Organization",
+                    "description": "The Organization through which a subject was enrolled on a ResearchStudy."
+                },
+                "study_arm": {
+                    "description": "The arm(s) of the study on which the Participant is enrolled",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "title": "Participant",
+            "type": "object"
+        },
         "Participation": {
             "additionalProperties": false,
             "description": "Subject/Study participation information",
@@ -157,6 +362,64 @@
             "title": "Participation",
             "type": "object"
         },
+        "Person": {
+            "additionalProperties": false,
+            "description": "Demographics and other administrative information about an individual or animal receiving care or other health-related services.",
+            "properties": {
+                "age_at_death": {
+                    "description": "The age of an individual at the time of death, expressed in days since birth",
+                    "type": "integer"
+                },
+                "breed": {
+                    "$ref": "#/$defs/VertebrateBreedEnum",
+                    "description": "A label given to a group of animals homogeneous in appearance and other characteristics that distinguish it from other animals of the same species. Values should be derived from the Vertebrate Breed Ontology (http://purl.obolibrary.org/obo/vbo.owl)."
+                },
+                "cause_of_death": {
+                    "description": "Coded value indicating the circumstance or condition that results in the death of the individual.",
+                    "type": "string"
+                },
+                "ethnicity": {
+                    "$ref": "#/$defs/EthnicityEnum",
+                    "description": "An individual's self-described social and cultural grouping, specifically whether an individual describes themselves as Hispanic or Latino. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "identity": {
+                    "description": "A 'business' identifier or accession number for the entity, typically as provided by an external system or authority, that are globally unique and persist across implementing systems. Also, since these identifiers are created outside the information system through a specific business process, the Identifier type has additional attributes to capture this additional metadata so the actual identifier values are qualified by the context that created those values. This additional context allows \"identifier\" instances to be transmitted as business data across systems while still being able to trace them back to the system of origin.",
+                    "items": {
+                        "$ref": "#/$defs/Identifier"
+                    },
+                    "type": "array"
+                },
+                "race": {
+                    "$ref": "#/$defs/RaceEnum",
+                    "description": "An arbitrary classification of a taxonomic group that is a division of a species. It usually arises as a consequence of geographical isolation within a species and is characterized by shared heredity, physical attributes and behavior, and in the case of humans, by common history, nationality, or geographic distribution. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau."
+                },
+                "sex": {
+                    "$ref": "#/$defs/SexEnum",
+                    "description": "The biologic character or quality that distinguishes male and female from one another as expressed by analysis of the person's gonadal, morphologic (internal and external), chromosomal, and hormonal characteristics."
+                },
+                "species": {
+                    "$ref": "#/$defs/CellularOrganismSpeciesEnum",
+                    "description": "The scientific binomial name for the species of the Person (e.g. Homo sapiens, Mus musculus, etc.). Values should be derived from the NCBI organismal taxonomy (http://purl.obolibrary.org/obo/ncbitaxon.owl)."
+                },
+                "vital_status": {
+                    "$ref": "#/$defs/VitalStatusEnum",
+                    "description": "Coded value indicating the state or condition of being living or deceased; also includes the case where the vital status is unknown."
+                },
+                "year_of_birth": {
+                    "description": "Numeric value to represent the calendar year in which an individual was born.",
+                    "type": "integer"
+                },
+                "year_of_death": {
+                    "description": "Numeric value to represent the calendar year in which an individual died.",
+                    "type": "integer"
+                }
+            },
+            "title": "Person",
+            "type": "object"
+        },
         "Quantity": {
             "additionalProperties": false,
             "description": "",
@@ -176,6 +439,376 @@
             },
             "title": "Quantity",
             "type": "object"
+        },
+        "Questionnaire": {
+            "additionalProperties": false,
+            "description": "A Questionnaire is an organized collection of questions intended to solicit information from patients, providers or other individuals involved in the healthcare domain. They may be simple flat lists of questions or can be hierarchically organized in groups and sub-groups, each containing questions. The Questionnaire defines the questions to be asked, how they are ordered and grouped, any intervening instructional text and what the constraints are on the allowed answers. The results of a Questionnaire can be communicated using the QuestionnaireResponse. (FHIR)",
+            "properties": {
+                "copyright": {
+                    "description": "Textual description of any use and/or publishing restrictions",
+                    "type": "string"
+                },
+                "copyright_label": {
+                    "description": "Copyright holder and year(s)",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Natural language description of the Questionnaire",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "identity": {
+                    "description": "A 'business' identifier or accession number for the entity, typically as provided by an external system or authority, that are globally unique and persist across implementing systems. Also, since these identifiers are created outside the information system through a specific business process, the Identifier type has additional attributes to capture this additional metadata so the actual identifier values are qualified by the context that created those values. This additional context allows \"identifier\" instances to be transmitted as business data across systems while still being able to trace them back to the system of origin.",
+                    "items": {
+                        "$ref": "#/$defs/Identifier"
+                    },
+                    "type": "array"
+                },
+                "items": {
+                    "description": "A collection of QuestionnaireItem objects which encapsulate the question being asked.",
+                    "items": {
+                        "$ref": "#/$defs/QuestionnaireItem"
+                    },
+                    "type": "array"
+                },
+                "language": {
+                    "description": "The language(s) in which questions are presented.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "Name for this Questionnaire (computer friendly)",
+                    "type": "string"
+                },
+                "publisher": {
+                    "description": "Name of the publisher/steward (organization or individual) of this Questionnaire",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "Name for this Questionnaire (human friendly)",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "Canonical identifier for this Questionnaire, represented as an absolute URI (globally unique)",
+                    "type": "string"
+                },
+                "version": {
+                    "description": "The identifier that is used to identify this version of the questionnaire when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the questionnaire author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "items"
+            ],
+            "title": "Questionnaire",
+            "type": "object"
+        },
+        "QuestionnaireItem": {
+            "additionalProperties": false,
+            "description": "QuestionnaireItem defines a question or section within the Questionnaire",
+            "properties": {
+                "code": {
+                    "description": "Corresponding concept for this item in a terminology",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "identity": {
+                    "description": "A 'business' identifier or accession number for the entity, typically as provided by an external system or authority, that are globally unique and persist across implementing systems. Also, since these identifiers are created outside the information system through a specific business process, the Identifier type has additional attributes to capture this additional metadata so the actual identifier values are qualified by the context that created those values. This additional context allows \"identifier\" instances to be transmitted as business data across systems while still being able to trace them back to the system of origin.",
+                    "items": {
+                        "$ref": "#/$defs/Identifier"
+                    },
+                    "type": "array"
+                },
+                "part_of": {
+                    "$ref": "#/$defs/QuestionnaireItem",
+                    "description": "A reference to a parent QuestionnaireItem."
+                },
+                "text": {
+                    "description": "Name for group or question text",
+                    "type": "string"
+                }
+            },
+            "title": "QuestionnaireItem",
+            "type": "object"
+        },
+        "QuestionnaireResponse": {
+            "additionalProperties": false,
+            "description": "QuestionnaireResponse provides a complete or partial list of answers to a set of questions filled when responding to a questionnaire. (FHIR)",
+            "properties": {
+                "age_at_response": {
+                    "description": "The age (in days) of the Participant when the QuestionnaireResponse was captured.",
+                    "type": "integer"
+                },
+                "associated_visit": {
+                    "$ref": "#/$defs/Visit",
+                    "description": "A reference to the Visit during which this QuestionnaireResponse was captured."
+                },
+                "id": {
+                    "type": "string"
+                },
+                "items": {
+                    "description": "A collection of QuestionnaireResponseItem objects which encapsulate the question being asked and the response.",
+                    "items": {
+                        "$ref": "#/$defs/QuestionnaireResponseItem"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "items"
+            ],
+            "title": "QuestionnaireResponse",
+            "type": "object"
+        },
+        "QuestionnaireResponseItem": {
+            "additionalProperties": false,
+            "description": "QuestionnaireResponseItem provides a complete or partial list of answers to a set of questions filled when responding to a questionnaire. (FHIR)",
+            "properties": {
+                "has_questionnaire_item": {
+                    "$ref": "#/$defs/QuestionnaireItem",
+                    "description": "A reference to the QuestionnaireItem that this QuestionnaireResponseItem responds to."
+                },
+                "response_value": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/QuestionnaireResponseValue"
+                        },
+                        {
+                            "$ref": "#/$defs/QuestionnaireResponseValueDecimal"
+                        },
+                        {
+                            "$ref": "#/$defs/QuestionnaireResponseValueBoolean"
+                        },
+                        {
+                            "$ref": "#/$defs/QuestionnaireResponseValueString"
+                        }
+                    ]
+                },
+                "text": {
+                    "description": "Name for group or question text",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "response_value"
+            ],
+            "title": "QuestionnaireResponseItem",
+            "type": "object"
+        },
+        "QuestionnaireResponseValue": {
+            "additionalProperties": false,
+            "description": "Single-valued answer to the question. (FHIR)",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "QuestionnaireResponseValue"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "description": "A general slot to hold a value.",
+                    "type": "string"
+                }
+            },
+            "title": "QuestionnaireResponseValue",
+            "type": "object"
+        },
+        "QuestionnaireResponseValueBoolean": {
+            "additionalProperties": false,
+            "description": "Single-valued boolean answer to the question",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "QuestionnaireResponseValueBoolean"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "description": "A general slot to hold a value.",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "title": "QuestionnaireResponseValueBoolean",
+            "type": "object"
+        },
+        "QuestionnaireResponseValueDecimal": {
+            "additionalProperties": false,
+            "description": "Single-valued decimal answer to the question",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "QuestionnaireResponseValueDecimal"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "description": "A general slot to hold a value.",
+                    "type": "number"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "title": "QuestionnaireResponseValueDecimal",
+            "type": "object"
+        },
+        "QuestionnaireResponseValueString": {
+            "additionalProperties": false,
+            "description": "Single-valued string answer to the question",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "QuestionnaireResponseValueString"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "description": "A general slot to hold a value.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "title": "QuestionnaireResponseValueString",
+            "type": "object"
+        },
+        "RaceEnum": {
+            "description": "A constrained set of enumerative values containing the United States Office of Management and Budget (OMB) values for race.",
+            "enum": [
+                "AMERICAN_INDIAN_OR_ALASKA_NATIVE",
+                "ASIAN",
+                "BLACK_OR_AFRICAN_AMERICAN",
+                "NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER",
+                "UNKNOWN",
+                "WHITE"
+            ],
+            "title": "RaceEnum",
+            "type": "string"
+        },
+        "ResearchStudy": {
+            "additionalProperties": false,
+            "description": "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge. This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques. A ResearchStudy involves the gathering of information about human or animal subjects.",
+            "properties": {
+                "associated_timepoint": {
+                    "description": "A collection of timepoint observations that are relevant to research projects (e.g. date of IACUC approval, date of IRB approval, date of embargo end, etc.)",
+                    "items": {
+                        "$ref": "#/$defs/TimePoint"
+                    },
+                    "type": "array"
+                },
+                "consent_code": {
+                    "description": "Data Use Restrictions that are used to indicate permissions/restrictions for datasets and/or materials, and relates to the purposes for which datasets and/or material might be removed, stored or used. Based on the Data Use Ontology : see http://www.obofoundry.org/ontology/duo.html",
+                    "items": {
+                        "$ref": "#/$defs/DataUseEnum"
+                    },
+                    "type": "array"
+                },
+                "date_ended": {
+                    "$ref": "#/$defs/TimePoint",
+                    "description": "The date when the research project ended."
+                },
+                "date_started": {
+                    "$ref": "#/$defs/TimePoint",
+                    "description": "The date when the research project began."
+                },
+                "description": {
+                    "description": "An unabridged description of a research program, project, or study.",
+                    "type": "string"
+                },
+                "description_shortened": {
+                    "description": "An abbreviated description of a research program, project, or study.",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "identity": {
+                    "description": "A 'business' identifier or accession number for the entity, typically as provided by an external system or authority, that are globally unique and persist across implementing systems. Also, since these identifiers are created outside the information system through a specific business process, the Identifier type has additional attributes to capture this additional metadata so the actual identifier values are qualified by the context that created those values. This additional context allows \"identifier\" instances to be transmitted as business data across systems while still being able to trace them back to the system of origin.",
+                    "items": {
+                        "$ref": "#/$defs/Identifier"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "An unabridged name of a research program, project, or study.",
+                    "type": "string"
+                },
+                "name_shortened": {
+                    "description": "An abbreviated name of a research program, project, or study.",
+                    "type": "string"
+                },
+                "part_of": {
+                    "$ref": "#/$defs/ResearchStudy",
+                    "description": "A reference to a parent ResearchStudy (e.g. a link to the overarching CPTAC ResearchStudy from a substudy of CPTAC)"
+                },
+                "principal_investigator": {
+                    "description": "The investigator or investigators leading a project.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "research_project_type": {
+                    "description": "The 'type' of ResearchStudy represented (e.g. a broad-based Program like 'CPTAC' or a more focused Project like 'CPTAC PDAC Discovery Study')",
+                    "type": "string"
+                },
+                "sponsor": {
+                    "description": "An entity that is responsible for the initiation, management, and/or financing of a research project.",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "A URL address for a resource that provides information about a research program, project, or study.",
+                    "type": "string"
+                }
+            },
+            "title": "ResearchStudy",
+            "type": "object"
+        },
+        "ResearchStudyCollection": {
+            "additionalProperties": false,
+            "description": "A holder for ResearchStudy objects",
+            "properties": {
+                "entries": {
+                    "items": {
+                        "$ref": "#/$defs/ResearchStudy"
+                    },
+                    "type": "array"
+                }
+            },
+            "title": "ResearchStudyCollection",
+            "type": "object"
+        },
+        "SexEnum": {
+            "description": "A constrained set of enumerative values containing the OMOP values for sex.",
+            "enum": [
+                "MALE",
+                "FEMALE",
+                "UNKNOWN"
+            ],
+            "title": "SexEnum",
+            "type": "string"
         },
         "SpecimenCollectionProcess": {
             "additionalProperties": false,
@@ -222,47 +855,211 @@
             ],
             "title": "Subject",
             "type": "object"
+        },
+        "TimePeriod": {
+            "additionalProperties": false,
+            "description": "A period of time between a start and end time point.",
+            "properties": {
+                "period_end": {
+                    "$ref": "#/$defs/TimePoint",
+                    "description": "When a period of time ended."
+                },
+                "period_start": {
+                    "$ref": "#/$defs/TimePoint",
+                    "description": "When a period of time started."
+                }
+            },
+            "title": "TimePeriod",
+            "type": "object"
+        },
+        "TimePoint": {
+            "additionalProperties": false,
+            "description": "A structured representation of a single point in time that allows direct/explicit declaration as a dateTime, specification in terms of offset from a defined index, or description of an event type as a proxy for the time point when it occurred.",
+            "properties": {
+                "date_time": {
+                    "description": "An explicitly specified timepoint described in terms of a date and optionally a time on that date.",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "event_type": {
+                    "description": "An event that occurred at the point in time specified by this TimePoint.",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "index_time_point": {
+                    "$ref": "#/$defs/TimePoint",
+                    "description": "Another TimePoint from which this point is offset."
+                },
+                "offset_from_index": {
+                    "description": "A quantity of time that, together with the index date or event, can be used to derive a specific timepoint.",
+                    "type": "integer"
+                }
+            },
+            "title": "TimePoint",
+            "type": "object"
+        },
+        "VertebrateBreedEnum": {
+            "description": "A constrained set of enumerative values containing the VBO values for vertebrate breeds.",
+            "title": "VertebrateBreedEnum",
+            "type": "string"
+        },
+        "Visit": {
+            "additionalProperties": false,
+            "description": "Events where Persons engage with the healthcare system for a duration of time. They are often also called \u201cEncounters\u201d. Visits are defined by a configuration of circumstances under which they occur, such as (i) whether the patient comes to a healthcare institution, the other way around, or the interaction is remote, (ii) whether and what kind of trained medical staff is delivering the service during the Visit, and (iii) whether the Visit is transient or for a longer period involving a stay in bed. (OMOP)",
+            "properties": {
+                "age_at_visit_end": {
+                    "description": "The age of the Participant (in days) at the end of the Visit.",
+                    "type": "integer"
+                },
+                "age_at_visit_start": {
+                    "description": "The age of the Participant (in days) at the start of the Visit.",
+                    "type": "integer"
+                },
+                "associated_participant": {
+                    "$ref": "#/$defs/Participant",
+                    "description": "A reference to the Participant for whom this Visit occurred."
+                },
+                "id": {
+                    "type": "string"
+                },
+                "visit_category": {
+                    "$ref": "#/$defs/VisitCategoryEnum",
+                    "description": "A value representing the kind (or category) of visit, like inpatient or outpatient."
+                },
+                "visit_provenance": {
+                    "$ref": "#/$defs/VisitProvenanceEnum",
+                    "description": "A value representing the provenance of the visit record, or where the record comes from."
+                }
+            },
+            "title": "Visit",
+            "type": "object"
+        },
+        "VisitCategoryEnum": {
+            "description": "A constrained set of enumerative values containing the OMOP values for visit categories.",
+            "enum": [
+                "INPATIENT",
+                "EMERGENCY_ROOM",
+                "EMERGENCY_ROOM_AND_INPATIENT",
+                "NON_HOSPITAL_INSTITUTION",
+                "OUTPATIENT",
+                "HOME",
+                "TELEHEALTH",
+                "PHARMACY",
+                "LABORATORY",
+                "AMBULANCE",
+                "CASE_MANAGEMENT"
+            ],
+            "title": "VisitCategoryEnum",
+            "type": "string"
+        },
+        "VisitProvenanceEnum": {
+            "description": "A constrained set of enumerative values containing the OMOP values for visit provenance.",
+            "enum": [
+                "CASE_REPORT_FORM",
+                "CLAIM",
+                "CLAIM_AUTHORIZATION",
+                "CLAIM_DISCHARGE_RECORD",
+                "CLAIM_ENROLMENT_RECORD",
+                "COST_RECORD",
+                "DEATH_CERTIFICATE",
+                "DENTAL_CLAIM",
+                "EHR",
+                "EHR_PATHOLOGY_REPORT",
+                "EHR_ADMINISTRATION_RECORD",
+                "EHR_ADMISSION_NOTE",
+                "EHR_ANCILLARY_REPORT",
+                "EHR_BILLING_RECORD",
+                "EHR_CHIEF_COMPLAINT",
+                "EHR_DISCHARGE_RECORD",
+                "EHR_DISCHARGE_SUMMARY",
+                "EHR_DISPENSING_RECORD",
+                "EHR_EMERGENCY_ROOM_NOTE",
+                "EHR_ENCOUNTER_RECORD",
+                "EHR_EPISODE_RECORD",
+                "EHR_INPATIENT_NOTE",
+                "EHR_MEDICATION_LIST",
+                "EHR_NOTE",
+                "EHR_NURSING_REPORT",
+                "EHR_ORDER",
+                "EHR_OUTPATIENT_NOTE",
+                "EHR_PHYSICAL_EXAMINATION",
+                "EHR_PLANNED_DISPENSING_RECORD",
+                "EHR_PRESCRIPTION",
+                "EHR_PRESCRIPTION_ISSUE_RECORD",
+                "EHR_PROBLEM_LIST",
+                "EHR_RADIOLOGY_REPORT",
+                "EHR_REFERRAL_RECORD",
+                "EXTERNAL_CDM_INSTANCE",
+                "FACILITY_CLAIM",
+                "FACILITY_CLAIM_DETAIL",
+                "FACILITY_CLAIM_HEADER",
+                "GEOGRAPHIC_ISOLATION_RECORD",
+                "GOVERNMENT_REPORT",
+                "HEALTH_INFORMATION_EXCHANGE_RECORD",
+                "HEALTH_RISK_ASSESSMENT",
+                "HEALTHCARE_PROFESSIONAL_FILLED_SURVEY",
+                "HOSPITAL_COST",
+                "INPATIENT_CLAIM",
+                "INPATIENT_CLAIM_DETAIL",
+                "INPATIENT_CLAIM_HEADER",
+                "LAB",
+                "MAIL_ORDER_RECORD",
+                "NLP",
+                "OUTPATIENT_CLAIM",
+                "OUTPATIENT_CLAIM_DETAIL",
+                "OUTPATIENT_CLAIM_HEADER",
+                "PATIENT_FILLED_SURVEY",
+                "PATIENT_OR_PAYER_PAID_RECORD",
+                "PATIENT_REPORTED_COST",
+                "PATIENT_SELF-REPORT",
+                "PATIENT_SELF-TESTED",
+                "PAYER_SYSTEM_RECORD_(PAID_PREMIUM)",
+                "PAYER_SYSTEM_RECORD_(PRIMARY_PAYER)",
+                "PAYER_SYSTEM_RECORD_(SECONDARY_PAYER)",
+                "PHARMACY_CLAIM",
+                "POINT_OF_CARE/EXPRESS_LAB",
+                "PRE-QUALIFICATION_TIME_PERIOD",
+                "PROFESSIONAL_CLAIM",
+                "PROFESSIONAL_CLAIM_DETAIL",
+                "PROFESSIONAL_CLAIM_HEADER",
+                "PROVIDER_CHARGE_LIST_PRICE",
+                "PROVIDER_FINANCIAL_SYSTEM",
+                "PROVIDER_INCURRED_COST_RECORD",
+                "RANDOMIZATION_RECORD",
+                "REFERENCE_LAB",
+                "REGISTRY",
+                "STANDARD_ALGORITHM",
+                "STANDARD_ALGORITHM_FROM_EHR",
+                "STANDARD_ALGORITHM_FROM_CLAIMS",
+                "SURVEY",
+                "US_SOCIAL_SECURITY_DEATH_MASTER_FILE",
+                "URGENT_LAB",
+                "VISION_CLAIM"
+            ],
+            "title": "VisitProvenanceEnum",
+            "type": "string"
+        },
+        "VitalStatusEnum": {
+            "description": "A constrained set of enumerative values containing the OMOP values for vital status.",
+            "enum": [
+                "ALIVE",
+                "DEAD"
+            ],
+            "title": "VitalStatusEnum",
+            "type": "string"
         }
     },
     "$id": "https://w3id.org/linkml/cmdr",
     "$schema": "https://json-schema.org/draft/2019-09/schema",
     "additionalProperties": true,
-    "description": "",
+    "description": "A holder for ResearchStudy objects",
     "metamodel_version": "1.7.0",
     "properties": {
-        "investigations": {
+        "entries": {
             "items": {
-                "$ref": "#/$defs/Investigation"
-            },
-            "type": "array"
-        },
-        "material_processings": {
-            "items": {
-                "$ref": "#/$defs/MaterialProcessing"
-            },
-            "type": "array"
-        },
-        "materials": {
-            "items": {
-                "$ref": "#/$defs/MaterialEntity"
-            },
-            "type": "array"
-        },
-        "participations": {
-            "items": {
-                "$ref": "#/$defs/Participation"
-            },
-            "type": "array"
-        },
-        "specimen_collection_processes": {
-            "items": {
-                "$ref": "#/$defs/SpecimenCollectionProcess"
-            },
-            "type": "array"
-        },
-        "subjects": {
-            "items": {
-                "$ref": "#/$defs/Subject"
+                "$ref": "#/$defs/ResearchStudy"
             },
             "type": "array"
         }

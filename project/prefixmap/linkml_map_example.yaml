@@ -1,15 +1,73 @@
 {
    "OBI": "http://example.org/UNKNOWN/OBI/",
    "PATO": "http://purl.obolibrary.org/obo/PATO_",
+   "bdchm": "https://w3id.org/nhlbidatastage/bdchm/",
    "biolink": "https://w3id.org/biolink/",
    "cmdr": "https://w3id.org/linkml/cmdr/",
    "example": "https://example.org/",
    "linkml": "https://w3id.org/linkml/",
    "schema": "http://schema.org/",
+   "Condition": {
+      "@id": "bdchm:Condition"
+   },
+   "Entity": {
+      "@id": "schema:Thing"
+   },
+   "Identifier": {
+      "@id": "bdchm:Identifier"
+   },
    "MaterialProcessing": {
       "@id": "OBI:0000094"
    },
+   "Organization": {
+      "@id": "bdchm:Organization"
+   },
+   "Participant": {
+      "@id": "bdchm:Participant"
+   },
+   "Person": {
+      "@id": "bdchm:Person"
+   },
+   "Questionnaire": {
+      "@id": "bdchm:Questionnaire"
+   },
+   "QuestionnaireItem": {
+      "@id": "bdchm:QuestionnaireItem"
+   },
+   "QuestionnaireResponse": {
+      "@id": "bdchm:QuestionnaireResponse"
+   },
+   "QuestionnaireResponseItem": {
+      "@id": "bdchm:QuestionnaireResponseItem"
+   },
+   "QuestionnaireResponseValue": {
+      "@id": "bdchm:QuestionnaireResponseValue"
+   },
+   "QuestionnaireResponseValueBoolean": {
+      "@id": "bdchm:QuestionnaireResponseValueBoolean"
+   },
+   "QuestionnaireResponseValueDecimal": {
+      "@id": "bdchm:QuestionnaireResponseValueDecimal"
+   },
+   "QuestionnaireResponseValueString": {
+      "@id": "bdchm:QuestionnaireResponseValueString"
+   },
+   "ResearchStudy": {
+      "@id": "bdchm:ResearchStudy"
+   },
+   "ResearchStudyCollection": {
+      "@id": "bdchm:ResearchStudyCollection"
+   },
    "SpecimenCollectionProcess": {
       "@id": "OBI:0000659"
+   },
+   "TimePeriod": {
+      "@id": "bdchm:TimePeriod"
+   },
+   "TimePoint": {
+      "@id": "bdchm:TimePoint"
+   },
+   "Visit": {
+      "@id": "bdchm:Visit"
    }
 }

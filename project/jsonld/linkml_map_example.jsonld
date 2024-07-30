@@ -7,7 +7,8 @@
   ],
   "id": "https://w3id.org/linkml/cmdr",
   "imports": [
-    "linkml:types"
+    "linkml:types",
+    "bdc_schema"
   ],
   "license": "MIT",
   "prefixes": [
@@ -362,6 +363,739 @@
       "@type": "TypeDefinition"
     }
   ],
+  "enums": [
+    {
+      "name": "DataUseEnum",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/DataUseEnum",
+      "description": "A constrained set of enumerative values drawn from the Data Use Ontology (DUO). The DUO is an ontology which represent data use conditions.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "permissible_values": [
+        {
+          "text": "GRU",
+          "description": "This data use permission indicates that use is allowed for general research use for any research purpose. This includes but is not limited to: health/medical/biomedical purposes, fundamental biology research, the study of population origins or ancestry, statistical methods and algorithms development, and social-sciences research.",
+          "meaning": "DUO:0000042"
+        },
+        {
+          "text": "HMB",
+          "description": "This data use permission indicates that use is allowed for health/medical/biomedical purposes; does not include the study of population origins or ancestry.",
+          "meaning": "DUO:0000006"
+        },
+        {
+          "text": "DS",
+          "description": "This data use permission indicates that use is allowed provided it is related to the specified disease. This term should be coupled with a term describing a disease from an ontology to specify the disease the restriction applies to. DUO recommends MONDO be used, to provide the basis for automated evaluation. For more information see https://github.com/EBISPOT/DUO/blob/master/MONDO_Overview.md Other resources, such as the Disease Ontology, HPO, SNOMED-CT or others, can also be used. When those other resources are being used, this may require an extra mapping step to leverage automated matching algorithms.",
+          "meaning": "DUO:0000007"
+        },
+        {
+          "text": "NPUNCU",
+          "description": "This data use modifier indicates that use of the data is limited to not-for-profit organizations and not-for-profit use, non-commercial use.",
+          "meaning": "DUO:0000018"
+        },
+        {
+          "text": "IRB",
+          "description": "This data use modifier indicates that the requestor must provide documentation of local IRB/ERB approval.",
+          "meaning": "DUO:0000021"
+        }
+      ]
+    },
+    {
+      "name": "EthnicityEnum",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/EthnicityEnum",
+      "description": "A constrained set of enumerative values containing the United States Office of Management and Budget (OMB) values for ethnicity.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "permissible_values": [
+        {
+          "text": "HISPANIC_OR_LATINO",
+          "description": "A person of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or origin, regardless of race. The term, \"Spanish origin\" can be used in addition to \"Hispanic or Latino\". (OMB)",
+          "meaning": "OMOP:38003563"
+        },
+        {
+          "text": "NOT_HISPANIC_OR_LATINO",
+          "description": "A person not of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or origin, regardless of race.",
+          "meaning": "OMOP:38003564"
+        }
+      ]
+    },
+    {
+      "name": "RaceEnum",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/RaceEnum",
+      "description": "A constrained set of enumerative values containing the United States Office of Management and Budget (OMB) values for race.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "permissible_values": [
+        {
+          "text": "AMERICAN_INDIAN_OR_ALASKA_NATIVE",
+          "description": "A person having origins in any of the original peoples of North and South America (including Central America) and who maintains tribal affiliation or community attachment. (OMB)",
+          "meaning": "OMOP:8657"
+        },
+        {
+          "text": "ASIAN",
+          "description": "A person having origins in any of the original peoples of the Far East, Southeast Asia, or the Indian subcontinent, including for example, Cambodia, China, India, Japan, Korea, Malaysia, Pakistan, the Philippine Islands, Thailand, and Vietnam. (OMB)",
+          "meaning": "OMOP:8515"
+        },
+        {
+          "text": "BLACK_OR_AFRICAN_AMERICAN",
+          "description": "A person having origins in any of the Black racial groups of Africa. Terms such as \"Haitian\" or \"Negro\" can be used in addition to \"Black or African American\". (OMB)",
+          "meaning": "OMOP:8516"
+        },
+        {
+          "text": "NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER",
+          "description": "Denotes a person having origins in any of the original peoples of Hawaii, Guam, Samoa, or other Pacific Islands. The term covers particularly people who identify themselves as part-Hawaiian, Native Hawaiian, Guamanian or Chamorro, Carolinian, Samoan, Chuukese (Trukese), Fijian, Kosraean, Melanesian, Micronesian, Northern Mariana Islander, Palauan, Papua New Guinean, Pohnpeian, Polynesian, Solomon Islander, Tahitian, Tokelauan, Tongan, Yapese, or Pacific Islander, not specified.",
+          "meaning": "OMOP:8557"
+        },
+        {
+          "text": "UNKNOWN",
+          "description": "Not known, not observed, not recorded, or refused.",
+          "meaning": "OMOP:8552"
+        },
+        {
+          "text": "WHITE",
+          "description": "Denotes person with European, Middle Eastern, or North African ancestral origin who identifies, or is identified, as White.",
+          "meaning": "OMOP:8527"
+        }
+      ]
+    },
+    {
+      "name": "SexEnum",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/SexEnum",
+      "description": "A constrained set of enumerative values containing the OMOP values for sex.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "permissible_values": [
+        {
+          "text": "MALE",
+          "description": "A person who belongs to the sex that normally produces sperm.",
+          "meaning": "OMOP:8507"
+        },
+        {
+          "text": "FEMALE",
+          "description": "A person who belongs to the sex that normally produces ova.",
+          "meaning": "OMOP:8532"
+        },
+        {
+          "text": "UNKNOWN",
+          "description": "Not known, not observed, not recorded, or refused.",
+          "meaning": "OMOP:8552"
+        }
+      ]
+    },
+    {
+      "name": "CellularOrganismSpeciesEnum",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/CellularOrganismSpeciesEnum",
+      "description": "A constrained set of enumerative values containing the NCBITaxon values for cellular organisms.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "reachable_from": {
+        "source_ontology": "obo:ncbitaxon",
+        "source_nodes": [
+          "ncbitaxon:131567"
+        ],
+        "relationship_types": [
+          "rdfs:subClassOf"
+        ]
+      }
+    },
+    {
+      "name": "VitalStatusEnum",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/VitalStatusEnum",
+      "description": "A constrained set of enumerative values containing the OMOP values for vital status.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "permissible_values": [
+        {
+          "text": "ALIVE",
+          "description": "Showing characteristics of life; displaying signs of life. (NCIt)",
+          "meaning": "OMOP:4230556"
+        },
+        {
+          "text": "DEAD",
+          "description": "The cessation of life. (NCIt)",
+          "meaning": "OMOP:434489"
+        }
+      ]
+    },
+    {
+      "name": "VertebrateBreedEnum",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/VertebrateBreedEnum",
+      "description": "A constrained set of enumerative values containing the VBO values for vertebrate breeds.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "reachable_from": {
+        "source_ontology": "obo:vbo",
+        "source_nodes": [
+          "VBO:0400000"
+        ],
+        "relationship_types": [
+          "rdfs:subClassOf"
+        ]
+      }
+    },
+    {
+      "name": "VisitCategoryEnum",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/VisitCategoryEnum",
+      "description": "A constrained set of enumerative values containing the OMOP values for visit categories.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "permissible_values": [
+        {
+          "text": "INPATIENT",
+          "description": "Person visiting hospital, at a care stie, in bed, for duration of more than one day, with physicians and other Providers permanently available to deliver service around the clock",
+          "meaning": "OMOP:9201"
+        },
+        {
+          "text": "EMERGENCY_ROOM",
+          "description": "Person visiting dedicated healthcare institution for treating emergencies, at a Care Site, within one day, with physicians and Providers permanently available to deliver service around the clock",
+          "meaning": "OMOP:9203"
+        },
+        {
+          "text": "EMERGENCY_ROOM_AND_INPATIENT",
+          "description": "Person visiting ER followed by a subsequent Inpatient Visit, where Emergency department is part of hospital, and transition from the ER to other hospital departments is undefined",
+          "meaning": "OMOP:262"
+        },
+        {
+          "text": "NON_HOSPITAL_INSTITUTION",
+          "description": "Person visiting dedicated institution for reasons of poor health, at a Care Site, long-term or permanently, with no physician but possibly other Providers permanently available to deliver service around the clock",
+          "meaning": "OMOP:42898160"
+        },
+        {
+          "text": "OUTPATIENT",
+          "description": "Person visiting dedicated ambulatory healthcare institution, at a Care Site, within one day, without bed, with physicians or medical Providers delivering service during Visit",
+          "meaning": "OMOP:9202"
+        },
+        {
+          "text": "HOME",
+          "description": "Provider visiting Person, without a Care Site, within one day, delivering service",
+          "meaning": "OMOP:581476"
+        },
+        {
+          "text": "TELEHEALTH",
+          "description": "Patient engages with Provider through communication media",
+          "meaning": "OMOP:5083"
+        },
+        {
+          "text": "PHARMACY",
+          "description": "Person visiting pharmacy for dispensing of Drug, at a Care Site, within one day",
+          "meaning": "OMOP:581458"
+        },
+        {
+          "text": "LABORATORY",
+          "description": "Patient visiting dedicated institution, at a Care Site, within one day, for the purpose of a Measurement.",
+          "meaning": "OMOP:32036"
+        },
+        {
+          "text": "AMBULANCE",
+          "description": "Person using transportation service for the purpose of initiating one of the other Visits, without a Care Site, within one day, potentially with Providers accompanying the Visit and delivering service",
+          "meaning": "OMOP:581478"
+        },
+        {
+          "text": "CASE_MANAGEMENT",
+          "description": "Person interacting with healthcare system, without a Care Site, within a day, with no Providers involved, for administrative purposes",
+          "meaning": "OMOP:38004193"
+        }
+      ]
+    },
+    {
+      "name": "VisitProvenanceEnum",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/VisitProvenanceEnum",
+      "description": "A constrained set of enumerative values containing the OMOP values for visit provenance.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "permissible_values": [
+        {
+          "text": "CASE_REPORT_FORM",
+          "description": "Case Report Form",
+          "meaning": "OMOP:32809"
+        },
+        {
+          "text": "CLAIM",
+          "description": "Claim",
+          "meaning": "OMOP:32810"
+        },
+        {
+          "text": "CLAIM_AUTHORIZATION",
+          "description": "Claim authorization",
+          "meaning": "OMOP:32811"
+        },
+        {
+          "text": "CLAIM_DISCHARGE_RECORD",
+          "description": "Claim discharge record",
+          "meaning": "OMOP:32812"
+        },
+        {
+          "text": "CLAIM_ENROLMENT_RECORD",
+          "description": "Claim enrolment record",
+          "meaning": "OMOP:32813"
+        },
+        {
+          "text": "COST_RECORD",
+          "description": "Cost record",
+          "meaning": "OMOP:32814"
+        },
+        {
+          "text": "DEATH_CERTIFICATE",
+          "description": "Death Certificate",
+          "meaning": "OMOP:32815"
+        },
+        {
+          "text": "DENTAL_CLAIM",
+          "description": "Dental claim",
+          "meaning": "OMOP:32816"
+        },
+        {
+          "text": "EHR",
+          "description": "EHR",
+          "meaning": "OMOP:32817"
+        },
+        {
+          "text": "EHR_PATHOLOGY_REPORT",
+          "description": "EHR Pathology report",
+          "meaning": "OMOP:32835"
+        },
+        {
+          "text": "EHR_ADMINISTRATION_RECORD",
+          "description": "EHR administration record",
+          "meaning": "OMOP:32818"
+        },
+        {
+          "text": "EHR_ADMISSION_NOTE",
+          "description": "EHR admission note",
+          "meaning": "OMOP:32819"
+        },
+        {
+          "text": "EHR_ANCILLARY_REPORT",
+          "description": "EHR ancillary report",
+          "meaning": "OMOP:32820"
+        },
+        {
+          "text": "EHR_BILLING_RECORD",
+          "description": "EHR billing record",
+          "meaning": "OMOP:32821"
+        },
+        {
+          "text": "EHR_CHIEF_COMPLAINT",
+          "description": "EHR chief complaint",
+          "meaning": "OMOP:32822"
+        },
+        {
+          "text": "EHR_DISCHARGE_RECORD",
+          "description": "EHR discharge record",
+          "meaning": "OMOP:32823"
+        },
+        {
+          "text": "EHR_DISCHARGE_SUMMARY",
+          "description": "EHR discharge summary",
+          "meaning": "OMOP:32824"
+        },
+        {
+          "text": "EHR_DISPENSING_RECORD",
+          "description": "EHR dispensing record",
+          "meaning": "OMOP:32825"
+        },
+        {
+          "text": "EHR_EMERGENCY_ROOM_NOTE",
+          "description": "EHR emergency room note",
+          "meaning": "OMOP:32826"
+        },
+        {
+          "text": "EHR_ENCOUNTER_RECORD",
+          "description": "EHR encounter record",
+          "meaning": "OMOP:32827"
+        },
+        {
+          "text": "EHR_EPISODE_RECORD",
+          "description": "EHR episode record",
+          "meaning": "OMOP:32828"
+        },
+        {
+          "text": "EHR_INPATIENT_NOTE",
+          "description": "EHR inpatient note",
+          "meaning": "OMOP:32829"
+        },
+        {
+          "text": "EHR_MEDICATION_LIST",
+          "description": "EHR medication list",
+          "meaning": "OMOP:32830"
+        },
+        {
+          "text": "EHR_NOTE",
+          "description": "EHR note",
+          "meaning": "OMOP:32831"
+        },
+        {
+          "text": "EHR_NURSING_REPORT",
+          "description": "EHR nursing report",
+          "meaning": "OMOP:32832"
+        },
+        {
+          "text": "EHR_ORDER",
+          "description": "EHR order",
+          "meaning": "OMOP:32833"
+        },
+        {
+          "text": "EHR_OUTPATIENT_NOTE",
+          "description": "EHR outpatient note",
+          "meaning": "OMOP:32834"
+        },
+        {
+          "text": "EHR_PHYSICAL_EXAMINATION",
+          "description": "EHR physical examination",
+          "meaning": "OMOP:32836"
+        },
+        {
+          "text": "EHR_PLANNED_DISPENSING_RECORD",
+          "description": "EHR planned dispensing record",
+          "meaning": "OMOP:32837"
+        },
+        {
+          "text": "EHR_PRESCRIPTION",
+          "description": "EHR prescription",
+          "meaning": "OMOP:32838"
+        },
+        {
+          "text": "EHR_PRESCRIPTION_ISSUE_RECORD",
+          "description": "EHR prescription issue record",
+          "meaning": "OMOP:32839"
+        },
+        {
+          "text": "EHR_PROBLEM_LIST",
+          "description": "EHR problem list",
+          "meaning": "OMOP:32840"
+        },
+        {
+          "text": "EHR_RADIOLOGY_REPORT",
+          "description": "EHR radiology report",
+          "meaning": "OMOP:32841"
+        },
+        {
+          "text": "EHR_REFERRAL_RECORD",
+          "description": "EHR referral record",
+          "meaning": "OMOP:32842"
+        },
+        {
+          "text": "EXTERNAL_CDM_INSTANCE",
+          "description": "External CDM instance",
+          "meaning": "OMOP:32843"
+        },
+        {
+          "text": "FACILITY_CLAIM",
+          "description": "Facility claim",
+          "meaning": "OMOP:32844"
+        },
+        {
+          "text": "FACILITY_CLAIM_DETAIL",
+          "description": "Facility claim detail",
+          "meaning": "OMOP:32845"
+        },
+        {
+          "text": "FACILITY_CLAIM_HEADER",
+          "description": "Facility claim header",
+          "meaning": "OMOP:32846"
+        },
+        {
+          "text": "GEOGRAPHIC_ISOLATION_RECORD",
+          "description": "Geographic isolation record",
+          "meaning": "OMOP:32847"
+        },
+        {
+          "text": "GOVERNMENT_REPORT",
+          "description": "Government report",
+          "meaning": "OMOP:32848"
+        },
+        {
+          "text": "HEALTH_INFORMATION_EXCHANGE_RECORD",
+          "description": "Health Information Exchange record",
+          "meaning": "OMOP:32849"
+        },
+        {
+          "text": "HEALTH_RISK_ASSESSMENT",
+          "description": "Health Risk Assessment",
+          "meaning": "OMOP:32850"
+        },
+        {
+          "text": "HEALTHCARE_PROFESSIONAL_FILLED_SURVEY",
+          "description": "Healthcare professional filled survey",
+          "meaning": "OMOP:32851"
+        },
+        {
+          "text": "HOSPITAL_COST",
+          "description": "Hospital cost",
+          "meaning": "OMOP:32852"
+        },
+        {
+          "text": "INPATIENT_CLAIM",
+          "description": "Inpatient claim",
+          "meaning": "OMOP:32853"
+        },
+        {
+          "text": "INPATIENT_CLAIM_DETAIL",
+          "description": "Inpatient claim detail",
+          "meaning": "OMOP:32854"
+        },
+        {
+          "text": "INPATIENT_CLAIM_HEADER",
+          "description": "Inpatient claim header",
+          "meaning": "OMOP:32855"
+        },
+        {
+          "text": "LAB",
+          "description": "Lab",
+          "meaning": "OMOP:32856"
+        },
+        {
+          "text": "MAIL_ORDER_RECORD",
+          "description": "Mail order record",
+          "meaning": "OMOP:32857"
+        },
+        {
+          "text": "NLP",
+          "description": "NLP",
+          "meaning": "OMOP:32858"
+        },
+        {
+          "text": "OUTPATIENT_CLAIM",
+          "description": "Outpatient claim",
+          "meaning": "OMOP:32859"
+        },
+        {
+          "text": "OUTPATIENT_CLAIM_DETAIL",
+          "description": "Outpatient claim detail",
+          "meaning": "OMOP:32860"
+        },
+        {
+          "text": "OUTPATIENT_CLAIM_HEADER",
+          "description": "Outpatient claim header",
+          "meaning": "OMOP:32861"
+        },
+        {
+          "text": "PATIENT_FILLED_SURVEY",
+          "description": "Patient filled survey",
+          "meaning": "OMOP:32862"
+        },
+        {
+          "text": "PATIENT_OR_PAYER_PAID_RECORD",
+          "description": "Patient or payer paid record",
+          "meaning": "OMOP:32863"
+        },
+        {
+          "text": "PATIENT_REPORTED_COST",
+          "description": "Patient reported cost",
+          "meaning": "OMOP:32864"
+        },
+        {
+          "text": "PATIENT_SELF-REPORT",
+          "description": "Patient self-report",
+          "meaning": "OMOP:32865"
+        },
+        {
+          "text": "PATIENT_SELF-TESTED",
+          "description": "Patient self-tested",
+          "meaning": "OMOP:705183"
+        },
+        {
+          "text": "PAYER_SYSTEM_RECORD_(PAID_PREMIUM)",
+          "description": "Payer system record (paid premium)",
+          "meaning": "OMOP:32866"
+        },
+        {
+          "text": "PAYER_SYSTEM_RECORD_(PRIMARY_PAYER)",
+          "description": "Payer system record (primary payer)",
+          "meaning": "OMOP:32867"
+        },
+        {
+          "text": "PAYER_SYSTEM_RECORD_(SECONDARY_PAYER)",
+          "description": "Payer system record (secondary payer)",
+          "meaning": "OMOP:32868"
+        },
+        {
+          "text": "PHARMACY_CLAIM",
+          "description": "Pharmacy claim",
+          "meaning": "OMOP:32869"
+        },
+        {
+          "text": "POINT_OF_CARE/EXPRESS_LAB",
+          "description": "Point of care/express lab",
+          "meaning": "OMOP:703249"
+        },
+        {
+          "text": "PRE-QUALIFICATION_TIME_PERIOD",
+          "description": "Pre-qualification time period",
+          "meaning": "OMOP:32870"
+        },
+        {
+          "text": "PROFESSIONAL_CLAIM",
+          "description": "Professional claim",
+          "meaning": "OMOP:32871"
+        },
+        {
+          "text": "PROFESSIONAL_CLAIM_DETAIL",
+          "description": "Professional claim detail",
+          "meaning": "OMOP:32872"
+        },
+        {
+          "text": "PROFESSIONAL_CLAIM_HEADER",
+          "description": "Professional claim header",
+          "meaning": "OMOP:32873"
+        },
+        {
+          "text": "PROVIDER_CHARGE_LIST_PRICE",
+          "description": "Provider charge list price",
+          "meaning": "OMOP:32874"
+        },
+        {
+          "text": "PROVIDER_FINANCIAL_SYSTEM",
+          "description": "Provider financial system",
+          "meaning": "OMOP:32875"
+        },
+        {
+          "text": "PROVIDER_INCURRED_COST_RECORD",
+          "description": "Provider incurred cost record",
+          "meaning": "OMOP:32876"
+        },
+        {
+          "text": "RANDOMIZATION_RECORD",
+          "description": "Randomization record",
+          "meaning": "OMOP:32877"
+        },
+        {
+          "text": "REFERENCE_LAB",
+          "description": "Reference lab",
+          "meaning": "OMOP:32878"
+        },
+        {
+          "text": "REGISTRY",
+          "description": "Registry",
+          "meaning": "OMOP:32879"
+        },
+        {
+          "text": "STANDARD_ALGORITHM",
+          "description": "Standard algorithm",
+          "meaning": "OMOP:32880"
+        },
+        {
+          "text": "STANDARD_ALGORITHM_FROM_EHR",
+          "description": "Standard algorithm from EHR",
+          "meaning": "OMOP:32882"
+        },
+        {
+          "text": "STANDARD_ALGORITHM_FROM_CLAIMS",
+          "description": "Standard algorithm from claims",
+          "meaning": "OMOP:32881"
+        },
+        {
+          "text": "SURVEY",
+          "description": "Survey",
+          "meaning": "OMOP:32883"
+        },
+        {
+          "text": "US_SOCIAL_SECURITY_DEATH_MASTER_FILE",
+          "description": "US Social Security Death Master File",
+          "meaning": "OMOP:32885"
+        },
+        {
+          "text": "URGENT_LAB",
+          "description": "Urgent lab",
+          "meaning": "OMOP:32884"
+        },
+        {
+          "text": "VISION_CLAIM",
+          "description": "Vision claim",
+          "meaning": "OMOP:32886"
+        }
+      ]
+    },
+    {
+      "name": "MondoHumanDiseaseEnum",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/MondoHumanDiseaseEnum",
+      "description": "A constrained set of enumerative values containing the MONDO values for human diseases.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "reachable_from": {
+        "source_ontology": "obo:mondo",
+        "source_nodes": [
+          "MONDO:0700096"
+        ],
+        "relationship_types": [
+          "rdfs:subClassOf"
+        ]
+      }
+    },
+    {
+      "name": "HpoPhenotypicAbnormalityEnum",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/HpoPhenotypicAbnormalityEnum",
+      "description": "A constrained set of enumerative values containing the HPO values for phenotypic abnormalities.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "reachable_from": {
+        "source_ontology": "obo:hp",
+        "source_nodes": [
+          "HP:0000118"
+        ],
+        "relationship_types": [
+          "rdfs:subClassOf"
+        ]
+      }
+    },
+    {
+      "name": "ConditionConceptEnum",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/ConditionConceptEnum",
+      "description": "A constrained set of enumerative values containing both the MONDO values for human diseases and the HPO values for phenotypic abnormalities.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "inherits": [
+        "MondoHumanDiseaseEnum",
+        "HpoPhenotypicAbnormalityEnum"
+      ]
+    },
+    {
+      "name": "ConditionProvenanceEnum",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/ConditionProvenanceEnum",
+      "description": "A constrained set of enumerative values containing the OMOP values for visit provenance.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "permissible_values": [
+        {
+          "text": "EHR_BILLING_DIAGNOSIS",
+          "meaning": "OMOP:4822159"
+        },
+        {
+          "text": "EHR_CHIEF_COMPLAINT",
+          "meaning": "OMOP:4822124"
+        },
+        {
+          "text": "EHR_ENCOUNTER_DIAGNOSIS",
+          "meaning": "OMOP:4822160"
+        },
+        {
+          "text": "EHR_EPISODE_ENTRY",
+          "meaning": "OMOP:4822135"
+        },
+        {
+          "text": "EHR_PROBLEM_LIST_ENTRY",
+          "meaning": "OMOP:4822121"
+        },
+        {
+          "text": "FIRST_POSITION_CONDITION",
+          "meaning": "OMOP:4822128"
+        },
+        {
+          "text": "NLP_DERIVED",
+          "meaning": "OMOP:4822058"
+        },
+        {
+          "text": "OBSERVATION_RECORDED_FROM_EHR",
+          "meaning": "OMOP:4822126"
+        },
+        {
+          "text": "PATIENT_SELF-REPORTED_CONDITION",
+          "meaning": "OMOP:4822157"
+        },
+        {
+          "text": "PRIMARY_CONDITION",
+          "meaning": "OMOP:4822127"
+        },
+        {
+          "text": "REFERRAL_RECORD",
+          "meaning": "OMOP:4822125"
+        },
+        {
+          "text": "SECONDARY_CONDITION",
+          "meaning": "OMOP:4822129"
+        },
+        {
+          "text": "TUMOR_REGISTRY",
+          "meaning": "OMOP:4822266"
+        }
+      ]
+    }
+  ],
   "slots": [
     {
       "name": "comparator",
@@ -456,13 +1190,14 @@
       "definition_uri": "https://w3id.org/linkml/cmdr/id",
       "from_schema": "https://w3id.org/linkml/cmdr",
       "slot_uri": "https://w3id.org/linkml/cmdr/id",
-      "owner": "Subject",
+      "owner": "Entity",
       "domain_of": [
         "Investigation",
         "MaterialEntity",
         "Participation",
         "Process",
-        "Subject"
+        "Subject",
+        "Entity"
       ],
       "range": "string",
       "@type": "SlotDefinition"
@@ -625,6 +1360,1075 @@
         "MaterialEntity"
       ],
       "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "identity",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/identity",
+      "description": "A 'business' identifier or accession number for the entity, typically as provided by an external system or authority, that are globally unique and persist across implementing systems. Also, since these identifiers are created outside the information system through a specific business process, the Identifier type has additional attributes to capture this additional metadata so the actual identifier values are qualified by the context that created those values. This additional context allows \"identifier\" instances to be transmitted as business data across systems while still being able to trace them back to the system of origin.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "mappings": [
+        "http://schema.org/identifier"
+      ],
+      "slot_uri": "http://schema.org/identifier",
+      "owner": "Condition",
+      "domain_of": [
+        "Person",
+        "Participant",
+        "ResearchStudy",
+        "Organization",
+        "Questionnaire",
+        "QuestionnaireItem",
+        "Condition"
+      ],
+      "range": "Identifier",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "associated_person",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/associated_person",
+      "description": "A reference to the Person that is associated with this record.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/associated_person",
+      "owner": "Participant",
+      "domain_of": [
+        "Participant"
+      ],
+      "range": "Person",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "value",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/value",
+      "description": "A general slot to hold a value.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/value",
+      "owner": "QuestionnaireResponseValue",
+      "domain_of": [
+        "QuestionnaireResponseValue"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "person__species",
+      "description": "The scientific binomial name for the species of the Person (e.g. Homo sapiens, Mus musculus, etc.). Values should be derived from the NCBI organismal taxonomy (http://purl.obolibrary.org/obo/ncbitaxon.owl).",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/species",
+      "alias": "species",
+      "owner": "Person",
+      "domain_of": [
+        "Person"
+      ],
+      "range": "CellularOrganismSpeciesEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "person__breed",
+      "description": "A label given to a group of animals homogeneous in appearance and other characteristics that distinguish it from other animals of the same species. Values should be derived from the Vertebrate Breed Ontology (http://purl.obolibrary.org/obo/vbo.owl).",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/breed",
+      "alias": "breed",
+      "owner": "Person",
+      "domain_of": [
+        "Person"
+      ],
+      "range": "VertebrateBreedEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "person__sex",
+      "description": "The biologic character or quality that distinguishes male and female from one another as expressed by analysis of the person's gonadal, morphologic (internal and external), chromosomal, and hormonal characteristics.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/sex",
+      "alias": "sex",
+      "owner": "Person",
+      "domain_of": [
+        "Person"
+      ],
+      "range": "SexEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "person__ethnicity",
+      "description": "An individual's self-described social and cultural grouping, specifically whether an individual describes themselves as Hispanic or Latino. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/ethnicity",
+      "alias": "ethnicity",
+      "owner": "Person",
+      "domain_of": [
+        "Person"
+      ],
+      "range": "EthnicityEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "person__race",
+      "description": "An arbitrary classification of a taxonomic group that is a division of a species. It usually arises as a consequence of geographical isolation within a species and is characterized by shared heredity, physical attributes and behavior, and in the case of humans, by common history, nationality, or geographic distribution. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/race",
+      "alias": "race",
+      "owner": "Person",
+      "domain_of": [
+        "Person"
+      ],
+      "range": "RaceEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "person__year_of_birth",
+      "description": "Numeric value to represent the calendar year in which an individual was born.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/year_of_birth",
+      "alias": "year_of_birth",
+      "owner": "Person",
+      "domain_of": [
+        "Person"
+      ],
+      "range": "integer",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "person__vital_status",
+      "description": "Coded value indicating the state or condition of being living or deceased; also includes the case where the vital status is unknown.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/vital_status",
+      "alias": "vital_status",
+      "owner": "Person",
+      "domain_of": [
+        "Person"
+      ],
+      "range": "VitalStatusEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "person__age_at_death",
+      "description": "The age of an individual at the time of death, expressed in days since birth",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/age_at_death",
+      "alias": "age_at_death",
+      "owner": "Person",
+      "domain_of": [
+        "Person"
+      ],
+      "range": "integer",
+      "unit": {
+        "ucum_code": "d",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "person__year_of_death",
+      "description": "Numeric value to represent the calendar year in which an individual died.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/year_of_death",
+      "alias": "year_of_death",
+      "owner": "Person",
+      "domain_of": [
+        "Person"
+      ],
+      "range": "integer",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "person__cause_of_death",
+      "description": "Coded value indicating the circumstance or condition that results in the death of the individual.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/cause_of_death",
+      "alias": "cause_of_death",
+      "owner": "Person",
+      "domain_of": [
+        "Person"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "participant__description",
+      "description": "A free text field to capture additional info/explanation about the research subject.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/description",
+      "alias": "description",
+      "owner": "Participant",
+      "domain_of": [
+        "Participant"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "participant__member_of_research_study",
+      "description": "A reference to the Study(s) of which this Participant is a member",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/member_of_research_study",
+      "alias": "member_of_research_study",
+      "owner": "Participant",
+      "domain_of": [
+        "Participant"
+      ],
+      "range": "ResearchStudy",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "participant__age_at_enrollment",
+      "description": "The age in days when the Participant enrolled on the ResearchStudy",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/age_at_enrollment",
+      "alias": "age_at_enrollment",
+      "owner": "Participant",
+      "domain_of": [
+        "Participant"
+      ],
+      "range": "integer",
+      "unit": {
+        "ucum_code": "d",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "participant__index_timepoint",
+      "description": "The text term used to describe the reference or anchor date used for date obfuscation, where a single date is obscured by creating one or more date ranges in relation to this date.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/index_timepoint",
+      "alias": "index_timepoint",
+      "owner": "Participant",
+      "domain_of": [
+        "Participant"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "participant__originating_site",
+      "description": "The Organization through which a subject was enrolled on a ResearchStudy.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/originating_site",
+      "alias": "originating_site",
+      "owner": "Participant",
+      "domain_of": [
+        "Participant"
+      ],
+      "range": "Organization",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "participant__study_arm",
+      "description": "The arm(s) of the study on which the Participant is enrolled",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/study_arm",
+      "alias": "study_arm",
+      "owner": "Participant",
+      "domain_of": [
+        "Participant"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "researchStudy__name",
+      "description": "An unabridged name of a research program, project, or study.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/name",
+      "alias": "name",
+      "owner": "ResearchStudy",
+      "domain_of": [
+        "ResearchStudy"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "researchStudy__name_shortened",
+      "description": "An abbreviated name of a research program, project, or study.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/name_shortened",
+      "alias": "name_shortened",
+      "owner": "ResearchStudy",
+      "domain_of": [
+        "ResearchStudy"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "researchStudy__description",
+      "description": "An unabridged description of a research program, project, or study.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/description",
+      "alias": "description",
+      "owner": "ResearchStudy",
+      "domain_of": [
+        "ResearchStudy"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "researchStudy__description_shortened",
+      "description": "An abbreviated description of a research program, project, or study.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/description_shortened",
+      "alias": "description_shortened",
+      "owner": "ResearchStudy",
+      "domain_of": [
+        "ResearchStudy"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "researchStudy__sponsor",
+      "description": "An entity that is responsible for the initiation, management, and/or financing of a research project.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/sponsor",
+      "alias": "sponsor",
+      "owner": "ResearchStudy",
+      "domain_of": [
+        "ResearchStudy"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "researchStudy__date_started",
+      "description": "The date when the research project began.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/date_started",
+      "alias": "date_started",
+      "owner": "ResearchStudy",
+      "domain_of": [
+        "ResearchStudy"
+      ],
+      "range": "TimePoint",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "researchStudy__date_ended",
+      "description": "The date when the research project ended.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/date_ended",
+      "alias": "date_ended",
+      "owner": "ResearchStudy",
+      "domain_of": [
+        "ResearchStudy"
+      ],
+      "range": "TimePoint",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "researchStudy__url",
+      "description": "A URL address for a resource that provides information about a research program, project, or study.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/url",
+      "alias": "url",
+      "owner": "ResearchStudy",
+      "domain_of": [
+        "ResearchStudy"
+      ],
+      "range": "uriorcurie",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "researchStudy__part_of",
+      "description": "A reference to a parent ResearchStudy (e.g. a link to the overarching CPTAC ResearchStudy from a substudy of CPTAC)",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/part_of",
+      "alias": "part_of",
+      "owner": "ResearchStudy",
+      "domain_of": [
+        "ResearchStudy"
+      ],
+      "range": "ResearchStudy",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "researchStudy__research_project_type",
+      "description": "The 'type' of ResearchStudy represented (e.g. a broad-based Program like 'CPTAC' or a more focused Project like 'CPTAC PDAC Discovery Study')",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/research_project_type",
+      "alias": "research_project_type",
+      "owner": "ResearchStudy",
+      "domain_of": [
+        "ResearchStudy"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "researchStudy__associated_timepoint",
+      "description": "A collection of timepoint observations that are relevant to research projects (e.g. date of IACUC approval, date of IRB approval, date of embargo end, etc.)",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/associated_timepoint",
+      "alias": "associated_timepoint",
+      "owner": "ResearchStudy",
+      "domain_of": [
+        "ResearchStudy"
+      ],
+      "range": "TimePoint",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "researchStudy__principal_investigator",
+      "description": "The investigator or investigators leading a project.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/principal_investigator",
+      "alias": "principal_investigator",
+      "owner": "ResearchStudy",
+      "domain_of": [
+        "ResearchStudy"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "researchStudy__consent_code",
+      "description": "Data Use Restrictions that are used to indicate permissions/restrictions for datasets and/or materials, and relates to the purposes for which datasets and/or material might be removed, stored or used. Based on the Data Use Ontology : see http://www.obofoundry.org/ontology/duo.html",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/consent_code",
+      "alias": "consent_code",
+      "owner": "ResearchStudy",
+      "domain_of": [
+        "ResearchStudy"
+      ],
+      "range": "DataUseEnum",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "visit__visit_category",
+      "description": "A value representing the kind (or category) of visit, like inpatient or outpatient.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/visit_category",
+      "alias": "visit_category",
+      "owner": "Visit",
+      "domain_of": [
+        "Visit"
+      ],
+      "range": "VisitCategoryEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "visit__age_at_visit_start",
+      "description": "The age of the Participant (in days) at the start of the Visit.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/age_at_visit_start",
+      "alias": "age_at_visit_start",
+      "owner": "Visit",
+      "domain_of": [
+        "Visit"
+      ],
+      "range": "integer",
+      "unit": {
+        "ucum_code": "d",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "visit__age_at_visit_end",
+      "description": "The age of the Participant (in days) at the end of the Visit.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/age_at_visit_end",
+      "alias": "age_at_visit_end",
+      "owner": "Visit",
+      "domain_of": [
+        "Visit"
+      ],
+      "range": "integer",
+      "unit": {
+        "ucum_code": "d",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "visit__visit_provenance",
+      "description": "A value representing the provenance of the visit record, or where the record comes from.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/visit_provenance",
+      "alias": "visit_provenance",
+      "owner": "Visit",
+      "domain_of": [
+        "Visit"
+      ],
+      "range": "VisitProvenanceEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "visit__associated_participant",
+      "description": "A reference to the Participant for whom this Visit occurred.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/associated_participant",
+      "alias": "associated_participant",
+      "owner": "Visit",
+      "domain_of": [
+        "Visit"
+      ],
+      "range": "Participant",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "organization__name",
+      "description": "The full legal name by which the organization is known (e.g. 'National Cancer Institute')",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/name",
+      "alias": "name",
+      "owner": "Organization",
+      "domain_of": [
+        "Organization"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "organization__alias",
+      "description": "A secondary name for the organization such as a short name or abbreviation (e.g. 'NCI')",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/alias",
+      "alias": "alias",
+      "owner": "Organization",
+      "domain_of": [
+        "Organization"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "organization__organization_type",
+      "description": "The type of the organization (e.g. 'Cancer Genome Characterization Center')",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/organization_type",
+      "alias": "organization_type",
+      "owner": "Organization",
+      "domain_of": [
+        "Organization"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "timePoint__date_time",
+      "description": "An explicitly specified timepoint described in terms of a date and optionally a time on that date.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/date_time",
+      "alias": "date_time",
+      "owner": "TimePoint",
+      "domain_of": [
+        "TimePoint"
+      ],
+      "range": "datetime",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "timePoint__index_time_point",
+      "description": "Another TimePoint from which this point is offset.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/index_time_point",
+      "alias": "index_time_point",
+      "owner": "TimePoint",
+      "domain_of": [
+        "TimePoint"
+      ],
+      "range": "TimePoint",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "timePoint__offset_from_index",
+      "description": "A quantity of time that, together with the index date or event, can be used to derive a specific timepoint.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/offset_from_index",
+      "alias": "offset_from_index",
+      "owner": "TimePoint",
+      "domain_of": [
+        "TimePoint"
+      ],
+      "range": "integer",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "timePoint__event_type",
+      "description": "An event that occurred at the point in time specified by this TimePoint.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/event_type",
+      "alias": "event_type",
+      "owner": "TimePoint",
+      "domain_of": [
+        "TimePoint"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "timePeriod__period_start",
+      "description": "When a period of time started.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/period_start",
+      "alias": "period_start",
+      "owner": "TimePeriod",
+      "domain_of": [
+        "TimePeriod"
+      ],
+      "range": "TimePoint",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "timePeriod__period_end",
+      "description": "When a period of time ended.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/period_end",
+      "alias": "period_end",
+      "owner": "TimePeriod",
+      "domain_of": [
+        "TimePeriod"
+      ],
+      "range": "TimePoint",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "identifier__value",
+      "description": "The value of the identifier, as defined by the system.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/value",
+      "alias": "value",
+      "owner": "Identifier",
+      "domain_of": [
+        "Identifier"
+      ],
+      "range": "string",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "identifier__system",
+      "description": "The system or namespace that defines the identifier.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/system",
+      "alias": "system",
+      "owner": "Identifier",
+      "domain_of": [
+        "Identifier"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "researchStudyCollection__entries",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/entries",
+      "alias": "entries",
+      "owner": "ResearchStudyCollection",
+      "domain_of": [
+        "ResearchStudyCollection"
+      ],
+      "range": "ResearchStudy",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaire__name",
+      "description": "Name for this Questionnaire (computer friendly)",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/name",
+      "alias": "name",
+      "owner": "Questionnaire",
+      "domain_of": [
+        "Questionnaire"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaire__title",
+      "description": "Name for this Questionnaire (human friendly)",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/title",
+      "alias": "title",
+      "owner": "Questionnaire",
+      "domain_of": [
+        "Questionnaire"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaire__description",
+      "description": "Natural language description of the Questionnaire",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/description",
+      "alias": "description",
+      "owner": "Questionnaire",
+      "domain_of": [
+        "Questionnaire"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaire__url",
+      "description": "Canonical identifier for this Questionnaire, represented as an absolute URI (globally unique)",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/url",
+      "alias": "url",
+      "owner": "Questionnaire",
+      "domain_of": [
+        "Questionnaire"
+      ],
+      "range": "uriorcurie",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaire__version",
+      "description": "The identifier that is used to identify this version of the questionnaire when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the questionnaire author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/version",
+      "alias": "version",
+      "owner": "Questionnaire",
+      "domain_of": [
+        "Questionnaire"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaire__publisher",
+      "description": "Name of the publisher/steward (organization or individual) of this Questionnaire",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/publisher",
+      "alias": "publisher",
+      "owner": "Questionnaire",
+      "domain_of": [
+        "Questionnaire"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaire__copyright",
+      "description": "Textual description of any use and/or publishing restrictions",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/copyright",
+      "alias": "copyright",
+      "owner": "Questionnaire",
+      "domain_of": [
+        "Questionnaire"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaire__copyright_label",
+      "description": "Copyright holder and year(s)",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/copyright_label",
+      "alias": "copyright_label",
+      "owner": "Questionnaire",
+      "domain_of": [
+        "Questionnaire"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaire__language",
+      "description": "The language(s) in which questions are presented.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/language",
+      "alias": "language",
+      "owner": "Questionnaire",
+      "domain_of": [
+        "Questionnaire"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaire__items",
+      "description": "A collection of QuestionnaireItem objects which encapsulate the question being asked.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/items",
+      "alias": "items",
+      "owner": "Questionnaire",
+      "domain_of": [
+        "Questionnaire"
+      ],
+      "range": "QuestionnaireItem",
+      "required": true,
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaireItem__text",
+      "description": "Name for group or question text",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/text",
+      "alias": "text",
+      "owner": "QuestionnaireItem",
+      "domain_of": [
+        "QuestionnaireItem"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaireItem__code",
+      "description": "Corresponding concept for this item in a terminology",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/code",
+      "alias": "code",
+      "owner": "QuestionnaireItem",
+      "domain_of": [
+        "QuestionnaireItem"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaireItem__part_of",
+      "description": "A reference to a parent QuestionnaireItem.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/part_of",
+      "alias": "part_of",
+      "owner": "QuestionnaireItem",
+      "domain_of": [
+        "QuestionnaireItem"
+      ],
+      "range": "QuestionnaireItem",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaireResponse__age_at_response",
+      "description": "The age (in days) of the Participant when the QuestionnaireResponse was captured.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/age_at_response",
+      "alias": "age_at_response",
+      "owner": "QuestionnaireResponse",
+      "domain_of": [
+        "QuestionnaireResponse"
+      ],
+      "range": "integer",
+      "unit": {
+        "ucum_code": "d",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaireResponse__items",
+      "description": "A collection of QuestionnaireResponseItem objects which encapsulate the question being asked and the response.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/items",
+      "alias": "items",
+      "owner": "QuestionnaireResponse",
+      "domain_of": [
+        "QuestionnaireResponse"
+      ],
+      "range": "QuestionnaireResponseItem",
+      "required": true,
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaireResponse__associated_visit",
+      "description": "A reference to the Visit during which this QuestionnaireResponse was captured.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/associated_visit",
+      "alias": "associated_visit",
+      "owner": "QuestionnaireResponse",
+      "domain_of": [
+        "QuestionnaireResponse"
+      ],
+      "range": "Visit",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaireResponseItem__has_questionnaire_item",
+      "description": "A reference to the QuestionnaireItem that this QuestionnaireResponseItem responds to.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/has_questionnaire_item",
+      "alias": "has_questionnaire_item",
+      "owner": "QuestionnaireResponseItem",
+      "domain_of": [
+        "QuestionnaireResponseItem"
+      ],
+      "range": "QuestionnaireItem",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaireResponseItem__text",
+      "description": "Name for group or question text",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/text",
+      "alias": "text",
+      "owner": "QuestionnaireResponseItem",
+      "domain_of": [
+        "QuestionnaireResponseItem"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaireResponseItem__response_value",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/response_value",
+      "alias": "response_value",
+      "owner": "QuestionnaireResponseItem",
+      "domain_of": [
+        "QuestionnaireResponseItem"
+      ],
+      "range": "QuestionnaireResponseValue",
+      "required": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaireResponseValue__type",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/type",
+      "designates_type": true,
+      "alias": "type",
+      "owner": "QuestionnaireResponseValue",
+      "domain_of": [
+        "QuestionnaireResponseValue"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "questionnaireResponseValue__name",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/name",
+      "alias": "name",
+      "owner": "QuestionnaireResponseValue",
+      "domain_of": [
+        "QuestionnaireResponseValue"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "condition__condition_concept",
+      "description": "The coded value for the presence of a disease or medical condition stated as a diagnosis, a sign or a symptom, coded to the Human Phenotype Ontology or MONDO.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/condition_concept",
+      "alias": "condition_concept",
+      "owner": "Condition",
+      "domain_of": [
+        "Condition"
+      ],
+      "range": "ConditionConceptEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "condition__age_at_condition_start",
+      "description": "The Participant's age (expressed in days) when the condition was first recorded.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/age_at_condition_start",
+      "alias": "age_at_condition_start",
+      "owner": "Condition",
+      "domain_of": [
+        "Condition"
+      ],
+      "range": "integer",
+      "unit": {
+        "ucum_code": "d",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "condition__age_at_condition_end",
+      "description": "The Participant's age (expressed in days) when the condition was recorded as having been resolved.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/age_at_condition_end",
+      "alias": "age_at_condition_end",
+      "owner": "Condition",
+      "domain_of": [
+        "Condition"
+      ],
+      "range": "integer",
+      "unit": {
+        "ucum_code": "d",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "condition__condition_provenance",
+      "description": "A value representing the provenance of the Condition record",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/condition_provenance",
+      "alias": "condition_provenance",
+      "owner": "Condition",
+      "domain_of": [
+        "Condition"
+      ],
+      "range": "ConditionProvenanceEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "condition__relationship_to_participant",
+      "description": "A value indicating the relationship between the Participant to which the Condition is attributed and the individual who had the reported Condition.  If the Condition is affecting the participant themselves, then 'Self' is the appropriate relationship.  If the Condition is affecting a family member (e.g. a parent of the Participant) then an appropriate relationship should be provided (e.g. 'Parent')",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/relationship_to_participant",
+      "alias": "relationship_to_participant",
+      "owner": "Condition",
+      "domain_of": [
+        "Condition"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "condition__associated_participant",
+      "description": "A reference to the Participant to which the Condition is attributed.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/associated_participant",
+      "alias": "associated_participant",
+      "owner": "Condition",
+      "domain_of": [
+        "Condition"
+      ],
+      "range": "Participant",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "condition__associated_visit",
+      "description": "A reference to the Visit during which this QuestionnaireResponse was captured.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/associated_visit",
+      "alias": "associated_visit",
+      "owner": "Condition",
+      "domain_of": [
+        "Condition"
+      ],
+      "range": "Visit",
+      "inlined": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1143,6 +2947,63 @@
       "range": "uriorcurie",
       "required": true,
       "@type": "SlotDefinition"
+    },
+    {
+      "name": "QuestionnaireResponseValueDecimal_value",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/value",
+      "description": "A general slot to hold a value.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "is_a": "value",
+      "domain": "QuestionnaireResponseValueDecimal",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/value",
+      "alias": "value",
+      "owner": "QuestionnaireResponseValueDecimal",
+      "domain_of": [
+        "QuestionnaireResponseValueDecimal"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "value",
+      "range": "decimal",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "QuestionnaireResponseValueBoolean_value",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/value",
+      "description": "A general slot to hold a value.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "is_a": "value",
+      "domain": "QuestionnaireResponseValueBoolean",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/value",
+      "alias": "value",
+      "owner": "QuestionnaireResponseValueBoolean",
+      "domain_of": [
+        "QuestionnaireResponseValueBoolean"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "value",
+      "range": "boolean",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "QuestionnaireResponseValueString_value",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/value",
+      "description": "A general slot to hold a value.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "is_a": "value",
+      "domain": "QuestionnaireResponseValueString",
+      "slot_uri": "https://w3id.org/nhlbidatastage/bdchm/value",
+      "alias": "value",
+      "owner": "QuestionnaireResponseValueString",
+      "domain_of": [
+        "QuestionnaireResponseValueString"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "value",
+      "range": "string",
+      "required": true,
+      "@type": "SlotDefinition"
     }
   ],
   "classes": [
@@ -1338,17 +3199,860 @@
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml/cmdr/Subject",
       "@type": "ClassDefinition"
+    },
+    {
+      "name": "Entity",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/Entity",
+      "description": "Any resource that has its own identifier",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "mappings": [
+        "schema:Thing"
+      ],
+      "abstract": true,
+      "slots": [
+        "id"
+      ],
+      "slot_usage": {},
+      "class_uri": "http://schema.org/Thing",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Person",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/Person",
+      "description": "Demographics and other administrative information about an individual or animal receiving care or other health-related services.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "is_a": "Entity",
+      "slots": [
+        "id",
+        "identity",
+        "person__species",
+        "person__breed",
+        "person__sex",
+        "person__ethnicity",
+        "person__race",
+        "person__year_of_birth",
+        "person__vital_status",
+        "person__age_at_death",
+        "person__year_of_death",
+        "person__cause_of_death"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "species",
+          "description": "The scientific binomial name for the species of the Person (e.g. Homo sapiens, Mus musculus, etc.). Values should be derived from the NCBI organismal taxonomy (http://purl.obolibrary.org/obo/ncbitaxon.owl).",
+          "range": "CellularOrganismSpeciesEnum",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "breed",
+          "description": "A label given to a group of animals homogeneous in appearance and other characteristics that distinguish it from other animals of the same species. Values should be derived from the Vertebrate Breed Ontology (http://purl.obolibrary.org/obo/vbo.owl).",
+          "range": "VertebrateBreedEnum",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "sex",
+          "description": "The biologic character or quality that distinguishes male and female from one another as expressed by analysis of the person's gonadal, morphologic (internal and external), chromosomal, and hormonal characteristics.",
+          "range": "SexEnum",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "ethnicity",
+          "description": "An individual's self-described social and cultural grouping, specifically whether an individual describes themselves as Hispanic or Latino. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau",
+          "range": "EthnicityEnum",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "race",
+          "description": "An arbitrary classification of a taxonomic group that is a division of a species. It usually arises as a consequence of geographical isolation within a species and is characterized by shared heredity, physical attributes and behavior, and in the case of humans, by common history, nationality, or geographic distribution. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau.",
+          "range": "RaceEnum",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "year_of_birth",
+          "description": "Numeric value to represent the calendar year in which an individual was born.",
+          "range": "integer",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "vital_status",
+          "description": "Coded value indicating the state or condition of being living or deceased; also includes the case where the vital status is unknown.",
+          "range": "VitalStatusEnum",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "age_at_death",
+          "description": "The age of an individual at the time of death, expressed in days since birth",
+          "range": "integer",
+          "unit": {
+            "ucum_code": "d",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "year_of_death",
+          "description": "Numeric value to represent the calendar year in which an individual died.",
+          "range": "integer",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "cause_of_death",
+          "description": "Coded value indicating the circumstance or condition that results in the death of the individual.",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/Person",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Participant",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/Participant",
+      "description": "A Participant is the entity of interest in a research study, typically a human being or an animal, but can also be a device, group of humans or animals, or a tissue sample. Human research subjects are usually not traceable to a particular person to protect the subject\u2019s privacy.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "is_a": "Entity",
+      "slots": [
+        "id",
+        "associated_person",
+        "identity",
+        "participant__description",
+        "participant__member_of_research_study",
+        "participant__age_at_enrollment",
+        "participant__index_timepoint",
+        "participant__originating_site",
+        "participant__study_arm"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "description",
+          "description": "A free text field to capture additional info/explanation about the research subject.",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "member_of_research_study",
+          "description": "A reference to the Study(s) of which this Participant is a member",
+          "range": "ResearchStudy",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "age_at_enrollment",
+          "description": "The age in days when the Participant enrolled on the ResearchStudy",
+          "range": "integer",
+          "unit": {
+            "ucum_code": "d",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "index_timepoint",
+          "description": "The text term used to describe the reference or anchor date used for date obfuscation, where a single date is obscured by creating one or more date ranges in relation to this date.",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "originating_site",
+          "description": "The Organization through which a subject was enrolled on a ResearchStudy.",
+          "range": "Organization",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "study_arm",
+          "description": "The arm(s) of the study on which the Participant is enrolled",
+          "range": "string",
+          "multivalued": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/Participant",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ResearchStudy",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/ResearchStudy",
+      "description": "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge. This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques. A ResearchStudy involves the gathering of information about human or animal subjects.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "is_a": "Entity",
+      "slots": [
+        "id",
+        "identity",
+        "researchStudy__name",
+        "researchStudy__name_shortened",
+        "researchStudy__description",
+        "researchStudy__description_shortened",
+        "researchStudy__sponsor",
+        "researchStudy__date_started",
+        "researchStudy__date_ended",
+        "researchStudy__url",
+        "researchStudy__part_of",
+        "researchStudy__research_project_type",
+        "researchStudy__associated_timepoint",
+        "researchStudy__principal_investigator",
+        "researchStudy__consent_code"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "name",
+          "description": "An unabridged name of a research program, project, or study.",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "name_shortened",
+          "description": "An abbreviated name of a research program, project, or study.",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "description",
+          "description": "An unabridged description of a research program, project, or study.",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "description_shortened",
+          "description": "An abbreviated description of a research program, project, or study.",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "sponsor",
+          "description": "An entity that is responsible for the initiation, management, and/or financing of a research project.",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "date_started",
+          "description": "The date when the research project began.",
+          "range": "TimePoint",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "date_ended",
+          "description": "The date when the research project ended.",
+          "range": "TimePoint",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "url",
+          "description": "A URL address for a resource that provides information about a research program, project, or study.",
+          "range": "uriorcurie",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "part_of",
+          "description": "A reference to a parent ResearchStudy (e.g. a link to the overarching CPTAC ResearchStudy from a substudy of CPTAC)",
+          "range": "ResearchStudy",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "research_project_type",
+          "description": "The 'type' of ResearchStudy represented (e.g. a broad-based Program like 'CPTAC' or a more focused Project like 'CPTAC PDAC Discovery Study')",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "associated_timepoint",
+          "description": "A collection of timepoint observations that are relevant to research projects (e.g. date of IACUC approval, date of IRB approval, date of embargo end, etc.)",
+          "range": "TimePoint",
+          "multivalued": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "principal_investigator",
+          "description": "The investigator or investigators leading a project.",
+          "range": "string",
+          "multivalued": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "consent_code",
+          "description": "Data Use Restrictions that are used to indicate permissions/restrictions for datasets and/or materials, and relates to the purposes for which datasets and/or material might be removed, stored or used. Based on the Data Use Ontology : see http://www.obofoundry.org/ontology/duo.html",
+          "range": "DataUseEnum",
+          "multivalued": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/ResearchStudy",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Visit",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/Visit",
+      "description": "Events where Persons engage with the healthcare system for a duration of time. They are often also called \u201cEncounters\u201d. Visits are defined by a configuration of circumstances under which they occur, such as (i) whether the patient comes to a healthcare institution, the other way around, or the interaction is remote, (ii) whether and what kind of trained medical staff is delivering the service during the Visit, and (iii) whether the Visit is transient or for a longer period involving a stay in bed. (OMOP)",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "is_a": "Entity",
+      "slots": [
+        "id",
+        "visit__visit_category",
+        "visit__age_at_visit_start",
+        "visit__age_at_visit_end",
+        "visit__visit_provenance",
+        "visit__associated_participant"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "visit_category",
+          "description": "A value representing the kind (or category) of visit, like inpatient or outpatient.",
+          "range": "VisitCategoryEnum",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "age_at_visit_start",
+          "description": "The age of the Participant (in days) at the start of the Visit.",
+          "range": "integer",
+          "unit": {
+            "ucum_code": "d",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "age_at_visit_end",
+          "description": "The age of the Participant (in days) at the end of the Visit.",
+          "range": "integer",
+          "unit": {
+            "ucum_code": "d",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "visit_provenance",
+          "description": "A value representing the provenance of the visit record, or where the record comes from.",
+          "range": "VisitProvenanceEnum",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "associated_participant",
+          "description": "A reference to the Participant for whom this Visit occurred.",
+          "range": "Participant",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/Visit",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Organization",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/Organization",
+      "description": "A grouping of people or organizations with a common purpose such as a data coordinating center, an university, or an institute within a university.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "is_a": "Entity",
+      "slots": [
+        "id",
+        "identity",
+        "organization__name",
+        "organization__alias",
+        "organization__organization_type"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "name",
+          "description": "The full legal name by which the organization is known (e.g. 'National Cancer Institute')",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "alias",
+          "description": "A secondary name for the organization such as a short name or abbreviation (e.g. 'NCI')",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "organization_type",
+          "description": "The type of the organization (e.g. 'Cancer Genome Characterization Center')",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/Organization",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "TimePoint",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/TimePoint",
+      "description": "A structured representation of a single point in time that allows direct/explicit declaration as a dateTime, specification in terms of offset from a defined index, or description of an event type as a proxy for the time point when it occurred.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "is_a": "Entity",
+      "slots": [
+        "id",
+        "timePoint__date_time",
+        "timePoint__index_time_point",
+        "timePoint__offset_from_index",
+        "timePoint__event_type"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "date_time",
+          "description": "An explicitly specified timepoint described in terms of a date and optionally a time on that date.",
+          "range": "datetime",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "index_time_point",
+          "description": "Another TimePoint from which this point is offset.",
+          "range": "TimePoint",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "offset_from_index",
+          "description": "A quantity of time that, together with the index date or event, can be used to derive a specific timepoint.",
+          "range": "integer",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "event_type",
+          "description": "An event that occurred at the point in time specified by this TimePoint.",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/TimePoint",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "TimePeriod",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/TimePeriod",
+      "description": "A period of time between a start and end time point.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slots": [
+        "timePeriod__period_start",
+        "timePeriod__period_end"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "period_start",
+          "description": "When a period of time started.",
+          "range": "TimePoint",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "period_end",
+          "description": "When a period of time ended.",
+          "range": "TimePoint",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/TimePeriod",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Identifier",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/Identifier",
+      "description": "An Identifier is associated with a unique object or entity within a given system.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slots": [
+        "identifier__value",
+        "identifier__system"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "value",
+          "description": "The value of the identifier, as defined by the system.",
+          "range": "string",
+          "required": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "system",
+          "description": "The system or namespace that defines the identifier.",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/Identifier",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ResearchStudyCollection",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/ResearchStudyCollection",
+      "description": "A holder for ResearchStudy objects",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slots": [
+        "researchStudyCollection__entries"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "entries",
+          "range": "ResearchStudy",
+          "multivalued": true,
+          "inlined": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/ResearchStudyCollection",
+      "tree_root": true,
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Questionnaire",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/Questionnaire",
+      "description": "A Questionnaire is an organized collection of questions intended to solicit information from patients, providers or other individuals involved in the healthcare domain. They may be simple flat lists of questions or can be hierarchically organized in groups and sub-groups, each containing questions. The Questionnaire defines the questions to be asked, how they are ordered and grouped, any intervening instructional text and what the constraints are on the allowed answers. The results of a Questionnaire can be communicated using the QuestionnaireResponse. (FHIR)",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "is_a": "Entity",
+      "slots": [
+        "id",
+        "identity",
+        "questionnaire__name",
+        "questionnaire__title",
+        "questionnaire__description",
+        "questionnaire__url",
+        "questionnaire__version",
+        "questionnaire__publisher",
+        "questionnaire__copyright",
+        "questionnaire__copyright_label",
+        "questionnaire__language",
+        "questionnaire__items"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "name",
+          "description": "Name for this Questionnaire (computer friendly)",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "title",
+          "description": "Name for this Questionnaire (human friendly)",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "description",
+          "description": "Natural language description of the Questionnaire",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "url",
+          "description": "Canonical identifier for this Questionnaire, represented as an absolute URI (globally unique)",
+          "range": "uriorcurie",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "version",
+          "description": "The identifier that is used to identify this version of the questionnaire when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the questionnaire author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "publisher",
+          "description": "Name of the publisher/steward (organization or individual) of this Questionnaire",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "copyright",
+          "description": "Textual description of any use and/or publishing restrictions",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "copyright_label",
+          "description": "Copyright holder and year(s)",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "language",
+          "description": "The language(s) in which questions are presented.",
+          "range": "string",
+          "multivalued": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "items",
+          "description": "A collection of QuestionnaireItem objects which encapsulate the question being asked.",
+          "range": "QuestionnaireItem",
+          "required": true,
+          "multivalued": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/Questionnaire",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "QuestionnaireItem",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/QuestionnaireItem",
+      "description": "QuestionnaireItem defines a question or section within the Questionnaire",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "is_a": "Entity",
+      "slots": [
+        "id",
+        "identity",
+        "questionnaireItem__text",
+        "questionnaireItem__code",
+        "questionnaireItem__part_of"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "text",
+          "description": "Name for group or question text",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "code",
+          "description": "Corresponding concept for this item in a terminology",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "part_of",
+          "description": "A reference to a parent QuestionnaireItem.",
+          "range": "QuestionnaireItem",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/QuestionnaireItem",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "QuestionnaireResponse",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponse",
+      "description": "QuestionnaireResponse provides a complete or partial list of answers to a set of questions filled when responding to a questionnaire. (FHIR)",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "is_a": "Entity",
+      "slots": [
+        "id",
+        "questionnaireResponse__age_at_response",
+        "questionnaireResponse__items",
+        "questionnaireResponse__associated_visit"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "age_at_response",
+          "description": "The age (in days) of the Participant when the QuestionnaireResponse was captured.",
+          "range": "integer",
+          "unit": {
+            "ucum_code": "d",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "items",
+          "description": "A collection of QuestionnaireResponseItem objects which encapsulate the question being asked and the response.",
+          "range": "QuestionnaireResponseItem",
+          "required": true,
+          "multivalued": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "associated_visit",
+          "description": "A reference to the Visit during which this QuestionnaireResponse was captured.",
+          "range": "Visit",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponse",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "QuestionnaireResponseItem",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseItem",
+      "description": "QuestionnaireResponseItem provides a complete or partial list of answers to a set of questions filled when responding to a questionnaire. (FHIR)",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slots": [
+        "questionnaireResponseItem__has_questionnaire_item",
+        "questionnaireResponseItem__text",
+        "questionnaireResponseItem__response_value"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "has_questionnaire_item",
+          "description": "A reference to the QuestionnaireItem that this QuestionnaireResponseItem responds to.",
+          "range": "QuestionnaireItem",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "text",
+          "description": "Name for group or question text",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "response_value",
+          "range": "QuestionnaireResponseValue",
+          "required": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseItem",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "QuestionnaireResponseValue",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValue",
+      "description": "Single-valued answer to the question. (FHIR)",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "slots": [
+        "value",
+        "questionnaireResponseValue__type",
+        "questionnaireResponseValue__name"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "type",
+          "designates_type": true,
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "name",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValue",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "QuestionnaireResponseValueDecimal",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueDecimal",
+      "description": "Single-valued decimal answer to the question",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "is_a": "QuestionnaireResponseValue",
+      "slots": [
+        "questionnaireResponseValue__type",
+        "questionnaireResponseValue__name",
+        "QuestionnaireResponseValueDecimal_value"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueDecimal",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "QuestionnaireResponseValueBoolean",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueBoolean",
+      "description": "Single-valued boolean answer to the question",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "is_a": "QuestionnaireResponseValue",
+      "slots": [
+        "questionnaireResponseValue__type",
+        "questionnaireResponseValue__name",
+        "QuestionnaireResponseValueBoolean_value"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueBoolean",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "QuestionnaireResponseValueString",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueString",
+      "description": "Single-valued string answer to the question",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "is_a": "QuestionnaireResponseValue",
+      "slots": [
+        "questionnaireResponseValue__type",
+        "questionnaireResponseValue__name",
+        "QuestionnaireResponseValueString_value"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueString",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Condition",
+      "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/Condition",
+      "description": "Conditions are records of a Person suggesting the presence of a disease or medical condition stated as a diagnosis, a sign or a symptom, which is either observed by a Provider or reported by the patient. Conditions are recorded in different sources and levels of standardization.",
+      "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
+      "is_a": "Entity",
+      "slots": [
+        "id",
+        "identity",
+        "condition__condition_concept",
+        "condition__age_at_condition_start",
+        "condition__age_at_condition_end",
+        "condition__condition_provenance",
+        "condition__relationship_to_participant",
+        "condition__associated_participant",
+        "condition__associated_visit"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "condition_concept",
+          "description": "The coded value for the presence of a disease or medical condition stated as a diagnosis, a sign or a symptom, coded to the Human Phenotype Ontology or MONDO.",
+          "range": "ConditionConceptEnum",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "age_at_condition_start",
+          "description": "The Participant's age (expressed in days) when the condition was first recorded.",
+          "range": "integer",
+          "unit": {
+            "ucum_code": "d",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "age_at_condition_end",
+          "description": "The Participant's age (expressed in days) when the condition was recorded as having been resolved.",
+          "range": "integer",
+          "unit": {
+            "ucum_code": "d",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "condition_provenance",
+          "description": "A value representing the provenance of the Condition record",
+          "range": "ConditionProvenanceEnum",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "relationship_to_participant",
+          "description": "A value indicating the relationship between the Participant to which the Condition is attributed and the individual who had the reported Condition.  If the Condition is affecting the participant themselves, then 'Self' is the appropriate relationship.  If the Condition is affecting a family member (e.g. a parent of the Participant) then an appropriate relationship should be provided (e.g. 'Parent')",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "associated_participant",
+          "description": "A reference to the Participant to which the Condition is attributed.",
+          "range": "Participant",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "associated_visit",
+          "description": "A reference to the Visit during which this QuestionnaireResponse was captured.",
+          "range": "Visit",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/nhlbidatastage/bdchm/Condition",
+      "@type": "ClassDefinition"
     }
   ],
   "metamodel_version": "1.7.0",
   "source_file": "linkml_map_example.yaml",
-  "source_file_date": "2024-07-29T15:40:38",
-  "source_file_size": 5863,
-  "generation_date": "2024-07-29T15:57:49",
+  "source_file_date": "2024-07-29T17:21:50",
+  "source_file_size": 5878,
+  "generation_date": "2024-07-29T17:22:29",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/linkml_map_example.context.jsonld",
     "https://w3id.org/linkml/types.context.jsonld",
+    "bdc_schema.context.jsonld",
     {
       "@base": "https://w3id.org/linkml/cmdr/"
     }

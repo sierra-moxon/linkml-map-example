@@ -1,6 +1,19 @@
  syntax="proto3";
  package
 // metamodel_version: 1.7.0
+// Conditions are records of a Person suggesting the presence of a disease or medical condition stated as a diagnosis, a sign or a symptom, which is either observed by a Provider or reported by the patient. Conditions are recorded in different sources and levels of standardization.
+message Condition
+ {
+  string id = 0
+ repeated  identifier identity = 0
+  conditionConceptEnum conditionConcept = 0
+  integer ageAtConditionStart = 0
+  integer ageAtConditionEnd = 0
+  conditionProvenanceEnum conditionProvenance = 0
+  string relationshipToParticipant = 0
+  participant associatedParticipant = 0
+  visit associatedVisit = 0
+ }
 message Container
  {
  repeated  materialEntity materials = 0
@@ -9,6 +22,12 @@ message Container
  repeated  specimenCollectionProcess specimenCollectionProcesses = 0
  repeated  investigation investigations = 0
  repeated  subject subjects = 0
+ }
+// An Identifier is associated with a unique object or entity within a given system.
+message Identifier
+ {
+  string value = 0
+  string system = 0
  }
 // General information about the Investigation
 message Investigation
@@ -35,6 +54,28 @@ message MaterialProcessing
  repeated  materialEntity hasInput = 0
  repeated  materialEntity hasOutput = 0
  }
+// A grouping of people or organizations with a common purpose such as a data coordinating center, an university, or an institute within a university.
+message Organization
+ {
+  string id = 0
+ repeated  identifier identity = 0
+  string name = 0
+  string alias = 0
+  string organizationType = 0
+ }
+// A Participant is the entity of interest in a research study, typically a human being or an animal, but can also be a device, group of humans or animals, or a tissue sample. Human research subjects are usually not traceable to a particular person to protect the subject’s privacy.
+message Participant
+ {
+  string id = 0
+  person associatedPerson = 0
+ repeated  identifier identity = 0
+  string description = 0
+  researchStudy memberOfResearchStudy = 0
+  integer ageAtEnrollment = 0
+  string indexTimepoint = 0
+  organization originatingSite = 0
+ repeated  string studyArm = 0
+ }
 // Subject/Study participation information
 message Participation
  {
@@ -43,12 +84,120 @@ message Participation
  repeated  investigation involvedIn = 0
   subject includes = 0
  }
+// Demographics and other administrative information about an individual or animal receiving care or other health-related services.
+message Person
+ {
+  string id = 0
+ repeated  identifier identity = 0
+  cellularOrganismSpeciesEnum species = 0
+  vertebrateBreedEnum breed = 0
+  sexEnum sex = 0
+  ethnicityEnum ethnicity = 0
+  raceEnum race = 0
+  integer yearOfBirth = 0
+  vitalStatusEnum vitalStatus = 0
+  integer ageAtDeath = 0
+  integer yearOfDeath = 0
+  string causeOfDeath = 0
+ }
 message Quantity
  {
   string hasRawValue = 0
   float hasNumericValue = 0
   string hasUnit = 0
   string comparator = 0
+ }
+// A Questionnaire is an organized collection of questions intended to solicit information from patients, providers or other individuals involved in the healthcare domain. They may be simple flat lists of questions or can be hierarchically organized in groups and sub-groups, each containing questions. The Questionnaire defines the questions to be asked, how they are ordered and grouped, any intervening instructional text and what the constraints are on the allowed answers. The results of a Questionnaire can be communicated using the QuestionnaireResponse. (FHIR)
+message Questionnaire
+ {
+  string id = 0
+ repeated  identifier identity = 0
+  string name = 0
+  string title = 0
+  string description = 0
+  uriorcurie url = 0
+  string version = 0
+  string publisher = 0
+  string copyright = 0
+  string copyrightLabel = 0
+ repeated  string language = 0
+ repeated  questionnaireItem items = 0
+ }
+// QuestionnaireItem defines a question or section within the Questionnaire
+message QuestionnaireItem
+ {
+  string id = 0
+ repeated  identifier identity = 0
+  string text = 0
+  string code = 0
+  questionnaireItem partOf = 0
+ }
+// QuestionnaireResponse provides a complete or partial list of answers to a set of questions filled when responding to a questionnaire. (FHIR)
+message QuestionnaireResponse
+ {
+  string id = 0
+  integer ageAtResponse = 0
+ repeated  questionnaireResponseItem items = 0
+  visit associatedVisit = 0
+ }
+// QuestionnaireResponseItem provides a complete or partial list of answers to a set of questions filled when responding to a questionnaire. (FHIR)
+message QuestionnaireResponseItem
+ {
+  questionnaireItem hasQuestionnaireItem = 0
+  string text = 0
+  questionnaireResponseValue responseValue = 0
+ }
+// Single-valued answer to the question. (FHIR)
+message QuestionnaireResponseValue
+ {
+  string value = 0
+  string type = 0
+  string name = 0
+ }
+// Single-valued boolean answer to the question
+message QuestionnaireResponseValueBoolean
+ {
+  string type = 0
+  string name = 0
+  boolean value = 0
+ }
+// Single-valued decimal answer to the question
+message QuestionnaireResponseValueDecimal
+ {
+  string type = 0
+  string name = 0
+  decimal value = 0
+ }
+// Single-valued string answer to the question
+message QuestionnaireResponseValueString
+ {
+  string type = 0
+  string name = 0
+  string value = 0
+ }
+// A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge. This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques. A ResearchStudy involves the gathering of information about human or animal subjects.
+message ResearchStudy
+ {
+  string id = 0
+ repeated  identifier identity = 0
+  string name = 0
+  string nameShortened = 0
+  string description = 0
+  string descriptionShortened = 0
+  string sponsor = 0
+  timePoint dateStarted = 0
+  timePoint dateEnded = 0
+  uriorcurie url = 0
+  researchStudy partOf = 0
+  string researchProjectType = 0
+ repeated  timePoint associatedTimepoint = 0
+ repeated  string principalInvestigator = 0
+ repeated  dataUseEnum consentCode = 0
+ }
+// A holder for ResearchStudy objects
+message ResearchStudyCollection
+ {
+ repeated  researchStudy entries = 0
  }
 // A planned process with the objective of collecting a specimen
 message SpecimenCollectionProcess
@@ -63,4 +212,29 @@ message Subject
  {
   uriorcurie id = 0
   string name = 0
+ }
+// A period of time between a start and end time point.
+message TimePeriod
+ {
+  timePoint periodStart = 0
+  timePoint periodEnd = 0
+ }
+// A structured representation of a single point in time that allows direct/explicit declaration as a dateTime, specification in terms of offset from a defined index, or description of an event type as a proxy for the time point when it occurred.
+message TimePoint
+ {
+  string id = 0
+  datetime dateTime = 0
+  timePoint indexTimePoint = 0
+  integer offsetFromIndex = 0
+  string eventType = 0
+ }
+// Events where Persons engage with the healthcare system for a duration of time. They are often also called “Encounters”. Visits are defined by a configuration of circumstances under which they occur, such as (i) whether the patient comes to a healthcare institution, the other way around, or the interaction is remote, (ii) whether and what kind of trained medical staff is delivering the service during the Visit, and (iii) whether the Visit is transient or for a longer period involving a stay in bed. (OMOP)
+message Visit
+ {
+  string id = 0
+  visitCategoryEnum visitCategory = 0
+  integer ageAtVisitStart = 0
+  integer ageAtVisitEnd = 0
+  visitProvenanceEnum visitProvenance = 0
+  participant associatedParticipant = 0
  }

@@ -1,4 +1,17 @@
 # metamodel_version: 1.7.0
+type Condition
+  {
+    id: String
+    identity: [Identifier]
+    conditionConcept: ConditionConceptEnum
+    ageAtConditionStart: Integer
+    ageAtConditionEnd: Integer
+    conditionProvenance: ConditionProvenanceEnum
+    relationshipToParticipant: String
+    associatedParticipant: Participant
+    associatedVisit: Visit
+  }
+
 type Container
   {
     materials: [MaterialEntity]
@@ -11,6 +24,17 @@ type Container
 
 type DataObject
   {
+  }
+
+interface Entity
+  {
+    id: String
+  }
+
+type Identifier
+  {
+    value: String!
+    system: String
   }
 
 type Investigation
@@ -38,12 +62,50 @@ type MaterialProcessing
     hasOutput: [MaterialEntity]
   }
 
+type Organization
+  {
+    id: String
+    identity: [Identifier]
+    name: String
+    alias: String
+    organizationType: String
+  }
+
+type Participant
+  {
+    id: String
+    associatedPerson: Person
+    identity: [Identifier]
+    description: String
+    memberOfResearchStudy: ResearchStudy
+    ageAtEnrollment: Integer
+    indexTimepoint: String
+    originatingSite: Organization
+    studyArm: [String]
+  }
+
 type Participation
   {
     id: Uriorcurie!
     name: String
     involvedIn: [Investigation]
     includes: Subject
+  }
+
+type Person
+  {
+    id: String
+    identity: [Identifier]
+    species: CellularOrganismSpeciesEnum
+    breed: VertebrateBreedEnum
+    sex: SexEnum
+    ethnicity: EthnicityEnum
+    race: RaceEnum
+    yearOfBirth: Integer
+    vitalStatus: VitalStatusEnum
+    ageAtDeath: Integer
+    yearOfDeath: Integer
+    causeOfDeath: String
   }
 
 interface Process
@@ -62,6 +124,98 @@ type Quantity
     comparator: String
   }
 
+type Questionnaire
+  {
+    id: String
+    identity: [Identifier]
+    name: String
+    title: String
+    description: String
+    url: Uriorcurie
+    version: String
+    publisher: String
+    copyright: String
+    copyrightLabel: String
+    language: [String]
+    items: [QuestionnaireItem]!
+  }
+
+type QuestionnaireItem
+  {
+    id: String
+    identity: [Identifier]
+    text: String
+    code: String
+    partOf: QuestionnaireItem
+  }
+
+type QuestionnaireResponse
+  {
+    id: String
+    ageAtResponse: Integer
+    items: [QuestionnaireResponseItem]!
+    associatedVisit: Visit
+  }
+
+type QuestionnaireResponseItem
+  {
+    hasQuestionnaireItem: QuestionnaireItem
+    text: String
+    responseValue: QuestionnaireResponseValue!
+  }
+
+type QuestionnaireResponseValue
+  {
+    value: String
+    type: String
+    name: String
+  }
+
+type QuestionnaireResponseValueBoolean
+  {
+    type: String
+    name: String
+    value: Boolean!
+  }
+
+type QuestionnaireResponseValueDecimal
+  {
+    type: String
+    name: String
+    value: Decimal!
+  }
+
+type QuestionnaireResponseValueString
+  {
+    type: String
+    name: String
+    value: String!
+  }
+
+type ResearchStudy
+  {
+    id: String
+    identity: [Identifier]
+    name: String
+    nameShortened: String
+    description: String
+    descriptionShortened: String
+    sponsor: String
+    dateStarted: TimePoint
+    dateEnded: TimePoint
+    url: Uriorcurie
+    partOf: ResearchStudy
+    researchProjectType: String
+    associatedTimepoint: [TimePoint]
+    principalInvestigator: [String]
+    consentCode: [DataUseEnum]
+  }
+
+type ResearchStudyCollection
+  {
+    entries: [ResearchStudy]
+  }
+
 type SpecimenCollectionProcess
   {
     id: Uriorcurie!
@@ -74,5 +228,30 @@ type Subject
   {
     id: Uriorcurie!
     name: String
+  }
+
+type TimePeriod
+  {
+    periodStart: TimePoint
+    periodEnd: TimePoint
+  }
+
+type TimePoint
+  {
+    id: String
+    dateTime: Datetime
+    indexTimePoint: TimePoint
+    offsetFromIndex: Integer
+    eventType: String
+  }
+
+type Visit
+  {
+    id: String
+    visitCategory: VisitCategoryEnum
+    ageAtVisitStart: Integer
+    ageAtVisitEnd: Integer
+    visitProvenance: VisitProvenanceEnum
+    associatedParticipant: Participant
   }
 
