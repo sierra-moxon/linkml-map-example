@@ -30,25 +30,43 @@ class_derivations:
                 populated_from: id
             species:
                 range: CellularOrganismSpeciesEnum
-                description: The scientific binomial name for the species of the Person (e.g. Homo sapiens, Mus musculus, etc.). Values should be derived from the NCBI organismal taxonomy (http://purl.obolibrary.org/obo/ncbitaxon.owl).
+                description: >- 
+                    The scientific binomial name for the species of the Person (e.g. Homo sapiens, 
+                    Mus musculus, etc.). Values should be derived from the NCBI organismal taxonomy 
+                    (http://purl.obolibrary.org/obo/ncbitaxon.owl).
             breed:
                 range: VertebrateBreedEnum
-                description: A label given to a group of animals homogeneous in appearance and other characteristics that distinguish it from other animals of the same species. Values should be derived from the Vertebrate Breed Ontology (http://purl.obolibrary.org/obo/vbo.owl).
+                description: >-  
+                    A label given to a group of animals homogeneous in appearance and other characteristics 
+                    that distinguish it from other animals of the same species. Values should be derived from the Vertebrate
+                    Breed Ontology (http://purl.obolibrary.org/obo/vbo.owl).
             sex:
                 range: SexEnum
-                description: The biologic character or quality that distinguishes male and female from one another as expressed by analysis of the person's gonadal, morphologic (internal and external), chromosomal, and hormonal characteristics.
+                description: >- 
+                    The biologic character or quality that distinguishes male and female from one another as 
+                    expressed by analysis of the person's gonadal, morphologic (internal and external), chromosomal, 
+                    and hormonal characteristics.
             ethnicity:
                 range: EthnicityEnum
-                description: An individual's self-described social and cultural grouping, specifically whether an individual describes themselves as Hispanic or Latino. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau
+                description: >- 
+                    An individual's self-described social and cultural grouping, specifically whether an 
+                    individual describes themselves as Hispanic or Latino. The provided values are based on the categories
+                    defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau
             race:
                 range: RaceEnum
-                description: An arbitrary classification of a taxonomic group that is a division of a species. It usually arises as a consequence of geographical isolation within a species and is characterized by shared heredity, physical attributes and behavior, and in the case of humans, by common history, nationality, or geographic distribution. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau.
+                description: >-
+                    An arbitrary classification of a taxonomic group that is a division of a species. It 
+                    usually arises as a consequence of geographical isolation within a species and is characterized by 
+                    shared heredity, physical attributes and behavior, and in the case of humans, by common history, 
+                    nationality, or geographic distribution. The provided values are based on the categories defined 
+                    by the U.S. Office of Management and Business and used by the U.S. Census Bureau.
             year_of_birth:
                 range: integer
                 description: Numeric value to represent the calendar year in which an individual was born.
             vital_status:
                 range: VitalStatusEnum
-                description: Coded value indicating the state or condition of being living or deceased; also includes the case where the vital status is unknown.
+                description: Coded value indicating the state or condition of being living or deceased; also includes 
+                the case where the vital status is unknown.
             age_at_death:
                 range: integer
                 description: The age of an individual at the time of death, expressed in days since birth
@@ -57,12 +75,15 @@ class_derivations:
                 description: Numeric value to represent the calendar year in which an individual died.
             cause_of_death:
                 range: string
-                description: Coded value indicating the circumstance or condition that results in the death of the individual.
+                description: Coded value indicating the circumstance or condition that results in the death of the 
+                individual.
     Participant:
         populated_from: Participation
         is_a: Entity
         description: >-
-            A Participant is the entity of interest in a research study, typically a human being or an animal, but can also be a device, group of humans or animals, or a tissue sample. Human research subjects are usually not traceable to a particular person to protect the subject’s privacy.
+            A Participant is the entity of interest in a research study, typically a human being or an animal, but can 
+            also be a device, group of humans or animals, or a tissue sample. Human research subjects are usually not
+             traceable to a particular person to protect the subject’s privacy.
         slot_derivations:
             member_of_research_study:
                 range: ResearchStudy
@@ -72,7 +93,8 @@ class_derivations:
                 description: The age in days when the Participant enrolled on the ResearchStudy
             index_timepoint:
                 range: string
-                description: The text term used to describe the reference or anchor date used for date obfuscation, where a single date is obscured by creating one or more date ranges in relation to this date.
+                description: The text term used to describe the reference or anchor date used for date obfuscation, 
+                where a single date is obscured by creating one or more date ranges in relation to this date.
             originating_site:
                 range: Organization
                 description: The Organization through which a subject was enrolled on a ResearchStudy.
@@ -105,7 +127,9 @@ class_derivations:
                 description: An abbreviated description of a research program, project, or study.
             sponsor:
                 range: string
-                description: An entity that is responsible for the initiation, management, and/or financing of a research project.
+                description: >- 
+                    An entity that is responsible for the initiation, management, and/or financing of a 
+                    research project.
             date_started:
                 range: TimePoint
                 description: The date when the research project began.

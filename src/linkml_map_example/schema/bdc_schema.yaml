@@ -72,7 +72,6 @@ classes:
         description: Coded value indicating the circumstance or condition that results in the death of the individual.
     slots:
       - identity
-
   Participant:
     is_a: Entity
     description: >-
@@ -102,7 +101,6 @@ classes:
     slots:
       - associated_person
       - identity
-
   ResearchStudy:
     is_a: Entity
     description: >-
