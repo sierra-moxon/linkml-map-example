@@ -65,8 +65,9 @@ class_derivations:
                 description: Numeric value to represent the calendar year in which an individual was born.
             vital_status:
                 range: VitalStatusEnum
-                description: Coded value indicating the state or condition of being living or deceased; also includes 
-                the case where the vital status is unknown.
+                description: >- 
+                    Coded value indicating the state or condition of being living or deceased; also includes 
+                    the case where the vital status is unknown.
             age_at_death:
                 range: integer
                 description: The age of an individual at the time of death, expressed in days since birth
@@ -75,8 +76,9 @@ class_derivations:
                 description: Numeric value to represent the calendar year in which an individual died.
             cause_of_death:
                 range: string
-                description: Coded value indicating the circumstance or condition that results in the death of the 
-                individual.
+                description: >- 
+                    Coded value indicating the circumstance or condition that results in the death of the 
+                    individual.
     Participant:
         populated_from: Participation
         is_a: Entity
@@ -93,8 +95,9 @@ class_derivations:
                 description: The age in days when the Participant enrolled on the ResearchStudy
             index_timepoint:
                 range: string
-                description: The text term used to describe the reference or anchor date used for date obfuscation, 
-                where a single date is obscured by creating one or more date ranges in relation to this date.
+                description: >-
+                    The text term used to describe the reference or anchor date used for date obfuscation, 
+                    where a single date is obscured by creating one or more date ranges in relation to this date.
             originating_site:
                 range: Organization
                 description: The Organization through which a subject was enrolled on a ResearchStudy.
