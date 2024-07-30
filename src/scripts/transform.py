@@ -281,35 +281,35 @@ class_derivations:
           name:
             range: string
           value:
-    QuestionnaireResponseValueDecimal:
-        is_a: QuestionnaireResponseValue
-        description: Single-valued decimal answer to the question
-    QuestionnaireResponseValueBoolean:
-        is_a: QuestionnaireResponseValue
-        description: Single-valued boolean answer to the question
-    QuestionnaireResponseValueString:
-        is_a: QuestionnaireResponseValue
-        description: Single-valued string answer to the question
     Condition:
         is_a: Entity
         description: >-
-            Conditions are records of a Person suggesting the presence of a disease or medical condition stated as a diagnosis, a sign or a symptom, which is either observed by a Provider or reported by the patient. Conditions are recorded in different sources and levels of standardization.
+            Conditions are records of a Person suggesting the presence of a disease or medical condition stated as a 
+            diagnosis, a sign or a symptom, which is either observed by a Provider or reported by the patient. 
+            Conditions are recorded in different sources and levels of standardization.
         slot_derivations:
           condition_concept:
             range: ConditionConceptEnum
-            description: The coded value for the presence of a disease or medical condition stated as a diagnosis, a sign or a symptom, coded to the Human Phenotype Ontology or MONDO.
+            description: >- 
+                The coded value for the presence of a disease or medical condition stated as a diagnosis, a 
+                sign or a symptom, coded to the Human Phenotype Ontology or MONDO.
           age_at_condition_start:
             range: integer
             description: The Participant's age (expressed in days) when the condition was first recorded.
           age_at_condition_end:
             range: integer
-            description: The Participant's age (expressed in days) when the condition was recorded as having been resolved.
+            description: The Participant's age (expressed in days) when the condition was recorded as having been 
+            resolved.
           condition_provenance:
             range: ConditionProvenanceEnum
             description: A value representing the provenance of the Condition record
           relationship_to_participant:
             range: string
-            description: A value indicating the relationship between the Participant to which the Condition is attributed and the individual who had the reported Condition.  If the Condition is affecting the participant themselves, then 'Self' is the appropriate relationship.  If the Condition is affecting a family member (e.g. a parent of the Participant) then an appropriate relationship should be provided (e.g. 'Parent')
+            description: >-
+                A value indicating the relationship between the Participant to which the Condition is 
+                attributed and the individual who had the reported Condition.  If the Condition is affecting the participant 
+                themselves, then 'Self' is the appropriate relationship.  If the Condition is affecting a family member 
+                (e.g. a parent of the Participant) then an appropriate relationship should be provided (e.g. 'Parent')
           associated_participant:
             range: Participant
             description: A reference to the Participant to which the Condition is attributed.
@@ -318,7 +318,439 @@ class_derivations:
             range: Visit
           identity:
             populated_from: id
-
+enum_derivations:
+    DataUseEnum:
+        description: >-
+          A constrained set of enumerative values drawn from the Data Use Ontology (DUO). The DUO is an ontology which represent data use conditions.
+        permissible_values:
+          GRU:
+            description: 'This data use permission indicates that use is allowed for general research use for any research purpose. This includes but is not limited to: health/medical/biomedical purposes, fundamental biology research, the study of population origins or ancestry, statistical methods and algorithms development, and social-sciences research.'
+            meaning: DUO:0000042
+          HMB:
+            description: 'This data use permission indicates that use is allowed for health/medical/biomedical purposes; does not include the study of population origins or ancestry.'
+            meaning: DUO:0000006
+          DS:
+            description: 'This data use permission indicates that use is allowed provided it is related to the specified disease. This term should be coupled with a term describing a disease from an ontology to specify the disease the restriction applies to. DUO recommends MONDO be used, to provide the basis for automated evaluation. For more information see https://github.com/EBISPOT/DUO/blob/master/MONDO_Overview.md Other resources, such as the Disease Ontology, HPO, SNOMED-CT or others, can also be used. When those other resources are being used, this may require an extra mapping step to leverage automated matching algorithms.'
+            meaning: DUO:0000007
+          NPUNCU:
+            description: 'This data use modifier indicates that use of the data is limited to not-for-profit organizations and not-for-profit use, non-commercial use.'
+            meaning: DUO:0000018
+          IRB:
+            description: 'This data use modifier indicates that the requestor must provide documentation of local IRB/ERB approval.'
+            meaning: DUO:0000021
+    EthnicityEnum:
+        description: >-
+          A constrained set of enumerative values containing the United States Office of Management and Budget (OMB) values for ethnicity.
+        permissible_values:
+          HISPANIC_OR_LATINO:
+            description: 'A person of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or origin, regardless of race. The term, "Spanish origin" can be used in addition to "Hispanic or Latino". (OMB)'
+            meaning: OMOP:38003563
+          NOT_HISPANIC_OR_LATINO:
+            description: 'A person not of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or origin, regardless of race.'
+            meaning: OMOP:38003564
+    RaceEnum:
+        description: >-
+          A constrained set of enumerative values containing the United States Office of Management and Budget (OMB) values for race.
+        permissible_values:
+          AMERICAN_INDIAN_OR_ALASKA_NATIVE:
+            description: 'A person having origins in any of the original peoples of North and South America (including Central America) and who maintains tribal affiliation or community attachment. (OMB)'
+            meaning: OMOP:8657
+          ASIAN:
+            description: 'A person having origins in any of the original peoples of the Far East, Southeast Asia, or the Indian subcontinent, including for example, Cambodia, China, India, Japan, Korea, Malaysia, Pakistan, the Philippine Islands, Thailand, and Vietnam. (OMB)'
+            meaning: OMOP:8515
+          BLACK_OR_AFRICAN_AMERICAN:
+            description: 'A person having origins in any of the Black racial groups of Africa. Terms such as "Haitian" or "Negro" can be used in addition to "Black or African American". (OMB)'
+            meaning: OMOP:8516
+          NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER:
+            description: 'Denotes a person having origins in any of the original peoples of Hawaii, Guam, Samoa, or other Pacific Islands. The term covers particularly people who identify themselves as part-Hawaiian, Native Hawaiian, Guamanian or Chamorro, Carolinian, Samoan, Chuukese (Trukese), Fijian, Kosraean, Melanesian, Micronesian, Northern Mariana Islander, Palauan, Papua New Guinean, Pohnpeian, Polynesian, Solomon Islander, Tahitian, Tokelauan, Tongan, Yapese, or Pacific Islander, not specified.'
+            meaning: OMOP:8557
+          UNKNOWN:
+            description: 'Not known, not observed, not recorded, or refused.'
+            meaning: OMOP:8552
+          WHITE:
+            description: 'Denotes person with European, Middle Eastern, or North African ancestral origin who identifies, or is identified, as White.'
+            meaning: OMOP:8527
+    SexEnum:
+        description: >-
+          A constrained set of enumerative values containing the OMOP values for sex.
+        permissible_values:
+          MALE:
+            description: A person who belongs to the sex that normally produces sperm.
+            meaning: OMOP:8507
+          FEMALE:
+            description: A person who belongs to the sex that normally produces ova.
+            meaning: OMOP:8532
+          UNKNOWN:
+            description: 'Not known, not observed, not recorded, or refused.'
+            meaning: OMOP:8552
+    CellularOrganismSpeciesEnum:
+        description: >-
+          A constrained set of enumerative values containing the NCBITaxon values for cellular organisms.
+        reachable_from:
+          source_ontology: obo:ncbitaxon
+          source_nodes:
+            - ncbitaxon:131567 ## Cellular Organisms
+          include_self: false
+          relationship_types:
+            - rdfs:subClassOf
+    VitalStatusEnum:
+        description: >-
+          A constrained set of enumerative values containing the OMOP values for vital status.
+        permissible_values:
+          ALIVE:
+            description: 'Showing characteristics of life; displaying signs of life. (NCIt)'
+            meaning: OMOP:4230556
+          DEAD:
+            description: 'The cessation of life. (NCIt)'
+            meaning: OMOP:434489
+    VertebrateBreedEnum:
+        description: >-
+          A constrained set of enumerative values containing the VBO values for vertebrate breeds.
+        reachable_from:
+          source_ontology: obo:vbo
+          source_nodes:
+            - VBO:0400000 ## Vertebrate Breed
+          include_self: false
+          relationship_types:
+            - rdfs:subClassOf
+    VisitCategoryEnum:
+        description: >-
+          A constrained set of enumerative values containing the OMOP values for visit categories.
+        permissible_values:
+          INPATIENT:
+            description: Person visiting hospital, at a care stie, in bed, for duration of more than one day, with physicians and other Providers permanently available to deliver service around the clock
+            meaning: OMOP:9201
+          EMERGENCY_ROOM:
+            description: Person visiting dedicated healthcare institution for treating emergencies, at a Care Site, within one day, with physicians and Providers permanently available to deliver service around the clock
+            meaning: OMOP:9203
+          EMERGENCY_ROOM_AND_INPATIENT:
+            description: Person visiting ER followed by a subsequent Inpatient Visit, where Emergency department is part of hospital, and transition from the ER to other hospital departments is undefined
+            meaning: OMOP:262
+          NON_HOSPITAL_INSTITUTION:
+            description: Person visiting dedicated institution for reasons of poor health, at a Care Site, long-term or permanently, with no physician but possibly other Providers permanently available to deliver service around the clock
+            meaning: OMOP:42898160
+          OUTPATIENT:
+            description: Person visiting dedicated ambulatory healthcare institution, at a Care Site, within one day, without bed, with physicians or medical Providers delivering service during Visit
+            meaning: OMOP:9202
+          HOME:
+            description: Provider visiting Person, without a Care Site, within one day, delivering service
+            meaning: OMOP:581476
+          TELEHEALTH:
+            description: Patient engages with Provider through communication media
+            meaning: OMOP:5083
+          PHARMACY:
+            description: Person visiting pharmacy for dispensing of Drug, at a Care Site, within one day
+            meaning: OMOP:581458
+          LABORATORY:
+            description: Patient visiting dedicated institution, at a Care Site, within one day, for the purpose of a Measurement.
+            meaning: OMOP:32036
+          AMBULANCE:
+              description: Person using transportation service for the purpose of initiating one of the other Visits, without a Care Site, within one day, potentially with Providers accompanying the Visit and delivering service
+              meaning: OMOP:581478
+          CASE_MANAGEMENT:
+              description: Person interacting with healthcare system, without a Care Site, within a day, with no Providers involved, for administrative purposes
+              meaning: OMOP:38004193
+    VisitProvenanceEnum:
+        description: >-
+          A constrained set of enumerative values containing the OMOP values for visit provenance.
+        permissible_values:
+          CASE_REPORT_FORM:
+            description: Case Report Form
+            meaning: OMOP:32809
+          CLAIM:
+              description: Claim
+              meaning: OMOP:32810
+          CLAIM_AUTHORIZATION:
+              description: Claim authorization
+              meaning: OMOP:32811
+          CLAIM_DISCHARGE_RECORD:
+              description: Claim discharge record
+              meaning: OMOP:32812
+          CLAIM_ENROLMENT_RECORD:
+            description: Claim enrolment record
+            meaning: OMOP:32813
+          COST_RECORD:
+            description: Cost record
+            meaning: OMOP:32814
+          DEATH_CERTIFICATE:
+            description: Death Certificate
+            meaning: OMOP:32815
+          DENTAL_CLAIM:
+            description: Dental claim
+            meaning: OMOP:32816
+          EHR:
+            description: EHR
+            meaning: OMOP:32817
+          EHR_PATHOLOGY_REPORT:
+            description: EHR Pathology report
+            meaning: OMOP:32835
+          EHR_ADMINISTRATION_RECORD:
+            description: EHR administration record
+            meaning: OMOP:32818
+          EHR_ADMISSION_NOTE:
+            description: EHR admission note
+            meaning: OMOP:32819
+          EHR_ANCILLARY_REPORT:
+            description: EHR ancillary report
+            meaning: OMOP:32820
+          EHR_BILLING_RECORD:
+            description: EHR billing record
+            meaning: OMOP:32821
+          EHR_CHIEF_COMPLAINT:
+            description: EHR chief complaint
+            meaning: OMOP:32822
+          EHR_DISCHARGE_RECORD:
+            description: EHR discharge record
+            meaning: OMOP:32823
+          EHR_DISCHARGE_SUMMARY:
+            description: EHR discharge summary
+            meaning: OMOP:32824
+          EHR_DISPENSING_RECORD:
+            description: EHR dispensing record
+            meaning: OMOP:32825
+          EHR_EMERGENCY_ROOM_NOTE:
+            description: EHR emergency room note
+            meaning: OMOP:32826
+          EHR_ENCOUNTER_RECORD:
+            description: EHR encounter record
+            meaning: OMOP:32827
+          EHR_EPISODE_RECORD:
+            description: EHR episode record
+            meaning: OMOP:32828
+          EHR_INPATIENT_NOTE:
+            description: EHR inpatient note
+            meaning: OMOP:32829
+          EHR_MEDICATION_LIST:
+            description: EHR medication list
+            meaning: OMOP:32830
+          EHR_NOTE:
+            description: EHR note
+            meaning: OMOP:32831
+          EHR_NURSING_REPORT:
+            description: EHR nursing report
+            meaning: OMOP:32832
+          EHR_ORDER:
+            description: EHR order
+            meaning: OMOP:32833
+          EHR_OUTPATIENT_NOTE:
+            description: EHR outpatient note
+            meaning: OMOP:32834
+          EHR_PHYSICAL_EXAMINATION:
+            description: EHR physical examination
+            meaning: OMOP:32836
+          EHR_PLANNED_DISPENSING_RECORD:
+            description: EHR planned dispensing record
+            meaning: OMOP:32837
+          EHR_PRESCRIPTION:
+            description: EHR prescription
+            meaning: OMOP:32838
+          EHR_PRESCRIPTION_ISSUE_RECORD:
+            description: EHR prescription issue record
+            meaning: OMOP:32839
+          EHR_PROBLEM_LIST:
+            description: EHR problem list
+            meaning: OMOP:32840
+          EHR_RADIOLOGY_REPORT:
+            description: EHR radiology report
+            meaning: OMOP:32841
+          EHR_REFERRAL_RECORD:
+            description: EHR referral record
+            meaning: OMOP:32842
+          EXTERNAL_CDM_INSTANCE:
+            description: External CDM instance
+            meaning: OMOP:32843
+          FACILITY_CLAIM:
+            description: Facility claim
+            meaning: OMOP:32844
+          FACILITY_CLAIM_DETAIL:
+            description: Facility claim detail
+            meaning: OMOP:32845
+          FACILITY_CLAIM_HEADER:
+            description: Facility claim header
+            meaning: OMOP:32846
+          GEOGRAPHIC_ISOLATION_RECORD:
+            description: Geographic isolation record
+            meaning: OMOP:32847
+          GOVERNMENT_REPORT:
+            description: Government report
+            meaning: OMOP:32848
+          HEALTH_INFORMATION_EXCHANGE_RECORD:
+            description: Health Information Exchange record
+            meaning: OMOP:32849
+          HEALTH_RISK_ASSESSMENT:
+            description: Health Risk Assessment
+            meaning: OMOP:32850
+          HEALTHCARE_PROFESSIONAL_FILLED_SURVEY:
+            description: Healthcare professional filled survey
+            meaning: OMOP:32851
+          HOSPITAL_COST:
+            description: Hospital cost
+            meaning: OMOP:32852
+          INPATIENT_CLAIM:
+            description: Inpatient claim
+            meaning: OMOP:32853
+          INPATIENT_CLAIM_DETAIL:
+            description: Inpatient claim detail
+            meaning: OMOP:32854
+          INPATIENT_CLAIM_HEADER:
+            description: Inpatient claim header
+            meaning: OMOP:32855
+          LAB:
+            description: Lab
+            meaning: OMOP:32856
+          MAIL_ORDER_RECORD:
+            description: Mail order record
+            meaning: OMOP:32857
+          NLP:
+            description: NLP
+            meaning: OMOP:32858
+          OUTPATIENT_CLAIM:
+            description: Outpatient claim
+            meaning: OMOP:32859
+          OUTPATIENT_CLAIM_DETAIL:
+            description: Outpatient claim detail
+            meaning: OMOP:32860
+          OUTPATIENT_CLAIM_HEADER:
+            description: Outpatient claim header
+            meaning: OMOP:32861
+          PATIENT_FILLED_SURVEY:
+            description: Patient filled survey
+            meaning: OMOP:32862
+          PATIENT_OR_PAYER_PAID_RECORD:
+            description: Patient or payer paid record
+            meaning: OMOP:32863
+          PATIENT_REPORTED_COST:
+            description: Patient reported cost
+            meaning: OMOP:32864
+          PATIENT_SELF-REPORT:
+            description: Patient self-report
+            meaning: OMOP:32865
+          PATIENT_SELF-TESTED:
+            description: Patient self-tested
+            meaning: OMOP:705183
+          PAYER_SYSTEM_RECORD_(PAID_PREMIUM):
+            description: Payer system record (paid premium)
+            meaning: OMOP:32866
+          PAYER_SYSTEM_RECORD_(PRIMARY_PAYER):
+            description: Payer system record (primary payer)
+            meaning: OMOP:32867
+          PAYER_SYSTEM_RECORD_(SECONDARY_PAYER):
+            description: Payer system record (secondary payer)
+            meaning: OMOP:32868
+          PHARMACY_CLAIM:
+            description: Pharmacy claim
+            meaning: OMOP:32869
+          POINT_OF_CARE/EXPRESS_LAB:
+            description: Point of care/express lab
+            meaning: OMOP:703249
+          PRE-QUALIFICATION_TIME_PERIOD:
+            description: Pre-qualification time period
+            meaning: OMOP:32870
+          PROFESSIONAL_CLAIM:
+            description: Professional claim
+            meaning: OMOP:32871
+          PROFESSIONAL_CLAIM_DETAIL:
+            description: Professional claim detail
+            meaning: OMOP:32872
+          PROFESSIONAL_CLAIM_HEADER:
+            description: Professional claim header
+            meaning: OMOP:32873
+          PROVIDER_CHARGE_LIST_PRICE:
+            description: Provider charge list price
+            meaning: OMOP:32874
+          PROVIDER_FINANCIAL_SYSTEM:
+            description: Provider financial system
+            meaning: OMOP:32875
+          PROVIDER_INCURRED_COST_RECORD:
+            description: Provider incurred cost record
+            meaning: OMOP:32876
+          RANDOMIZATION_RECORD:
+            description: Randomization record
+            meaning: OMOP:32877
+          REFERENCE_LAB:
+            description: Reference lab
+            meaning: OMOP:32878
+          REGISTRY:
+            description: Registry
+            meaning: OMOP:32879
+          STANDARD_ALGORITHM:
+            description: Standard algorithm
+            meaning: OMOP:32880
+          STANDARD_ALGORITHM_FROM_EHR:
+            description: Standard algorithm from EHR
+            meaning: OMOP:32882
+          STANDARD_ALGORITHM_FROM_CLAIMS:
+            description: Standard algorithm from claims
+            meaning: OMOP:32881
+          SURVEY:
+            description: Survey
+            meaning: OMOP:32883
+          US_SOCIAL_SECURITY_DEATH_MASTER_FILE:
+            description: US Social Security Death Master File
+            meaning: OMOP:32885
+          URGENT_LAB:
+            description: Urgent lab
+            meaning: OMOP:32884
+          VISION_CLAIM:
+            description: Vision claim
+            meaning: OMOP:32886
+    MondoHumanDiseaseEnum:
+        description: >-
+          A constrained set of enumerative values containing the MONDO values for human diseases.
+        reachable_from:
+          source_ontology: obo:mondo
+          source_nodes:
+            - MONDO:0700096 ## Human Disease
+          include_self: false
+          relationship_types:
+            - rdfs:subClassOf
+    HpoPhenotypicAbnormalityEnum:
+        description: >-
+          A constrained set of enumerative values containing the HPO values for phenotypic abnormalities.
+        reachable_from:
+          source_ontology: obo:hp
+          source_nodes:
+            - HP:0000118 ## Phenotypic Abnormality
+          include_self: false
+          relationship_types:
+            - rdfs:subClassOf
+    ConditionConceptEnum:
+        description: >-
+          A constrained set of enumerative values containing both the MONDO values for human diseases and the HPO values for phenotypic abnormalities.
+        inherits:
+          - MondoHumanDiseaseEnum
+          - HpoPhenotypicAbnormalityEnum
+    ConditionProvenanceEnum:
+        description: >-
+          A constrained set of enumerative values containing the OMOP values for visit provenance.
+        permissible_values:
+          EHR_BILLING_DIAGNOSIS:
+            meaning: OMOP:4822159
+          EHR_CHIEF_COMPLAINT:
+            meaning: OMOP:4822124
+          EHR_ENCOUNTER_DIAGNOSIS:
+            meaning: OMOP:4822160
+          EHR_EPISODE_ENTRY:
+            meaning: OMOP:4822135
+          EHR_PROBLEM_LIST_ENTRY:
+            meaning: OMOP:4822121
+          FIRST_POSITION_CONDITION:
+            meaning: OMOP:4822128
+          NLP_DERIVED:
+            meaning: OMOP:4822058
+          OBSERVATION_RECORDED_FROM_EHR:
+            meaning: OMOP:4822126
+          PATIENT_SELF-REPORTED_CONDITION:
+            meaning: OMOP:4822157
+          PRIMARY_CONDITION:
+            meaning: OMOP:4822127
+          REFERRAL_RECORD:
+            meaning: OMOP:4822125
+          SECONDARY_CONDITION:
+            meaning: OMOP:4822129
+          TUMOR_REGISTRY:
+            meaning: OMOP:4822266
+    
 
 """)
 
