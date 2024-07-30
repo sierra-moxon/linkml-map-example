@@ -83,8 +83,8 @@ bdchm:Condition CLOSED {
 }
 
 bdchm:Entity  (
-    @bdchm:Condition OR @bdchm:Organization OR @bdchm:Participant OR @bdchm:Person OR @bdchm:Questionnaire OR
-    @bdchm:QuestionnaireItem OR @bdchm:QuestionnaireResponse OR @bdchm:ResearchStudy OR @bdchm:TimePoint OR @bdchm:Visit
+    @bdchm:Condition OR @bdchm:Organization OR @bdchm:Participant OR @bdchm:Questionnaire OR @bdchm:QuestionnaireItem OR
+    @bdchm:QuestionnaireResponse OR @bdchm:TimePoint OR @bdchm:Visit
 )
 
 bdchm:Entity_struct {
@@ -101,13 +101,15 @@ bdchm:Identifier CLOSED {
     )
 }
 
-<Investigation> CLOSED {
-    (  $<Investigation_tes> (  <name> @linkml:String ? ;
-          <part_of> @<Investigation> ?
-       ) ;
-       rdf:type [ <Investigation> ]
-    )
-}
+<Investigation>  (
+    CLOSED {
+       (  $<Investigation_tes> (  <name> @linkml:String ? ;
+             <part_of> @<Investigation> ?
+          ) ;
+          rdf:type [ <Investigation> ]
+       )
+    } OR @bdchm:ResearchStudy
+)
 
 <MaterialEntity> CLOSED {
     (  $<MaterialEntity_tes> (  <name> @linkml:String ? ;
@@ -168,8 +170,8 @@ bdchm:Participant CLOSED {
 }
 
 bdchm:Person CLOSED {
-    (  $bdchm:Person_tes (  &bdchm:Entity_tes ;
-          rdf:type [ schema1:Thing ] ? ;
+    (  $bdchm:Person_tes (  &<Subject_tes> ;
+          rdf:type [ <Subject> ] ? ;
           schema1:identifier @bdchm:Identifier * ;
           bdchm:species . ? ;
           bdchm:breed . ? ;
@@ -182,7 +184,7 @@ bdchm:Person CLOSED {
           bdchm:year_of_death @linkml:Integer ? ;
           bdchm:cause_of_death @linkml:String ?
        ) ;
-       rdf:type [ bdchm:Person ] ?
+       rdf:type [ bdchm:Person ]
     )
 }
 
@@ -300,8 +302,8 @@ bdchm:QuestionnaireResponseValueString CLOSED {
 }
 
 bdchm:ResearchStudy CLOSED {
-    (  $bdchm:ResearchStudy_tes (  &bdchm:Entity_tes ;
-          rdf:type [ schema1:Thing ] ? ;
+    (  $bdchm:ResearchStudy_tes (  &<Investigation_tes> ;
+          rdf:type [ <Investigation> ] ? ;
           schema1:identifier @bdchm:Identifier * ;
           bdchm:name @linkml:String ? ;
           bdchm:name_shortened @linkml:String ? ;
@@ -319,7 +321,7 @@ bdchm:ResearchStudy CLOSED {
              <http://purl.obolibrary.org/obo/DUO_0000007> <http://purl.obolibrary.org/obo/DUO_0000018>
              <http://purl.obolibrary.org/obo/DUO_0000021> ] *
        ) ;
-       rdf:type [ bdchm:ResearchStudy ] ?
+       rdf:type [ bdchm:ResearchStudy ]
     )
 }
 
@@ -339,11 +341,13 @@ bdchm:ResearchStudyCollection CLOSED {
     )
 }
 
-<Subject> CLOSED {
-    (  $<Subject_tes> <name> @linkml:String ? ;
-       rdf:type [ <Subject> ]
-    )
-}
+<Subject>  (
+    CLOSED {
+       (  $<Subject_tes> <name> @linkml:String ? ;
+          rdf:type [ <Subject> ]
+       )
+    } OR @bdchm:Person
+)
 
 bdchm:TimePeriod CLOSED {
     (  $bdchm:TimePeriod_tes (  bdchm:period_start @bdchm:TimePoint ? ;

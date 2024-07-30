@@ -296,8 +296,8 @@
                     "type": "integer"
                 },
                 "associated_person": {
-                    "$ref": "#/$defs/Person",
-                    "description": "A reference to the Person that is associated with this record."
+                    "description": "A reference to the Person that is associated with this record.",
+                    "type": "string"
                 },
                 "description": {
                     "description": "A free text field to capture additional info/explanation about the research subject.",
@@ -318,8 +318,8 @@
                     "type": "string"
                 },
                 "member_of_research_study": {
-                    "$ref": "#/$defs/ResearchStudy",
-                    "description": "A reference to the Study(s) of which this Participant is a member"
+                    "description": "A reference to the Study(s) of which this Participant is a member",
+                    "type": "string"
                 },
                 "originating_site": {
                     "$ref": "#/$defs/Organization",
@@ -392,6 +392,9 @@
                     },
                     "type": "array"
                 },
+                "name": {
+                    "type": "string"
+                },
                 "race": {
                     "$ref": "#/$defs/RaceEnum",
                     "description": "An arbitrary classification of a taxonomic group that is a division of a species. It usually arises as a consequence of geographical isolation within a species and is characterized by shared heredity, physical attributes and behavior, and in the case of humans, by common history, nationality, or geographic distribution. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau."
@@ -417,6 +420,9 @@
                     "type": "integer"
                 }
             },
+            "required": [
+                "id"
+            ],
             "title": "Person",
             "type": "object"
         },
@@ -760,8 +766,8 @@
                     "type": "string"
                 },
                 "part_of": {
-                    "$ref": "#/$defs/ResearchStudy",
-                    "description": "A reference to a parent ResearchStudy (e.g. a link to the overarching CPTAC ResearchStudy from a substudy of CPTAC)"
+                    "description": "A reference to a parent ResearchStudy (e.g. a link to the overarching CPTAC ResearchStudy from a substudy of CPTAC)",
+                    "type": "string"
                 },
                 "principal_investigator": {
                     "description": "The investigator or investigators leading a project.",
@@ -783,6 +789,9 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "id"
+            ],
             "title": "ResearchStudy",
             "type": "object"
         },
@@ -791,13 +800,100 @@
             "description": "A holder for ResearchStudy objects",
             "properties": {
                 "entries": {
-                    "items": {
-                        "$ref": "#/$defs/ResearchStudy"
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/ResearchStudy__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
-                    "type": "array"
+                    "type": "object"
                 }
             },
             "title": "ResearchStudyCollection",
+            "type": "object"
+        },
+        "ResearchStudy__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge. This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques. A ResearchStudy involves the gathering of information about human or animal subjects.",
+            "properties": {
+                "associated_timepoint": {
+                    "description": "A collection of timepoint observations that are relevant to research projects (e.g. date of IACUC approval, date of IRB approval, date of embargo end, etc.)",
+                    "items": {
+                        "$ref": "#/$defs/TimePoint"
+                    },
+                    "type": "array"
+                },
+                "consent_code": {
+                    "description": "Data Use Restrictions that are used to indicate permissions/restrictions for datasets and/or materials, and relates to the purposes for which datasets and/or material might be removed, stored or used. Based on the Data Use Ontology : see http://www.obofoundry.org/ontology/duo.html",
+                    "items": {
+                        "$ref": "#/$defs/DataUseEnum"
+                    },
+                    "type": "array"
+                },
+                "date_ended": {
+                    "$ref": "#/$defs/TimePoint",
+                    "description": "The date when the research project ended."
+                },
+                "date_started": {
+                    "$ref": "#/$defs/TimePoint",
+                    "description": "The date when the research project began."
+                },
+                "description": {
+                    "description": "An unabridged description of a research program, project, or study.",
+                    "type": "string"
+                },
+                "description_shortened": {
+                    "description": "An abbreviated description of a research program, project, or study.",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "identity": {
+                    "description": "A 'business' identifier or accession number for the entity, typically as provided by an external system or authority, that are globally unique and persist across implementing systems. Also, since these identifiers are created outside the information system through a specific business process, the Identifier type has additional attributes to capture this additional metadata so the actual identifier values are qualified by the context that created those values. This additional context allows \"identifier\" instances to be transmitted as business data across systems while still being able to trace them back to the system of origin.",
+                    "items": {
+                        "$ref": "#/$defs/Identifier"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "An unabridged name of a research program, project, or study.",
+                    "type": "string"
+                },
+                "name_shortened": {
+                    "description": "An abbreviated name of a research program, project, or study.",
+                    "type": "string"
+                },
+                "part_of": {
+                    "description": "A reference to a parent ResearchStudy (e.g. a link to the overarching CPTAC ResearchStudy from a substudy of CPTAC)",
+                    "type": "string"
+                },
+                "principal_investigator": {
+                    "description": "The investigator or investigators leading a project.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "research_project_type": {
+                    "description": "The 'type' of ResearchStudy represented (e.g. a broad-based Program like 'CPTAC' or a more focused Project like 'CPTAC PDAC Discovery Study')",
+                    "type": "string"
+                },
+                "sponsor": {
+                    "description": "An entity that is responsible for the initiation, management, and/or financing of a research project.",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "A URL address for a resource that provides information about a research program, project, or study.",
+                    "type": "string"
+                }
+            },
+            "required": [],
+            "title": "ResearchStudy",
             "type": "object"
         },
         "SexEnum": {
@@ -1058,10 +1154,17 @@
     "metamodel_version": "1.7.0",
     "properties": {
         "entries": {
-            "items": {
-                "$ref": "#/$defs/ResearchStudy"
+            "additionalProperties": {
+                "anyOf": [
+                    {
+                        "$ref": "#/$defs/ResearchStudy__identifier_optional"
+                    },
+                    {
+                        "type": "null"
+                    }
+                ]
             },
-            "type": "array"
+            "type": "object"
         }
     },
     "title": "cmdr",

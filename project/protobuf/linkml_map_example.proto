@@ -87,7 +87,8 @@ message Participation
 // Demographics and other administrative information about an individual or animal receiving care or other health-related services.
 message Person
  {
-  string id = 0
+  uriorcurie id = 0
+  string name = 0
  repeated  identifier identity = 0
   cellularOrganismSpeciesEnum species = 0
   vertebrateBreedEnum breed = 0
@@ -178,7 +179,7 @@ message QuestionnaireResponseValueString
 // A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge. This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques. A ResearchStudy involves the gathering of information about human or animal subjects.
 message ResearchStudy
  {
-  string id = 0
+  uriorcurie id = 0
  repeated  identifier identity = 0
   string name = 0
   string nameShortened = 0

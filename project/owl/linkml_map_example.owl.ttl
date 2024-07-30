@@ -18,14 +18,20 @@ cmdr:Container a owl:Class,
             owl:allValuesFrom cmdr:MaterialEntity ;
             owl:onProperty cmdr:materials ],
         [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:Investigation ;
-            owl:onProperty cmdr:investigations ],
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:materials ],
         [ a owl:Restriction ;
             owl:allValuesFrom cmdr:MaterialProcessing ;
             owl:onProperty cmdr:material_processings ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty cmdr:material_processings ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:Investigation ;
+            owl:onProperty cmdr:investigations ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:Participation ;
+            owl:onProperty cmdr:participations ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty cmdr:subjects ],
@@ -34,16 +40,10 @@ cmdr:Container a owl:Class,
             owl:onProperty cmdr:participations ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty cmdr:materials ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:Participation ;
-            owl:onProperty cmdr:participations ],
+            owl:onProperty cmdr:investigations ],
         [ a owl:Restriction ;
             owl:allValuesFrom cmdr:SpecimenCollectionProcess ;
             owl:onProperty cmdr:specimen_collection_processes ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:investigations ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty cmdr:specimen_collection_processes ] ;
@@ -69,16 +69,31 @@ cmdr:MondoHumanDiseaseEnum a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Condition" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/relationship_to_participant> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/condition_provenance> ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_participant> ],
         [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:ConditionProvenanceEnum ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/condition_provenance> ],
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_visit> ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/condition_concept> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_condition_end> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_visit> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_condition_end> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_condition_end> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_condition_start> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
@@ -87,56 +102,41 @@ cmdr:MondoHumanDiseaseEnum a owl:Class,
             owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Visit> ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_visit> ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_condition_end> ],
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_visit> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_condition_start> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_condition_end> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Participant> ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_participant> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom cmdr:ConditionProvenanceEnum ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/condition_provenance> ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/relationship_to_participant> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_participant> ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Integer ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/condition_concept> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_condition_start> ],
         [ a owl:Restriction ;
             owl:allValuesFrom cmdr:ConditionConceptEnum ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/condition_concept> ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
+            owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/relationship_to_participant> ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_participant> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Integer ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_condition_end> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/condition_provenance> ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/relationship_to_participant> ],
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Participant> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_participant> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_visit> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_condition_start> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/relationship_to_participant> ],
         <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
     skos:definition "Conditions are records of a Person suggesting the presence of a disease or medical condition stated as a diagnosis, a sign or a symptom, which is either observed by a Provider or reported by the patient. Conditions are recorded in different sources and levels of standardization." ;
     skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
@@ -145,95 +145,95 @@ cmdr:MondoHumanDiseaseEnum a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Questionnaire" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/title> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/version> ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/title> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/language> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/url> ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/publisher> ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/copyright> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/url> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/version> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/language> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/copyright_label> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/copyright_label> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/items> ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/copyright> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/version> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/publisher> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/copyright_label> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/copyright_label> ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/publisher> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/copyright_label> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/copyright> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/language> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/publisher> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/copyright_label> ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/version> ],
         [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/url> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/items> ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/title> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/publisher> ],
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireItem> ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/items> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/title> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/copyright> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/url> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/copyright> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/version> ],
         <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
     skos:definition "A Questionnaire is an organized collection of questions intended to solicit information from patients, providers or other individuals involved in the healthcare domain. They may be simple flat lists of questions or can be hierarchically organized in groups and sub-groups, each containing questions. The Questionnaire defines the questions to be asked, how they are ordered and grouped, any intervening instructional text and what the constraints are on the allowed answers. The results of a Questionnaire can be communicated using the QuestionnaireResponse. (FHIR)" ;
     skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
@@ -242,29 +242,29 @@ cmdr:MondoHumanDiseaseEnum a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "QuestionnaireResponse" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_visit> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_visit> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_response> ],
+        [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseItem> ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/items> ],
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Visit> ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_visit> ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_response> ],
+        [ a owl:Restriction ;
             owl:allValuesFrom linkml:Integer ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_response> ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/items> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_visit> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_visit> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_response> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_response> ],
         <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
     skos:definition "QuestionnaireResponse provides a complete or partial list of answers to a set of questions filled when responding to a questionnaire. (FHIR)" ;
     skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
@@ -273,10 +273,10 @@ cmdr:MondoHumanDiseaseEnum a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "ResearchStudyCollection" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/ResearchStudy> ;
+            owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/entries> ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/ResearchStudy> ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/entries> ] ;
     skos:definition "A holder for ResearchStudy objects" ;
     skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
@@ -286,22 +286,22 @@ cmdr:MondoHumanDiseaseEnum a owl:Class,
     rdfs:label "TimePeriod" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/period_end> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/period_start> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/period_start> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/period_start> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/period_start> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/period_start> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/period_end> ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/period_end> ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/period_start> ] ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/period_end> ] ;
     skos:definition "A period of time between a start and end time point." ;
     skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
 
@@ -316,15 +316,15 @@ cmdr:MaterialProcessing a owl:Class,
     rdfs:label "MaterialProcessing" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom cmdr:MaterialEntity ;
-            owl:onProperty cmdr:has_output ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty cmdr:has_input ],
         [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:MaterialEntity ;
+            owl:onProperty cmdr:has_output ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty cmdr:has_output ],
         [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:MaterialEntity ;
+            owl:minCardinality 0 ;
             owl:onProperty cmdr:has_input ],
         cmdr:Process ;
     skos:definition "A planned process which results in physical changes in a specified input material" ;
@@ -336,38 +336,38 @@ cmdr:Participation a owl:Class,
     rdfs:label "Participation" ;
     rdfs:seeAlso <include:Participant> ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:Subject ;
-            owl:onProperty cmdr:includes ],
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:name ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty cmdr:involved_in ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty cmdr:includes ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty cmdr:id ],
         [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:Investigation ;
-            owl:onProperty cmdr:involved_in ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty cmdr:name ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:id ],
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:includes ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty cmdr:name ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty cmdr:id ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:includes ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom cmdr:Investigation ;
             owl:onProperty cmdr:involved_in ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty cmdr:name ] ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:Subject ;
+            owl:onProperty cmdr:includes ] ;
     skos:definition "Subject/Study participation information" ;
     skos:inScheme linkml:cmdr .
 
@@ -378,14 +378,14 @@ cmdr:SpecimenCollectionProcess a owl:Class,
             owl:allValuesFrom cmdr:Subject ;
             owl:onProperty cmdr:has_input ],
         [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:MaterialEntity ;
+            owl:onProperty cmdr:has_output ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty cmdr:has_output ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty cmdr:has_input ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:MaterialEntity ;
-            owl:onProperty cmdr:has_output ],
         cmdr:Process ;
     skos:altLabel "MaterialCollectionProcess" ;
     skos:definition "A planned process with the objective of collecting a specimen" ;
@@ -399,17 +399,17 @@ cmdr:VertebrateBreedEnum a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Organization" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/alias> ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/organization_type> ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/alias> ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/organization_type> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/alias> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
@@ -417,20 +417,20 @@ cmdr:VertebrateBreedEnum a owl:Class,
             owl:allValuesFrom linkml:String ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom linkml:String ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/alias> ],
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/organization_type> ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/organization_type> ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/alias> ],
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
         <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
     skos:definition "A grouping of people or organizations with a common purpose such as a data coordinating center, an university, or an institute within a university." ;
     skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
@@ -439,31 +439,31 @@ cmdr:VertebrateBreedEnum a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "QuestionnaireResponseItem" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/response_value> ],
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireItem> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/has_questionnaire_item> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/text> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/has_questionnaire_item> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/response_value> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/has_questionnaire_item> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/text> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValue> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/response_value> ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/text> ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/text> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireItem> ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/has_questionnaire_item> ],
-        [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/response_value> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/has_questionnaire_item> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValue> ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/response_value> ] ;
     skos:definition "QuestionnaireResponseItem provides a complete or partial list of answers to a set of questions filled when responding to a questionnaire. (FHIR)" ;
     skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
@@ -1075,32 +1075,32 @@ cmdr:Process a owl:Class,
             owl:allValuesFrom linkml:String ;
             owl:onProperty cmdr:has_output ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:has_input ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:has_input ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
             owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty cmdr:id ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty cmdr:has_input ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty cmdr:id ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty cmdr:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty cmdr:name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:has_input ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:has_output ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:name ] ;
+            owl:onProperty cmdr:has_output ] ;
     skos:definition "A planned process resulting in a material or data" ;
     skos:inScheme linkml:cmdr .
 
@@ -1108,41 +1108,41 @@ cmdr:Quantity a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Quantity" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:has_numeric_value ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:has_raw_value ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:comparator ],
-        [ a owl:Restriction ;
             owl:allValuesFrom linkml:Float ;
             owl:onProperty cmdr:has_numeric_value ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty cmdr:has_unit ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty cmdr:comparator ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:comparator ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:has_raw_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:has_unit ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:has_numeric_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:has_raw_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:has_numeric_value ],
+        [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty cmdr:comparator ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:has_unit ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty cmdr:has_unit ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
-            owl:onProperty cmdr:has_raw_value ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:has_unit ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:has_raw_value ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:has_numeric_value ] ;
+            owl:onProperty cmdr:has_raw_value ] ;
     skos:inScheme linkml:cmdr .
 
 cmdr:investigations a owl:ObjectProperty,
@@ -1189,71 +1189,71 @@ cmdr:used_in a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "Participant" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_enrollment> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_person> ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_enrollment> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/member_of_research_study> ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/study_arm> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_timepoint> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_timepoint> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_enrollment> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/ResearchStudy> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/member_of_research_study> ],
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Person> ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_person> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/originating_site> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/study_arm> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_timepoint> ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/member_of_research_study> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/originating_site> ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_timepoint> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/study_arm> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/originating_site> ],
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Organization> ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/originating_site> ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Integer ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_enrollment> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/originating_site> ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/member_of_research_study> ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_person> ],
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_enrollment> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_timepoint> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_person> ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
         [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/ResearchStudy> ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/member_of_research_study> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/study_arm> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_person> ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_timepoint> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_enrollment> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
         <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
     skos:definition "A Participant is the entity of interest in a research study, typically a human being or an animal, but can also be a device, group of humans or animals, or a tissue sample. Human research subjects are usually not traceable to a particular person to protect the subject’s privacy." ;
     skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
@@ -1262,102 +1262,102 @@ cmdr:used_in a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "Person" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:CellularOrganismSpeciesEnum ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/species> ],
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/year_of_birth> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/ethnicity> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/race> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/year_of_birth> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:VertebrateBreedEnum ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/breed> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:EthnicityEnum ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/ethnicity> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/cause_of_death> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/breed> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/year_of_death> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:RaceEnum ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/race> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_death> ],
         [ a owl:Restriction ;
             owl:allValuesFrom cmdr:VitalStatusEnum ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/vital_status> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/species> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/sex> ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/breed> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/breed> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Integer ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/year_of_death> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/year_of_death> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/vital_status> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Integer ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/year_of_birth> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/ethnicity> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/race> ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/year_of_birth> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:CellularOrganismSpeciesEnum ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/species> ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Integer ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/vital_status> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_death> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/cause_of_death> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/breed> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/species> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/sex> ],
         [ a owl:Restriction ;
             owl:allValuesFrom cmdr:SexEnum ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/sex> ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_death> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/sex> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/species> ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/cause_of_death> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/ethnicity> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/year_of_death> ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/year_of_death> ],
         [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:EthnicityEnum ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/ethnicity> ],
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/cause_of_death> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_death> ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/ethnicity> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:VertebrateBreedEnum ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/breed> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/race> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/cause_of_death> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/year_of_birth> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/cause_of_death> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:RaceEnum ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/race> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/vital_status> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/year_of_birth> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
-        <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
+        cmdr:Subject ;
     skos:definition "Demographics and other administrative information about an individual or animal receiving care or other health-related services." ;
     skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
 
@@ -1365,13 +1365,13 @@ cmdr:used_in a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "QuestionnaireResponseValueBoolean" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:maxCardinality 1 ;
             owl:onProperty cmdr:value ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:Boolean ;
             owl:onProperty cmdr:value ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 1 ;
             owl:onProperty cmdr:value ],
         <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValue> ;
     skos:definition "Single-valued boolean answer to the question" ;
@@ -1381,13 +1381,13 @@ cmdr:used_in a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "QuestionnaireResponseValueDecimal" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 1 ;
             owl:onProperty cmdr:value ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:Decimal ;
             owl:onProperty cmdr:value ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:maxCardinality 1 ;
             owl:onProperty cmdr:value ],
         <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValue> ;
     skos:definition "Single-valued decimal answer to the question" ;
@@ -1413,50 +1413,50 @@ cmdr:used_in a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "Visit" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_start> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_end> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/visit_provenance> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/visit_category> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Integer ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_start> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_participant> ],
+        [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Participant> ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_participant> ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_end> ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/visit_category> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_start> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_participant> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Integer ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_end> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:VisitProvenanceEnum ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/visit_provenance> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/visit_provenance> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/visit_category> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Integer ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_start> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_participant> ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/visit_provenance> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_end> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_end> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_start> ],
         [ a owl:Restriction ;
             owl:allValuesFrom cmdr:VisitCategoryEnum ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/visit_category> ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_end> ],
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/visit_provenance> ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/age_at_visit_start> ],
+            owl:allValuesFrom cmdr:VisitProvenanceEnum ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/visit_provenance> ],
         <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
     skos:definition "Events where Persons engage with the healthcare system for a duration of time. They are often also called “Encounters”. Visits are defined by a configuration of circumstances under which they occur, such as (i) whether the patient comes to a healthcare institution, the other way around, or the interaction is remote, (ii) whether and what kind of trained medical staff is delivering the service during the Visit, and (iii) whether the Visit is transient or for a longer period involving a stay in bed. (OMOP)" ;
     skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
@@ -1545,38 +1545,38 @@ cmdr:volume a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "QuestionnaireItem" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/text> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/code> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/text> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/text> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/part_of> ],
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireItem> ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/part_of> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/text> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/part_of> ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom linkml:String ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/code> ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/part_of> ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/code> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/text> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/code> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/text> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/code> ],
         <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
     skos:definition "QuestionnaireItem defines a question or section within the Questionnaire" ;
     skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
@@ -1585,23 +1585,20 @@ cmdr:volume a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "ResearchStudy" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_started> ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/sponsor> ],
         [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_started> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_ended> ],
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_timepoint> ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/principal_investigator> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_ended> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/ResearchStudy> ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/part_of> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
@@ -1611,94 +1608,97 @@ cmdr:volume a owl:ObjectProperty,
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/principal_investigator> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/sponsor> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_started> ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/url> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/research_project_type> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description_shortened> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name_shortened> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/research_project_type> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/url> ],
         [ a owl:Restriction ;
             owl:allValuesFrom cmdr:DataUseEnum ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/consent_code> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/consent_code> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/Identifier> ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description_shortened> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_started> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/part_of> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name_shortened> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/sponsor> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description_shortened> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/url> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_timepoint> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_timepoint> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_ended> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/consent_code> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/research_project_type> ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/research_project_type> ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/ResearchStudy> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/part_of> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/sponsor> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_ended> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description_shortened> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/sponsor> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/url> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name_shortened> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/part_of> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description> ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name_shortened> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/part_of> ],
-        <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_ended> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/associated_timepoint> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/description_shortened> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_started> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/research_project_type> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/identity> ],
+        cmdr:Investigation ;
     skos:definition "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge. This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques. A ResearchStudy involves the gathering of information about human or animal subjects." ;
     skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
 
@@ -1997,73 +1997,40 @@ cmdr:volume a owl:ObjectProperty,
     rdfs:subClassOf cmdr:RaceEnum,
         cmdr:SexEnum .
 
-cmdr:Investigation a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "Investigation" ;
-    rdfs:seeAlso <include:Study> ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom cmdr:Investigation ;
-            owl:onProperty cmdr:part_of ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty cmdr:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty cmdr:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:part_of ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:part_of ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:name ] ;
-    skos:altLabel "Proposal",
-        "Study" ;
-    skos:definition "General information about the Investigation" ;
-    skos:inScheme linkml:cmdr .
-
 cmdr:MaterialEntity a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "MaterialEntity" ;
     rdfs:seeAlso <include:Biospecimen> ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:concentration ],
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:name ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty cmdr:source ],
         [ a owl:Restriction ;
             owl:allValuesFrom cmdr:Subject ;
             owl:onProperty cmdr:source ],
         [ a owl:Restriction ;
             owl:allValuesFrom cmdr:Quantity ;
-            owl:onProperty cmdr:volume ],
+            owl:onProperty cmdr:concentration ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty cmdr:name ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty cmdr:name ],
+            owl:onProperty cmdr:concentration ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:concentration ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty cmdr:volume ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty cmdr:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:used_in ],
+            owl:onProperty cmdr:source ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty cmdr:id ],
@@ -2071,56 +2038,26 @@ cmdr:MaterialEntity a owl:Class,
             owl:maxCardinality 1 ;
             owl:onProperty cmdr:volume ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty cmdr:name ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
             owl:allValuesFrom cmdr:Quantity ;
-            owl:onProperty cmdr:concentration ],
+            owl:onProperty cmdr:volume ],
         [ a owl:Restriction ;
             owl:allValuesFrom cmdr:Investigation ;
             owl:onProperty cmdr:used_in ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:source ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:concentration ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:id ] ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:used_in ] ;
     skos:altLabel "Biosample",
         "Biospecimen",
         "Sample",
         "Specimen",
         "Substance" ;
     skos:definition "Physical entity that is an input our output of a process from a Subject" ;
-    skos:inScheme linkml:cmdr .
-
-cmdr:Subject a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "Subject" ;
-    rdfs:seeAlso <include:Participant> ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty cmdr:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty cmdr:id ] ;
-    skos:altLabel "Participant",
-        "Site" ;
-    skos:definition "Demographic and clinical information about the subject" ;
     skos:inScheme linkml:cmdr .
 
 <https://w3id.org/nhlbidatastage/bdchm/items> a owl:ObjectProperty,
@@ -2131,6 +2068,69 @@ cmdr:EthnicityEnum a owl:Class,
     owl:unionOf ( <https://athena.ohdsi.org/search-terms/terms/38003563> <https://athena.ohdsi.org/search-terms/terms/38003564> ) ;
     linkml:permissible_values <https://athena.ohdsi.org/search-terms/terms/38003563>,
         <https://athena.ohdsi.org/search-terms/terms/38003564> .
+
+cmdr:Investigation a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Investigation" ;
+    rdfs:seeAlso <include:Study> ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom cmdr:Investigation ;
+            owl:onProperty cmdr:part_of ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:part_of ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:part_of ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty cmdr:id ] ;
+    skos:altLabel "Proposal",
+        "Study" ;
+    skos:definition "General information about the Investigation" ;
+    skos:inScheme linkml:cmdr .
+
+cmdr:Subject a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Subject" ;
+    rdfs:seeAlso <include:Participant> ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:name ] ;
+    skos:altLabel "Participant",
+        "Site" ;
+    skos:definition "Demographic and clinical information about the subject" ;
+    skos:inScheme linkml:cmdr .
 
 cmdr:VitalStatusEnum a owl:Class,
         linkml:EnumDefinition ;
@@ -2152,31 +2152,31 @@ cmdr:has_output a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "QuestionnaireResponseValue" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/value> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/value> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/type> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/value> ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/type> ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/value> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/type> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/value> ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/value> ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/name> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
+            owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/type> ] ;
     skos:definition "Single-valued answer to the question. (FHIR)" ;
     skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
@@ -2185,23 +2185,14 @@ cmdr:has_output a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "TimePoint" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_time_point> ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_time_point> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/offset_from_index> ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_time> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_time> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_time_point> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom linkml:String ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/event_type> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_time> ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:Integer ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/offset_from_index> ],
@@ -2213,13 +2204,22 @@ cmdr:has_output a owl:ObjectProperty,
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_time> ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/event_type> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_time_point> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/offset_from_index> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/offset_from_index> ],
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_time_point> ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/event_type> ],
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/date_time> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/nhlbidatastage/bdchm/TimePoint> ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/index_time_point> ],
         <https://w3id.org/nhlbidatastage/bdchm/Entity> ;
     skos:definition "A structured representation of a single point in time that allows direct/explicit declaration as a dateTime, specification in terms of offset from a defined index, or description of an event type as a proxy for the time point when it occurred." ;
     skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
@@ -2259,23 +2259,39 @@ cmdr:SexEnum a owl:Class,
     rdfs:label "type" ;
     skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
 
+<https://w3id.org/nhlbidatastage/bdchm/Entity> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Entity" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty cmdr:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty cmdr:id ] ;
+    skos:definition "Any resource that has its own identifier" ;
+    skos:exactMatch schema1:Thing ;
+    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
+
 <https://w3id.org/nhlbidatastage/bdchm/Identifier> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Identifier" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/system> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/value> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/system> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/value> ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/system> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/system> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/value> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
             owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/system> ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
@@ -2285,22 +2301,6 @@ cmdr:SexEnum a owl:Class,
 
 <https://w3id.org/nhlbidatastage/bdchm/description> a owl:ObjectProperty,
         linkml:SlotDefinition .
-
-<https://w3id.org/nhlbidatastage/bdchm/Entity> a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "Entity" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty cmdr:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty cmdr:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty cmdr:id ] ;
-    skos:definition "Any resource that has its own identifier" ;
-    skos:exactMatch schema1:Thing ;
-    skos:inScheme <https://w3id.org/nhlbidatastage/bdchm> .
 
 cmdr:DataUseEnum a owl:Class,
         linkml:EnumDefinition ;
@@ -2465,9 +2465,9 @@ cmdr:VisitProvenanceEnum a owl:Class,
         <https://athena.ohdsi.org/search-terms/terms/705183> .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueBoolean> ;
+    rdfs:subClassOf <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValue> ;
     owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/type> ;
-    owl:someValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueBoolean> .
+    owl:someValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValue> .
 
 [] a owl:Restriction ;
     rdfs:subClassOf <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueDecimal> ;
@@ -2475,12 +2475,12 @@ cmdr:VisitProvenanceEnum a owl:Class,
     owl:someValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueDecimal> .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValue> ;
-    owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/type> ;
-    owl:someValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValue> .
-
-[] a owl:Restriction ;
     rdfs:subClassOf <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueString> ;
     owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/type> ;
     owl:someValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueString> .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueBoolean> ;
+    owl:onProperty <https://w3id.org/nhlbidatastage/bdchm/type> ;
+    owl:someValuesFrom <https://w3id.org/nhlbidatastage/bdchm/QuestionnaireResponseValueBoolean> .
 

@@ -34,7 +34,7 @@ classes:
       - id
     class_uri: schema:Thing
   Person:
-    is_a: Entity
+    is_a: Subject
     description: >-
       Demographics and other administrative information about an individual or animal receiving care or other health-related services.
     attributes:
@@ -104,7 +104,7 @@ classes:
       - identity
 
   ResearchStudy:
-    is_a: Entity
+    is_a: Investigation
     description: >-
       A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge. This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques. A ResearchStudy involves the gathering of information about human or animal subjects.
     attributes:

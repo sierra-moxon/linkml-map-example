@@ -1,5 +1,5 @@
 # Auto generated from linkml_map_example.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-07-29T17:22:30
+# Generation date: 2024-07-29T17:24:11
 # Schema: cmdr
 #
 # id: https://w3id.org/linkml/cmdr
@@ -71,6 +71,14 @@ class SpecimenCollectionProcessId(ProcessId):
 
 
 class SubjectId(URIorCURIE):
+    pass
+
+
+class PersonId(SubjectId):
+    pass
+
+
+class ResearchStudyId(InvestigationId):
     pass
 
 
@@ -417,7 +425,7 @@ class Entity(YAMLRoot):
 
 
 @dataclass
-class Person(Entity):
+class Person(Subject):
     """
     Demographics and other administrative information about an individual or animal receiving care or other
     health-related services.
@@ -429,6 +437,7 @@ class Person(Entity):
     class_name: ClassVar[str] = "Person"
     class_model_uri: ClassVar[URIRef] = CMDR.Person
 
+    id: Union[str, PersonId] = None
     identity: Optional[Union[Union[dict, "Identifier"], List[Union[dict, "Identifier"]]]] = empty_list()
     species: Optional[Union[str, "CellularOrganismSpeciesEnum"]] = None
     breed: Optional[Union[str, "VertebrateBreedEnum"]] = None
@@ -442,6 +451,11 @@ class Person(Entity):
     cause_of_death: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, PersonId):
+            self.id = PersonId(self.id)
+
         self._normalize_inlined_as_dict(slot_name="identity", slot_type=Identifier, key_name="value", keyed=False)
 
         if self.sex is not None and not isinstance(self.sex, SexEnum):
@@ -485,26 +499,26 @@ class Participant(Entity):
     class_name: ClassVar[str] = "Participant"
     class_model_uri: ClassVar[URIRef] = CMDR.Participant
 
-    associated_person: Optional[Union[dict, Person]] = None
+    associated_person: Optional[Union[str, PersonId]] = None
     identity: Optional[Union[Union[dict, "Identifier"], List[Union[dict, "Identifier"]]]] = empty_list()
     description: Optional[str] = None
-    member_of_research_study: Optional[Union[dict, "ResearchStudy"]] = None
+    member_of_research_study: Optional[Union[str, ResearchStudyId]] = None
     age_at_enrollment: Optional[int] = None
     index_timepoint: Optional[str] = None
     originating_site: Optional[Union[dict, "Organization"]] = None
     study_arm: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.associated_person is not None and not isinstance(self.associated_person, Person):
-            self.associated_person = Person(**as_dict(self.associated_person))
+        if self.associated_person is not None and not isinstance(self.associated_person, PersonId):
+            self.associated_person = PersonId(self.associated_person)
 
         self._normalize_inlined_as_dict(slot_name="identity", slot_type=Identifier, key_name="value", keyed=False)
 
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
 
-        if self.member_of_research_study is not None and not isinstance(self.member_of_research_study, ResearchStudy):
-            self.member_of_research_study = ResearchStudy(**as_dict(self.member_of_research_study))
+        if self.member_of_research_study is not None and not isinstance(self.member_of_research_study, ResearchStudyId):
+            self.member_of_research_study = ResearchStudyId(self.member_of_research_study)
 
         if self.age_at_enrollment is not None and not isinstance(self.age_at_enrollment, int):
             self.age_at_enrollment = int(self.age_at_enrollment)
@@ -523,7 +537,7 @@ class Participant(Entity):
 
 
 @dataclass
-class ResearchStudy(Entity):
+class ResearchStudy(Investigation):
     """
     A process where a researcher or organization plans and then executes a series of steps intended to increase the
     field of healthcare-related knowledge. This includes studies of safety, efficacy, comparative effectiveness and
@@ -537,6 +551,7 @@ class ResearchStudy(Entity):
     class_name: ClassVar[str] = "ResearchStudy"
     class_model_uri: ClassVar[URIRef] = CMDR.ResearchStudy
 
+    id: Union[str, ResearchStudyId] = None
     identity: Optional[Union[Union[dict, "Identifier"], List[Union[dict, "Identifier"]]]] = empty_list()
     name: Optional[str] = None
     name_shortened: Optional[str] = None
@@ -546,13 +561,18 @@ class ResearchStudy(Entity):
     date_started: Optional[Union[dict, "TimePoint"]] = None
     date_ended: Optional[Union[dict, "TimePoint"]] = None
     url: Optional[Union[str, URIorCURIE]] = None
-    part_of: Optional[Union[dict, "ResearchStudy"]] = None
+    part_of: Optional[Union[str, ResearchStudyId]] = None
     research_project_type: Optional[str] = None
     associated_timepoint: Optional[Union[Union[dict, "TimePoint"], List[Union[dict, "TimePoint"]]]] = empty_list()
     principal_investigator: Optional[Union[str, List[str]]] = empty_list()
     consent_code: Optional[Union[Union[str, "DataUseEnum"], List[Union[str, "DataUseEnum"]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ResearchStudyId):
+            self.id = ResearchStudyId(self.id)
+
         self._normalize_inlined_as_dict(slot_name="identity", slot_type=Identifier, key_name="value", keyed=False)
 
         if self.name is not None and not isinstance(self.name, str):
@@ -579,8 +599,8 @@ class ResearchStudy(Entity):
         if self.url is not None and not isinstance(self.url, URIorCURIE):
             self.url = URIorCURIE(self.url)
 
-        if self.part_of is not None and not isinstance(self.part_of, ResearchStudy):
-            self.part_of = ResearchStudy(**as_dict(self.part_of))
+        if self.part_of is not None and not isinstance(self.part_of, ResearchStudyId):
+            self.part_of = ResearchStudyId(self.part_of)
 
         if self.research_project_type is not None and not isinstance(self.research_project_type, str):
             self.research_project_type = str(self.research_project_type)
@@ -773,12 +793,10 @@ class ResearchStudyCollection(YAMLRoot):
     class_name: ClassVar[str] = "ResearchStudyCollection"
     class_model_uri: ClassVar[URIRef] = CMDR.ResearchStudyCollection
 
-    entries: Optional[Union[Union[dict, ResearchStudy], List[Union[dict, ResearchStudy]]]] = empty_list()
+    entries: Optional[Union[Dict[Union[str, ResearchStudyId], Union[dict, ResearchStudy]], List[Union[dict, ResearchStudy]]]] = empty_dict()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if not isinstance(self.entries, list):
-            self.entries = [self.entries] if self.entries is not None else []
-        self.entries = [v if isinstance(v, ResearchStudy) else ResearchStudy(**as_dict(v)) for v in self.entries]
+        self._normalize_inlined_as_dict(slot_name="entries", slot_type=ResearchStudy, key_name="id", keyed=True)
 
         super().__post_init__(**kwargs)
 
@@ -1802,7 +1820,7 @@ slots.identity = Slot(uri=SCHEMA.identifier, name="identity", curie=SCHEMA.curie
                    model_uri=CMDR.identity, domain=None, range=Optional[Union[Union[dict, Identifier], List[Union[dict, Identifier]]]])
 
 slots.associated_person = Slot(uri=BDCHM.associated_person, name="associated_person", curie=BDCHM.curie('associated_person'),
-                   model_uri=CMDR.associated_person, domain=None, range=Optional[Union[dict, Person]])
+                   model_uri=CMDR.associated_person, domain=None, range=Optional[Union[str, PersonId]])
 
 slots.value = Slot(uri=BDCHM.value, name="value", curie=BDCHM.curie('value'),
                    model_uri=CMDR.value, domain=None, range=Optional[str])
@@ -1841,7 +1859,7 @@ slots.participant__description = Slot(uri=BDCHM.description, name="participant__
                    model_uri=CMDR.participant__description, domain=None, range=Optional[str])
 
 slots.participant__member_of_research_study = Slot(uri=BDCHM.member_of_research_study, name="participant__member_of_research_study", curie=BDCHM.curie('member_of_research_study'),
-                   model_uri=CMDR.participant__member_of_research_study, domain=None, range=Optional[Union[dict, ResearchStudy]])
+                   model_uri=CMDR.participant__member_of_research_study, domain=None, range=Optional[Union[str, ResearchStudyId]])
 
 slots.participant__age_at_enrollment = Slot(uri=BDCHM.age_at_enrollment, name="participant__age_at_enrollment", curie=BDCHM.curie('age_at_enrollment'),
                    model_uri=CMDR.participant__age_at_enrollment, domain=None, range=Optional[int])
@@ -1880,7 +1898,7 @@ slots.researchStudy__url = Slot(uri=BDCHM.url, name="researchStudy__url", curie=
                    model_uri=CMDR.researchStudy__url, domain=None, range=Optional[Union[str, URIorCURIE]])
 
 slots.researchStudy__part_of = Slot(uri=BDCHM.part_of, name="researchStudy__part_of", curie=BDCHM.curie('part_of'),
-                   model_uri=CMDR.researchStudy__part_of, domain=None, range=Optional[Union[dict, ResearchStudy]])
+                   model_uri=CMDR.researchStudy__part_of, domain=None, range=Optional[Union[str, ResearchStudyId]])
 
 slots.researchStudy__research_project_type = Slot(uri=BDCHM.research_project_type, name="researchStudy__research_project_type", curie=BDCHM.curie('research_project_type'),
                    model_uri=CMDR.researchStudy__research_project_type, domain=None, range=Optional[str])
@@ -1943,7 +1961,7 @@ slots.identifier__system = Slot(uri=BDCHM.system, name="identifier__system", cur
                    model_uri=CMDR.identifier__system, domain=None, range=Optional[str])
 
 slots.researchStudyCollection__entries = Slot(uri=BDCHM.entries, name="researchStudyCollection__entries", curie=BDCHM.curie('entries'),
-                   model_uri=CMDR.researchStudyCollection__entries, domain=None, range=Optional[Union[Union[dict, ResearchStudy], List[Union[dict, ResearchStudy]]]])
+                   model_uri=CMDR.researchStudyCollection__entries, domain=None, range=Optional[Union[Dict[Union[str, ResearchStudyId], Union[dict, ResearchStudy]], List[Union[dict, ResearchStudy]]]])
 
 slots.questionnaire__name = Slot(uri=BDCHM.name, name="questionnaire__name", curie=BDCHM.curie('name'),
                    model_uri=CMDR.questionnaire__name, domain=None, range=Optional[str])

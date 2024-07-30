@@ -44,7 +44,6 @@
 --     * Slot: uid Description: 
 --     * Slot: id Description: 
 -- # Class: "Person" Description: "Demographics and other administrative information about an individual or animal receiving care or other health-related services."
---     * Slot: uid Description: 
 --     * Slot: species Description: The scientific binomial name for the species of the Person (e.g. Homo sapiens, Mus musculus, etc.). Values should be derived from the NCBI organismal taxonomy (http://purl.obolibrary.org/obo/ncbitaxon.owl).
 --     * Slot: breed Description: A label given to a group of animals homogeneous in appearance and other characteristics that distinguish it from other animals of the same species. Values should be derived from the Vertebrate Breed Ontology (http://purl.obolibrary.org/obo/vbo.owl).
 --     * Slot: sex Description: The biologic character or quality that distinguishes male and female from one another as expressed by analysis of the person's gonadal, morphologic (internal and external), chromosomal, and hormonal characteristics.
@@ -56,29 +55,29 @@
 --     * Slot: year_of_death Description: Numeric value to represent the calendar year in which an individual died.
 --     * Slot: cause_of_death Description: Coded value indicating the circumstance or condition that results in the death of the individual.
 --     * Slot: id Description: 
+--     * Slot: name Description: 
 -- # Class: "Participant" Description: "A Participant is the entity of interest in a research study, typically a human being or an animal, but can also be a device, group of humans or animals, or a tissue sample. Human research subjects are usually not traceable to a particular person to protect the subject’s privacy."
 --     * Slot: uid Description: 
+--     * Slot: associated_person Description: A reference to the Person that is associated with this record.
 --     * Slot: description Description: A free text field to capture additional info/explanation about the research subject.
+--     * Slot: member_of_research_study Description: A reference to the Study(s) of which this Participant is a member
 --     * Slot: age_at_enrollment Description: The age in days when the Participant enrolled on the ResearchStudy
 --     * Slot: index_timepoint Description: The text term used to describe the reference or anchor date used for date obfuscation, where a single date is obscured by creating one or more date ranges in relation to this date.
 --     * Slot: id Description: 
---     * Slot: associated_person_uid Description: A reference to the Person that is associated with this record.
---     * Slot: member_of_research_study_uid Description: A reference to the Study(s) of which this Participant is a member
 --     * Slot: originating_site_uid Description: The Organization through which a subject was enrolled on a ResearchStudy.
 -- # Class: "ResearchStudy" Description: "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge. This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques. A ResearchStudy involves the gathering of information about human or animal subjects."
---     * Slot: uid Description: 
 --     * Slot: name Description: An unabridged name of a research program, project, or study.
 --     * Slot: name_shortened Description: An abbreviated name of a research program, project, or study.
 --     * Slot: description Description: An unabridged description of a research program, project, or study.
 --     * Slot: description_shortened Description: An abbreviated description of a research program, project, or study.
 --     * Slot: sponsor Description: An entity that is responsible for the initiation, management, and/or financing of a research project.
 --     * Slot: url Description: A URL address for a resource that provides information about a research program, project, or study.
+--     * Slot: part_of Description: A reference to a parent ResearchStudy (e.g. a link to the overarching CPTAC ResearchStudy from a substudy of CPTAC)
 --     * Slot: research_project_type Description: The 'type' of ResearchStudy represented (e.g. a broad-based Program like 'CPTAC' or a more focused Project like 'CPTAC PDAC Discovery Study')
 --     * Slot: id Description: 
 --     * Slot: ResearchStudyCollection_id Description: Autocreated FK slot
 --     * Slot: date_started_uid Description: The date when the research project began.
 --     * Slot: date_ended_uid Description: The date when the research project ended.
---     * Slot: part_of_uid Description: A reference to a parent ResearchStudy (e.g. a link to the overarching CPTAC ResearchStudy from a substudy of CPTAC)
 -- # Class: "Visit" Description: "Events where Persons engage with the healthcare system for a duration of time. They are often also called “Encounters”. Visits are defined by a configuration of circumstances under which they occur, such as (i) whether the patient comes to a healthcare institution, the other way around, or the interaction is remote, (ii) whether and what kind of trained medical staff is delivering the service during the Visit, and (iii) whether the Visit is transient or for a longer period involving a stay in bed. (OMOP)"
 --     * Slot: uid Description: 
 --     * Slot: visit_category Description: A value representing the kind (or category) of visit, like inpatient or outpatient.
@@ -192,7 +191,7 @@
 --     * Slot: SpecimenCollectionProcess_id Description: Autocreated FK slot
 --     * Slot: has_output_id Description: 
 -- # Class: "Person_identity" Description: ""
---     * Slot: Person_uid Description: Autocreated FK slot
+--     * Slot: Person_id Description: Autocreated FK slot
 --     * Slot: identity_id Description: A 'business' identifier or accession number for the entity, typically as provided by an external system or authority, that are globally unique and persist across implementing systems. Also, since these identifiers are created outside the information system through a specific business process, the Identifier type has additional attributes to capture this additional metadata so the actual identifier values are qualified by the context that created those values. This additional context allows "identifier" instances to be transmitted as business data across systems while still being able to trace them back to the system of origin.
 -- # Class: "Participant_identity" Description: ""
 --     * Slot: Participant_uid Description: Autocreated FK slot
@@ -201,16 +200,16 @@
 --     * Slot: Participant_uid Description: Autocreated FK slot
 --     * Slot: study_arm Description: The arm(s) of the study on which the Participant is enrolled
 -- # Class: "ResearchStudy_identity" Description: ""
---     * Slot: ResearchStudy_uid Description: Autocreated FK slot
+--     * Slot: ResearchStudy_id Description: Autocreated FK slot
 --     * Slot: identity_id Description: A 'business' identifier or accession number for the entity, typically as provided by an external system or authority, that are globally unique and persist across implementing systems. Also, since these identifiers are created outside the information system through a specific business process, the Identifier type has additional attributes to capture this additional metadata so the actual identifier values are qualified by the context that created those values. This additional context allows "identifier" instances to be transmitted as business data across systems while still being able to trace them back to the system of origin.
 -- # Class: "ResearchStudy_associated_timepoint" Description: ""
---     * Slot: ResearchStudy_uid Description: Autocreated FK slot
+--     * Slot: ResearchStudy_id Description: Autocreated FK slot
 --     * Slot: associated_timepoint_uid Description: A collection of timepoint observations that are relevant to research projects (e.g. date of IACUC approval, date of IRB approval, date of embargo end, etc.)
 -- # Class: "ResearchStudy_principal_investigator" Description: ""
---     * Slot: ResearchStudy_uid Description: Autocreated FK slot
+--     * Slot: ResearchStudy_id Description: Autocreated FK slot
 --     * Slot: principal_investigator Description: The investigator or investigators leading a project.
 -- # Class: "ResearchStudy_consent_code" Description: ""
---     * Slot: ResearchStudy_uid Description: Autocreated FK slot
+--     * Slot: ResearchStudy_id Description: Autocreated FK slot
 --     * Slot: consent_code Description: Data Use Restrictions that are used to indicate permissions/restrictions for datasets and/or materials, and relates to the purposes for which datasets and/or material might be removed, stored or used. Based on the Data Use Ontology : see http://www.obofoundry.org/ontology/duo.html
 -- # Class: "Organization_identity" Description: ""
 --     * Slot: Organization_uid Description: Autocreated FK slot
@@ -261,7 +260,6 @@ CREATE TABLE "Entity" (
 	PRIMARY KEY (uid)
 );
 CREATE TABLE "Person" (
-	uid INTEGER NOT NULL, 
 	species VARCHAR, 
 	breed VARCHAR, 
 	sex VARCHAR(7), 
@@ -272,8 +270,9 @@ CREATE TABLE "Person" (
 	age_at_death INTEGER, 
 	year_of_death INTEGER, 
 	cause_of_death TEXT, 
-	id TEXT, 
-	PRIMARY KEY (uid)
+	id TEXT NOT NULL, 
+	name TEXT, 
+	PRIMARY KEY (id)
 );
 CREATE TABLE "Organization" (
 	uid INTEGER NOT NULL, 
@@ -383,26 +382,6 @@ CREATE TABLE "Subject" (
 	PRIMARY KEY (id), 
 	FOREIGN KEY("Container_id") REFERENCES "Container" (id)
 );
-CREATE TABLE "ResearchStudy" (
-	uid INTEGER NOT NULL, 
-	name TEXT, 
-	name_shortened TEXT, 
-	description TEXT, 
-	description_shortened TEXT, 
-	sponsor TEXT, 
-	url TEXT, 
-	research_project_type TEXT, 
-	id TEXT, 
-	"ResearchStudyCollection_id" INTEGER, 
-	date_started_uid INTEGER, 
-	date_ended_uid INTEGER, 
-	part_of_uid INTEGER, 
-	PRIMARY KEY (uid), 
-	FOREIGN KEY("ResearchStudyCollection_id") REFERENCES "ResearchStudyCollection" (id), 
-	FOREIGN KEY(date_started_uid) REFERENCES "TimePoint" (uid), 
-	FOREIGN KEY(date_ended_uid) REFERENCES "TimePoint" (uid), 
-	FOREIGN KEY(part_of_uid) REFERENCES "ResearchStudy" (uid)
-);
 CREATE TABLE "TimePeriod" (
 	id INTEGER NOT NULL, 
 	period_start_uid INTEGER, 
@@ -433,10 +412,10 @@ CREATE TABLE "Process_has_output" (
 	FOREIGN KEY("Process_id") REFERENCES "Process" (id)
 );
 CREATE TABLE "Person_identity" (
-	"Person_uid" INTEGER, 
+	"Person_id" TEXT, 
 	identity_id INTEGER, 
-	PRIMARY KEY ("Person_uid", identity_id), 
-	FOREIGN KEY("Person_uid") REFERENCES "Person" (uid), 
+	PRIMARY KEY ("Person_id", identity_id), 
+	FOREIGN KEY("Person_id") REFERENCES "Person" (id), 
 	FOREIGN KEY(identity_id) REFERENCES "Identifier" (id)
 );
 CREATE TABLE "Organization_identity" (
@@ -495,19 +474,24 @@ CREATE TABLE "Participation" (
 	FOREIGN KEY(includes) REFERENCES "Subject" (id), 
 	FOREIGN KEY("Container_id") REFERENCES "Container" (id)
 );
-CREATE TABLE "Participant" (
-	uid INTEGER NOT NULL, 
+CREATE TABLE "ResearchStudy" (
+	name TEXT, 
+	name_shortened TEXT, 
 	description TEXT, 
-	age_at_enrollment INTEGER, 
-	index_timepoint TEXT, 
-	id TEXT, 
-	associated_person_uid INTEGER, 
-	member_of_research_study_uid INTEGER, 
-	originating_site_uid INTEGER, 
-	PRIMARY KEY (uid), 
-	FOREIGN KEY(associated_person_uid) REFERENCES "Person" (uid), 
-	FOREIGN KEY(member_of_research_study_uid) REFERENCES "ResearchStudy" (uid), 
-	FOREIGN KEY(originating_site_uid) REFERENCES "Organization" (uid)
+	description_shortened TEXT, 
+	sponsor TEXT, 
+	url TEXT, 
+	part_of TEXT, 
+	research_project_type TEXT, 
+	id TEXT NOT NULL, 
+	"ResearchStudyCollection_id" INTEGER, 
+	date_started_uid INTEGER, 
+	date_ended_uid INTEGER, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(part_of) REFERENCES "Investigation" (id), 
+	FOREIGN KEY("ResearchStudyCollection_id") REFERENCES "ResearchStudyCollection" (id), 
+	FOREIGN KEY(date_started_uid) REFERENCES "TimePoint" (uid), 
+	FOREIGN KEY(date_ended_uid) REFERENCES "TimePoint" (uid)
 );
 CREATE TABLE "SpecimenCollectionProcess_has_input" (
 	"SpecimenCollectionProcess_id" TEXT, 
@@ -516,42 +500,19 @@ CREATE TABLE "SpecimenCollectionProcess_has_input" (
 	FOREIGN KEY("SpecimenCollectionProcess_id") REFERENCES "SpecimenCollectionProcess" (id), 
 	FOREIGN KEY(has_input_id) REFERENCES "Subject" (id)
 );
-CREATE TABLE "ResearchStudy_identity" (
-	"ResearchStudy_uid" INTEGER, 
-	identity_id INTEGER, 
-	PRIMARY KEY ("ResearchStudy_uid", identity_id), 
-	FOREIGN KEY("ResearchStudy_uid") REFERENCES "ResearchStudy" (uid), 
-	FOREIGN KEY(identity_id) REFERENCES "Identifier" (id)
-);
-CREATE TABLE "ResearchStudy_associated_timepoint" (
-	"ResearchStudy_uid" INTEGER, 
-	associated_timepoint_uid INTEGER, 
-	PRIMARY KEY ("ResearchStudy_uid", associated_timepoint_uid), 
-	FOREIGN KEY("ResearchStudy_uid") REFERENCES "ResearchStudy" (uid), 
-	FOREIGN KEY(associated_timepoint_uid) REFERENCES "TimePoint" (uid)
-);
-CREATE TABLE "ResearchStudy_principal_investigator" (
-	"ResearchStudy_uid" INTEGER, 
-	principal_investigator TEXT, 
-	PRIMARY KEY ("ResearchStudy_uid", principal_investigator), 
-	FOREIGN KEY("ResearchStudy_uid") REFERENCES "ResearchStudy" (uid)
-);
-CREATE TABLE "ResearchStudy_consent_code" (
-	"ResearchStudy_uid" INTEGER, 
-	consent_code VARCHAR(6), 
-	PRIMARY KEY ("ResearchStudy_uid", consent_code), 
-	FOREIGN KEY("ResearchStudy_uid") REFERENCES "ResearchStudy" (uid)
-);
-CREATE TABLE "Visit" (
+CREATE TABLE "Participant" (
 	uid INTEGER NOT NULL, 
-	visit_category VARCHAR(28), 
-	age_at_visit_start INTEGER, 
-	age_at_visit_end INTEGER, 
-	visit_provenance VARCHAR(37), 
+	associated_person TEXT, 
+	description TEXT, 
+	member_of_research_study TEXT, 
+	age_at_enrollment INTEGER, 
+	index_timepoint TEXT, 
 	id TEXT, 
-	associated_participant_uid INTEGER, 
+	originating_site_uid INTEGER, 
 	PRIMARY KEY (uid), 
-	FOREIGN KEY(associated_participant_uid) REFERENCES "Participant" (uid)
+	FOREIGN KEY(associated_person) REFERENCES "Person" (id), 
+	FOREIGN KEY(member_of_research_study) REFERENCES "ResearchStudy" (id), 
+	FOREIGN KEY(originating_site_uid) REFERENCES "Organization" (uid)
 );
 CREATE TABLE "MaterialEntity_used_in" (
 	"MaterialEntity_id" TEXT, 
@@ -587,6 +548,43 @@ CREATE TABLE "SpecimenCollectionProcess_has_output" (
 	PRIMARY KEY ("SpecimenCollectionProcess_id", has_output_id), 
 	FOREIGN KEY("SpecimenCollectionProcess_id") REFERENCES "SpecimenCollectionProcess" (id), 
 	FOREIGN KEY(has_output_id) REFERENCES "MaterialEntity" (id)
+);
+CREATE TABLE "ResearchStudy_identity" (
+	"ResearchStudy_id" TEXT, 
+	identity_id INTEGER, 
+	PRIMARY KEY ("ResearchStudy_id", identity_id), 
+	FOREIGN KEY("ResearchStudy_id") REFERENCES "ResearchStudy" (id), 
+	FOREIGN KEY(identity_id) REFERENCES "Identifier" (id)
+);
+CREATE TABLE "ResearchStudy_associated_timepoint" (
+	"ResearchStudy_id" TEXT, 
+	associated_timepoint_uid INTEGER, 
+	PRIMARY KEY ("ResearchStudy_id", associated_timepoint_uid), 
+	FOREIGN KEY("ResearchStudy_id") REFERENCES "ResearchStudy" (id), 
+	FOREIGN KEY(associated_timepoint_uid) REFERENCES "TimePoint" (uid)
+);
+CREATE TABLE "ResearchStudy_principal_investigator" (
+	"ResearchStudy_id" TEXT, 
+	principal_investigator TEXT, 
+	PRIMARY KEY ("ResearchStudy_id", principal_investigator), 
+	FOREIGN KEY("ResearchStudy_id") REFERENCES "ResearchStudy" (id)
+);
+CREATE TABLE "ResearchStudy_consent_code" (
+	"ResearchStudy_id" TEXT, 
+	consent_code VARCHAR(6), 
+	PRIMARY KEY ("ResearchStudy_id", consent_code), 
+	FOREIGN KEY("ResearchStudy_id") REFERENCES "ResearchStudy" (id)
+);
+CREATE TABLE "Visit" (
+	uid INTEGER NOT NULL, 
+	visit_category VARCHAR(28), 
+	age_at_visit_start INTEGER, 
+	age_at_visit_end INTEGER, 
+	visit_provenance VARCHAR(37), 
+	id TEXT, 
+	associated_participant_uid INTEGER, 
+	PRIMARY KEY (uid), 
+	FOREIGN KEY(associated_participant_uid) REFERENCES "Participant" (uid)
 );
 CREATE TABLE "Participant_identity" (
 	"Participant_uid" INTEGER, 

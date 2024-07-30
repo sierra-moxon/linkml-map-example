@@ -94,7 +94,8 @@ type Participation
 
 type Person
   {
-    id: String
+    id: Uriorcurie!
+    name: String
     identity: [Identifier]
     species: CellularOrganismSpeciesEnum
     breed: VertebrateBreedEnum
@@ -194,7 +195,7 @@ type QuestionnaireResponseValueString
 
 type ResearchStudy
   {
-    id: String
+    id: Uriorcurie!
     identity: [Identifier]
     name: String
     nameShortened: String

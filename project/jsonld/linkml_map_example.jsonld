@@ -1397,7 +1397,6 @@
         "Participant"
       ],
       "range": "Person",
-      "inlined": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1571,7 +1570,6 @@
         "Participant"
       ],
       "range": "ResearchStudy",
-      "inlined": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1749,7 +1747,6 @@
         "ResearchStudy"
       ],
       "range": "ResearchStudy",
-      "inlined": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3221,9 +3218,10 @@
       "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/Person",
       "description": "Demographics and other administrative information about an individual or animal receiving care or other health-related services.",
       "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
-      "is_a": "Entity",
+      "is_a": "Subject",
       "slots": [
-        "id",
+        "Subject_id",
+        "name",
         "identity",
         "person__species",
         "person__breed",
@@ -3375,9 +3373,9 @@
       "definition_uri": "https://w3id.org/nhlbidatastage/bdchm/ResearchStudy",
       "description": "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge. This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques. A ResearchStudy involves the gathering of information about human or animal subjects.",
       "from_schema": "https://w3id.org/nhlbidatastage/bdchm",
-      "is_a": "Entity",
+      "is_a": "Investigation",
       "slots": [
-        "id",
+        "Investigation_id",
         "identity",
         "researchStudy__name",
         "researchStudy__name_shortened",
@@ -4047,7 +4045,7 @@
   "source_file": "linkml_map_example.yaml",
   "source_file_date": "2024-07-29T17:21:50",
   "source_file_size": 5878,
-  "generation_date": "2024-07-29T17:22:29",
+  "generation_date": "2024-07-29T17:24:09",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/linkml_map_example.context.jsonld",
