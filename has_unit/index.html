@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://sierra-moxon.github.io/linkml-map-example/first_name/">
+        <link rel="canonical" href="https://sierra-moxon.github.io/linkml-map-example/has_unit/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-8.5.10">
     
     
       
-        <title>Slot: first_name - linkml-map-example</title>
+        <title>Slot: has_unit - linkml-map-example</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-first_name" class="md-skip">
+        <a href="#slot-has_unit" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: first_name
+              Slot: has_unit
             
           </span>
         </div>
@@ -317,15 +317,14 @@
                 
                   
 
-  <a href="https://github.com/sierra-moxon/linkml-map-example/edit/master/docs/first_name.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/sierra-moxon/linkml-map-example/edit/master/docs/has_unit.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="slot-first_name">Slot: first_name</h1>
-<p><em>A human-readable first name for a Person</em></p>
-<p>URI: <a href="https://w3id.org/sierra-moxon/linkml-map-example/first_name">linkml_map_example:first_name</a></p>
+<h1 id="slot-has_unit">Slot: has_unit</h1>
+<p>URI: <a href="https://w3id.org/linkml/cmdr/has_unit">cmdr:has_unit</a></p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -339,14 +338,9 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../Person/">Person</a></td>
-<td>Represents a Sample</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../NamedThing/">NamedThing</a></td>
-<td>Represents a NamedThing</td>
-<td>no</td>
+<td><a href="../Quantity/">Quantity</a></td>
+<td></td>
+<td>yes</td>
 </tr>
 </tbody>
 </table>
@@ -357,7 +351,7 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/sierra-moxon/linkml-map-example</li>
+<li>from schema: https://w3id.org/linkml/cmdr</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -370,26 +364,23 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>linkml_map_example:first_name</td>
+<td>cmdr:has_unit</td>
 </tr>
 <tr>
 <td>native</td>
-<td>linkml_map_example:first_name</td>
+<td>cmdr:has_unit</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: first_name
-description: A human-readable first name for a Person
-from_schema: https://w3id.org/sierra-moxon/linkml-map-example
+<pre><code class="language-yaml">name: has_unit
+from_schema: https://w3id.org/linkml/cmdr
 rank: 1000
-domain: Person
-alias: first_name
+alias: has_unit
 domain_of:
-- Person
-- NamedThing
+- Quantity
 range: string
 
 </code></pre>

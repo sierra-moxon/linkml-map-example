@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#linkml-map-example" class="md-skip">
+        <a href="#cmdr" class="md-skip">
           Skip to content
         </a>
       
@@ -379,10 +379,10 @@
   </a>
 
 
-<h1 id="linkml-map-example">linkml-map-example</h1>
-<p>An example repo showing the usage and application of linkml-map</p>
-<p>URI: https://w3id.org/sierra-moxon/linkml-map-example</p>
-<p>Name: linkml-map-example</p>
+<h1 id="cmdr">cmdr</h1>
+<p>Core Model for Data Research (Tentative)</p>
+<p>URI: https://w3id.org/linkml/cmdr</p>
+<p>Name: cmdr</p>
 <h2 id="classes">Classes</h2>
 <table>
 <thead>
@@ -393,12 +393,44 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="NamedThing/">NamedThing</a></td>
-<td>Represents a NamedThing</td>
+<td><a href="Container/">Container</a></td>
+<td>None</td>
 </tr>
 <tr>
-<td><a href="Person/">Person</a></td>
-<td>Represents a Sample</td>
+<td><a href="DataObject/">DataObject</a></td>
+<td>A DataFile Associated with a Subject or Investigation or MaterialEntity</td>
+</tr>
+<tr>
+<td><a href="Investigation/">Investigation</a></td>
+<td>General information about the Investigation</td>
+</tr>
+<tr>
+<td><a href="MaterialEntity/">MaterialEntity</a></td>
+<td>Physical entity that is an input our output of a process from a Subject</td>
+</tr>
+<tr>
+<td><a href="Participation/">Participation</a></td>
+<td>Subject/Study participation information</td>
+</tr>
+<tr>
+<td><a href="Process/">Process</a></td>
+<td>A planned process resulting in a material or data</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="MaterialProcessing/">MaterialProcessing</a></td>
+<td>A planned process which results in physical changes in a specified input material</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="SpecimenCollectionProcess/">SpecimenCollectionProcess</a></td>
+<td>A planned process with the objective of collecting a specimen</td>
+</tr>
+<tr>
+<td><a href="Quantity/">Quantity</a></td>
+<td>None</td>
+</tr>
+<tr>
+<td><a href="Subject/">Subject</a></td>
+<td>Demographic and clinical information about the subject</td>
 </tr>
 </tbody>
 </table>
@@ -412,20 +444,88 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="age_in_years/">age_in_years</a></td>
-<td>The age of a Person in years</td>
+<td><a href="comparator/">comparator</a></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="aliases/">aliases</a></td>
-<td>A list of aliases for a Person</td>
+<td><a href="concentration/">concentration</a></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="first_name/">first_name</a></td>
-<td>A human-readable first name for a Person</td>
+<td><a href="has_input/">has_input</a></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="last_name/">last_name</a></td>
-<td>A human-readable last name for a Person</td>
+<td><a href="has_numeric_value/">has_numeric_value</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="has_output/">has_output</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="has_raw_value/">has_raw_value</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="has_unit/">has_unit</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="id/">id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="includes/">includes</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="investigations/">investigations</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="involved_in/">involved_in</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="material_processings/">material_processings</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="materials/">materials</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="name/">name</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="part_of/">part_of</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="participations/">participations</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="source/">source</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="specimen_collection_processes/">specimen_collection_processes</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="subjects/">subjects</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="used_in/">used_in</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="volume/">volume</a></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -541,7 +641,11 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="PotentialPhi/">PotentialPhi</a></td>
 <td></td>
+</tr>
+<tr>
+<td><a href="TemporalData/">TemporalData</a></td>
 <td></td>
 </tr>
 </tbody>

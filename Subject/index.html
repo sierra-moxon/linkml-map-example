@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://sierra-moxon.github.io/linkml-map-example/Person/" rel="canonical"/>
+<link href="https://sierra-moxon.github.io/linkml-map-example/Subject/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
-<title>Class: Person - linkml-map-example</title>
+<title>Class: Subject - linkml-map-example</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -21,7 +21,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-person">
+<a class="md-skip" href="#class-subject">
           Skip to content
         </a>
 </div>
@@ -45,7 +45,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Person
+              Class: Subject
             
           </span>
 </div>
@@ -152,6 +152,16 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#aliases">
+    Aliases
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#see-also">
+    See Also
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#identifier-and-mapping-information">
     Identifier and Mapping Information
   </a>
@@ -196,22 +206,18 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<a class="md-content__button md-icon" href="https://github.com/sierra-moxon/linkml-map-example/edit/master/docs/Person.md" title="Edit this page">
+<a class="md-content__button md-icon" href="https://github.com/sierra-moxon/linkml-map-example/edit/master/docs/Subject.md" title="Edit this page">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
-<h1 id="class-person">Class: Person</h1>
-<p><em>Represents a Sample</em></p>
-<p>URI: <a href="https://w3id.org/sierra-moxon/linkml-map-example/Person">linkml_map_example:Person</a></p>
+<h1 id="class-subject">Class: Subject</h1>
+<p><em>Demographic and clinical information about the subject</em></p>
+<p>URI: <a href="https://w3id.org/linkml/cmdr/Subject">cmdr:Subject</a></p>
 <div class="mermaid"> classDiagram
-    class Person
-    click Person href "../Person"
-      Person : age_in_years
+    class Subject
+    click Subject href "../Subject"
+      Subject : id
 
-      Person : aliases
-
-      Person : first_name
-
-      Person : last_name
+      Subject : name
 
 
 </div>
@@ -228,27 +234,15 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../first_name/">first_name</a></td>
+<td><a href="../id/">id</a></td>
+<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../name/">name</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable first name for a Person</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../last_name/">last_name</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable last name for a Person</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../age_in_years/">age_in_years</a></td>
-<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
-<td>The age of a Person in years</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../aliases/">aliases</a></td>
-<td>* <br/> <a href="../String/">String</a></td>
-<td>A list of aliases for a Person</td>
+<td></td>
 <td>direct</td>
 </tr>
 </tbody>
@@ -265,41 +259,44 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="./">Person</a></td>
-<td><a href="../first_name/">first_name</a></td>
-<td>domain</td>
-<td><a href="./">Person</a></td>
+<td><a href="../Container/">Container</a></td>
+<td><a href="../subjects/">subjects</a></td>
+<td>range</td>
+<td><a href="./">Subject</a></td>
 </tr>
 <tr>
-<td><a href="./">Person</a></td>
-<td><a href="../last_name/">last_name</a></td>
-<td>domain</td>
-<td><a href="./">Person</a></td>
+<td><a href="../MaterialEntity/">MaterialEntity</a></td>
+<td><a href="../source/">source</a></td>
+<td>range</td>
+<td><a href="./">Subject</a></td>
 </tr>
 <tr>
-<td><a href="./">Person</a></td>
-<td><a href="../age_in_years/">age_in_years</a></td>
-<td>domain</td>
-<td><a href="./">Person</a></td>
+<td><a href="../Participation/">Participation</a></td>
+<td><a href="../includes/">includes</a></td>
+<td>range</td>
+<td><a href="./">Subject</a></td>
 </tr>
 <tr>
-<td><a href="./">Person</a></td>
-<td><a href="../aliases/">aliases</a></td>
-<td>domain</td>
-<td><a href="./">Person</a></td>
-</tr>
-<tr>
-<td><a href="../NamedThing/">NamedThing</a></td>
-<td><a href="../first_name/">first_name</a></td>
-<td>domain</td>
-<td><a href="./">Person</a></td>
+<td><a href="../SpecimenCollectionProcess/">SpecimenCollectionProcess</a></td>
+<td><a href="../has_input/">has_input</a></td>
+<td>range</td>
+<td><a href="./">Subject</a></td>
 </tr>
 </tbody>
 </table>
+<h2 id="aliases">Aliases</h2>
+<ul>
+<li>Site</li>
+<li>Participant</li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="include:Participant">include:Participant</a></li>
+</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/sierra-moxon/linkml-map-example</li>
+<li>from schema: https://w3id.org/linkml/cmdr</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -312,11 +309,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>linkml_map_example:Person</td>
+<td>cmdr:Subject</td>
 </tr>
 <tr>
 <td>native</td>
-<td>linkml_map_example:Person</td>
+<td>cmdr:Subject</td>
 </tr>
 </tbody>
 </table>
@@ -324,71 +321,80 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: Person
-description: Represents a Sample
-from_schema: https://w3id.org/sierra-moxon/linkml-map-example
+<pre><code class="language-yaml">name: Subject
+description: Demographic and clinical information about the subject
+from_schema: https://w3id.org/linkml/cmdr
+see_also:
+- include:Participant
+aliases:
+- Site
+- Participant
 slots:
-- first_name
-- last_name
-- age_in_years
-- aliases
-tree_root: true
+- id
+- name
+slot_usage:
+  id:
+    name: id
+    identifier: true
+    domain_of:
+    - Investigation
+    - MaterialEntity
+    - Participation
+    - Process
+    - Subject
+    range: uriorcurie
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: Person
-description: Represents a Sample
-from_schema: https://w3id.org/sierra-moxon/linkml-map-example
+<pre><code class="language-yaml">name: Subject
+description: Demographic and clinical information about the subject
+from_schema: https://w3id.org/linkml/cmdr
+see_also:
+- include:Participant
+aliases:
+- Site
+- Participant
+slot_usage:
+  id:
+    name: id
+    identifier: true
+    domain_of:
+    - Investigation
+    - MaterialEntity
+    - Participation
+    - Process
+    - Subject
+    range: uriorcurie
 attributes:
-  first_name:
-    name: first_name
-    description: A human-readable first name for a Person
-    from_schema: https://w3id.org/sierra-moxon/linkml-map-example
+  id:
+    name: id
+    from_schema: https://w3id.org/linkml/cmdr
     rank: 1000
-    domain: Person
-    alias: first_name
-    owner: Person
+    identifier: true
+    alias: id
+    owner: Subject
     domain_of:
-    - Person
-    - NamedThing
+    - Investigation
+    - MaterialEntity
+    - Participation
+    - Process
+    - Subject
+    range: uriorcurie
+  name:
+    name: name
+    from_schema: https://w3id.org/linkml/cmdr
+    rank: 1000
+    alias: name
+    owner: Subject
+    domain_of:
+    - Investigation
+    - MaterialEntity
+    - Participation
+    - Process
+    - Subject
     range: string
-  last_name:
-    name: last_name
-    description: A human-readable last name for a Person
-    from_schema: https://w3id.org/sierra-moxon/linkml-map-example
-    rank: 1000
-    domain: Person
-    alias: last_name
-    owner: Person
-    domain_of:
-    - Person
-    range: string
-  age_in_years:
-    name: age_in_years
-    description: The age of a Person in years
-    from_schema: https://w3id.org/sierra-moxon/linkml-map-example
-    rank: 1000
-    domain: Person
-    alias: age_in_years
-    owner: Person
-    domain_of:
-    - Person
-    range: integer
-  aliases:
-    name: aliases
-    description: A list of aliases for a Person
-    from_schema: https://w3id.org/sierra-moxon/linkml-map-example
-    rank: 1000
-    domain: Person
-    alias: aliases
-    owner: Person
-    domain_of:
-    - Person
-    range: string
-    multivalued: true
-tree_root: true
 
 </code></pre>
 </details>

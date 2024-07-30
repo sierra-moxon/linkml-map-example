@@ -2,142 +2,277 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/Boolean/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/Container/</loc>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/Curie/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/DataObject/</loc>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/Date/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/DateOrDatetime/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/Datetime/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/Decimal/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/Double/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/Float/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/Integer/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/Investigation/</loc>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/Jsonpath/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/Jsonpointer/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://sierra-moxon.github.io/linkml-map-example/NamedThing/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/MaterialEntity/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/MaterialProcessing/</loc>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/Ncname/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/Nodeidentifier/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/Objectidentifier/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://sierra-moxon.github.io/linkml-map-example/Person/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/Participation/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/PotentialPhi/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/Process/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/Quantity/</loc>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/Sparqlpath/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/SpecimenCollectionProcess/</loc>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/String/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/Subject/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/TemporalData/</loc>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/Time/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/Uri/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/Uriorcurie/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://sierra-moxon.github.io/linkml-map-example/about/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://sierra-moxon.github.io/linkml-map-example/age_in_years/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/cmdr/</loc>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://sierra-moxon.github.io/linkml-map-example/aliases/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/comparator/</loc>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://sierra-moxon.github.io/linkml-map-example/first_name/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/concentration/</loc>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://sierra-moxon.github.io/linkml-map-example/last_name/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/has_input/</loc>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://sierra-moxon.github.io/linkml-map-example/linkml-map-example/</loc>
-         <lastmod>2024-07-17</lastmod>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/has_numeric_value/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/has_output/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/has_raw_value/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/has_unit/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/id/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/includes/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/investigations/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/involved_in/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/material_processings/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/materials/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/name/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/part_of/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/participations/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/source/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/specimen_collection_processes/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/subjects/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/used_in/</loc>
+         <lastmod>2024-07-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sierra-moxon.github.io/linkml-map-example/volume/</loc>
+         <lastmod>2024-07-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
