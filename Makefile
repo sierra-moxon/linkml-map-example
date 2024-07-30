@@ -144,6 +144,7 @@ test: test-schema test-python test-examples
 
 test-schema:
 	$(RUN) gen-project ${CONFIG_YAML} -d tmp $(SOURCE_SCHEMA_PATH)
+	$(RUN) gen-plantuml $(SOURCE_SCHEMA_PATH) > project/plantuml/schema.puml
 
 test-python:
 	$(RUN) python -m unittest discover
